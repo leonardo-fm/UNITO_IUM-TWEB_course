@@ -1,0 +1,18 @@
+.navbar {
+    background-color: var(--primary);
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-form>button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.search-form>input {
+    padding-left: 48px;
+}

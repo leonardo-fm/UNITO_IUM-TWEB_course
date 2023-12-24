@@ -1,4 +1,6 @@
 {
     "date_format": "L",
-    "date_lan": "en"
+    "date_lan": "en",
+
+    "navbar_search_placeholder": "Search"
 }
