@@ -1,0 +1,21 @@
+.leagues-container,
+.matches-container {
+    background-color: var(--white);
+    border-radius: 8px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container>button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.search-container>input {
+    padding-left: 48px;
+    background-color: var(--white-shade);
+}

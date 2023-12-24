@@ -2,5 +2,7 @@
     "date_format": "L",
     "date_lan": "en",
 
-    "navbar_search_placeholder": "Search"
+    "navbar_search_placeholder": "Search",
+    "homepage_all_leagues": "All leagues",
+    "homepage_leagues_search_placeholder": "Filter"
 }
