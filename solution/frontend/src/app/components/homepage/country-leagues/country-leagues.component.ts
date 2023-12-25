@@ -41,7 +41,7 @@ export class CountryLeaguesComponent implements OnInit {
   }
 
   onExpand(element: HTMLElement) {
-    element.classList.toggle('expand-close');
+    element.classList.toggle('expand-open');
   }
 
   onFilterLeagues() {

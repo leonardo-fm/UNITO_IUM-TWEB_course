@@ -26,6 +26,6 @@
     max-height: 0;
 }
 
-.expand-close {
+.expand-open {
     max-height: fit-content;
 }
