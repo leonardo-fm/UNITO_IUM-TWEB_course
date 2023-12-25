@@ -1,5 +1,7 @@
 .leagues-container,
 .matches-container {
+    height: fit-content;
+    min-height: 100%;
     background-color: var(--white);
     border-radius: 8px;
 }
@@ -18,4 +20,20 @@
 .search-container>input {
     padding-left: 48px;
     background-color: var(--white-shade);
+}
+
+.country-league-container {
+    cursor: pointer;
+}
+.country-league-container:hover {
+    background-color: var(--white-shade);
+}
+
+.expand-container {
+    overflow: hidden;
+    max-height: 0;
+}
+
+.expand-close {
+    max-height: fit-content;
 }

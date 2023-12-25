@@ -6,7 +6,7 @@ import moment from 'moment';
   providedIn: 'root'
 })
 export class LanguageService {
-  public selectedLanguage: any;
+  public selectedLanguage: any = {};
   public activeLanguage: string;
 
   constructor() { }

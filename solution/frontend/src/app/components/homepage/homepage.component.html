@@ -2,13 +2,25 @@
     <span>{{languageService.selectedLanguage['homepage_all_leagues']}}</span>
     <div class="d-flex search-container my-2">
         <input class="form-control" type="search"
-            [placeholder]="languageService.selectedLanguage['homepage_leagues_search_placeholder']" aria-label="Search leagues">
+            [placeholder]="languageService.selectedLanguage['homepage_leagues_search_placeholder']" aria-label="Search leagues" [(ngModel)]="filter" (ngModelChange)="onFilterLeagues()">
         <button class="d-flex btn">
             <img src="assets/icons/search.svg" alt="Search button">
         </button>
     </div>
+    @for (competitionCountry of competitionsByCountry; track competitionCountry) {
+        <div class="d-flex country-league-container py-1" (click)="onExpand(leagueExpand)">
+            <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competitionCountry[0].country_id+'.webp'" [alt]="'Flag ' + competitionCountry[0].country_name">
+            <span>{{ languageService.selectedLanguage['homepage_country_name_'+competitionCountry[0].country_id] }}</span>
+            <img class="ms-auto" width="24" height="24" src="assets/icons/expand_more.svg" alt="">
+        </div>
+        <div #leagueExpand class="d-flex flex-column expand-container ps-3">
+            @for (competition of competitionCountry; track competition) {
+                <a>{{ competition.name }}</a>
+            }
+        </div>
+    }
 </div>
 
 <div class="matches-container p-3 w-75">
-
+    
 </div>
