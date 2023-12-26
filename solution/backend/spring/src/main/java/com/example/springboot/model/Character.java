@@ -1,4 +1,4 @@
-package com.example.springboot.character;
+package com.example.springboot.model;
 
 import java.time.LocalDate;
 import java.time.Period;
