@@ -1,7 +1,6 @@
 package com.example.springboot.repository;
 
 import com.example.springboot.dto.CompetitionDto;
-import com.example.springboot.model.Competition;
 
 import java.util.ArrayList;
 import java.util.List;

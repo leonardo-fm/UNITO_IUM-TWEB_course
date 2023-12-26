@@ -13,7 +13,12 @@ public class GameRepository {
         return new GameDto();
     }
 
-    public List<GameDto> GetAllCompetitions(LocalDate date) {
+    public List<GameDto> GetAllGame(LocalDate date) {
+        // Connect to Db and take data
+        return new ArrayList<>();
+    }
+
+    public List<GameDto> GetAllGameOfCompetition(int competitionId) {
         // Connect to Db and take data
         return new ArrayList<>();
     }

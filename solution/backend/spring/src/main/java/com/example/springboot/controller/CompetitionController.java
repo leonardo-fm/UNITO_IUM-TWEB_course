@@ -26,4 +26,11 @@ public class CompetitionController {
         // Logic
         return new Competition();
     }
+
+    @GetMapping("/details/{competitionId}")
+    public Competition GetCompetitionDetails(@PathVariable int competitionId) {
+        CompetitionDto competition = new CompetitionRepository().GetCompetition(competitionId);
+        // Logic
+        return new Competition();
+    }
 }
