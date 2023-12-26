@@ -22,4 +22,9 @@ public class GameRepository {
         // Connect to Db and take data
         return new ArrayList<>();
     }
+
+    public List<GameDto> GetAllGameOfPlayer(int playerId) {
+        // Connect to Db and take data
+        return new ArrayList<>();
+    }
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/competition")
 public class CompetitionController {
 
     @GetMapping("/all")
