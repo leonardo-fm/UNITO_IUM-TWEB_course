@@ -1,6 +1,6 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.model.Character;
+import com.example.springboot.dto.Character;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
