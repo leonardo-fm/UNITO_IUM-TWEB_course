@@ -1,4 +1,5 @@
 import { CompetitionModel } from "./competition.model";
+import { GameModel } from "./game.model";
 
 export class ClubModel {
     club_id: number;
@@ -19,4 +20,16 @@ export class ClubModel {
     url: string;
 
     competition: CompetitionModel;
+}
+
+export class ClubStatistics {
+    club: ClubModel | undefined;
+
+    points: number = 0;
+    wins: number = 0;
+    draws: number = 0;
+    loses: number = 0;
+    goalsScored: number = 0;
+    goalsConceded: number = 0;
+    games: GameModel[] = [];
 }

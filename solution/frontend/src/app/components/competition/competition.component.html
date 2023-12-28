@@ -9,12 +9,16 @@
                 [alt]="'Flag ' + competition?.country_name">
             {{ competition?.country_name }}
         </span>
-        <select class="form-select" name="season" id="season" [(ngModel)]="choosedSeason" (ngModelChange)="onSeasonChange()">
+        <select class="form-select" name="season" id="season" [formControl]="choosedSeason">
             @for(season of seasons; track season; let first = $first){
             <option [value]="season">{{season}}</option>
             }
         </select>
     </div>
+</div>
+
+<div class="d-flex game-history-container p-3 mt-3">
+    <app-season-detail></app-season-detail>
 </div>
 
 <div class="d-flex game-history-container p-3 mt-3">

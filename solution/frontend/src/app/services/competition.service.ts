@@ -8,7 +8,7 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CompetitionService {
-  public seasonSubject = new ReplaySubject<number>(1);
+  public gameHistorySubject = new ReplaySubject<GameModel[]>(1);
 
   constructor() { }
 
@@ -22,7 +22,9 @@ export class CompetitionService {
     return axios.get<GameModel[]>('assets/data/games.json').then(res => {
       let history = res.data.filter(x => x.competition_id == competitionId && (season ? x.season == season : true));
       history.sort((x, y) => x.date >= y.date ? -1 : 1);
+      
       console.log(history);
+      this.gameHistorySubject.next(history);
       return history.slice(0, 20);
     })
   }

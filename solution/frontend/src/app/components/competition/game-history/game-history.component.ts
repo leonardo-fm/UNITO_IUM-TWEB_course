@@ -19,24 +19,20 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
   gameHistory: GameModel[];
   moment = moment;
 
-  seasonSubscription: Subscription;
+  gameHistorySubscription: Subscription;
 
   constructor(
     public languageService: LanguageService,
-    private competitionService: CompetitionService,
-    private activatedRoute: ActivatedRoute
+    private competitionService: CompetitionService  
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      let comp_id = params['id'];
-      this.seasonSubscription = this.competitionService.seasonSubject.subscribe(season => {
-        this.competitionService.getGameHistoryByCompetition(comp_id, season).then(x => this.gameHistory = x);
-      })
+    this.gameHistorySubscription = this.competitionService.gameHistorySubject.subscribe(games => {
+      this.gameHistory = games;
     })
   }
 
   ngOnDestroy(): void {
-    if (this.seasonSubscription) this.seasonSubscription.unsubscribe();
+    if (this.gameHistorySubscription) this.gameHistorySubscription.unsubscribe();
   }
 }

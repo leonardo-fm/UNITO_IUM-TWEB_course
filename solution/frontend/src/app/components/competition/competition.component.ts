@@ -3,20 +3,23 @@ import { ActivatedRoute } from '@angular/router';
 import { CompetitionService } from '../../services/competition.service';
 import { CompetitionModel } from '../../models/competition.model';
 import { GameHistoryComponent } from './game-history/game-history.component';
-import { FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { SeasonDetailComponent } from './season-detail/season-detail.component';
 
 @Component({
   selector: 'app-competition',
   standalone: true,
-  imports: [GameHistoryComponent, FormsModule],
+  imports: [GameHistoryComponent, SeasonDetailComponent, ReactiveFormsModule],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto py-4' },
   templateUrl: './competition.component.html',
   styleUrl: './competition.component.css'
 })
 export class CompetitionComponent implements OnInit {
+  
+  competitionId: string;
   competition: CompetitionModel | undefined;
   seasons: number[];
-  choosedSeason: number;
+  choosedSeason = new FormControl<number>(0);
 
   constructor(
     private competitionService: CompetitionService,
@@ -25,17 +28,15 @@ export class CompetitionComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      let comp_id = params['id'];
-      this.competitionService.getCompetitionById(comp_id).then(x => this.competition = x);
+      this.competitionId = params['id'];
+      this.competitionService.getCompetitionById(this.competitionId).then(x => this.competition = x);
     })
     this.competitionService.getAllSeason().then(res => {
       this.seasons = res.data;
-      this.choosedSeason = this.seasons[0];
-      this.onSeasonChange();
+      this.choosedSeason.patchValue(this.seasons[0]);
     });
-  }
-
-  onSeasonChange(){
-    this.competitionService.seasonSubject.next(this.choosedSeason);
+    this.choosedSeason.valueChanges.subscribe(season => {
+      this.competitionService.getGameHistoryByCompetition(this.competitionId, season);
+    });
   }
 }

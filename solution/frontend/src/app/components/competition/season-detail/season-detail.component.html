@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Team</td>
+            <td>P</td>
+            <td>W</td>
+            <td>D</td>
+            <td>L</td>
+            <td>Goals</td>
+            <td>Last 5</td>
+            <td>PTS</td>
+        </tr>
+    </thead>
+    <tbody>
+        @for (clubStatistic of clubsStatistics; track clubStatistic; let index = $index){
+        <tr>
+            <td>{{ index + 1 }}</td>
+            <td>
+                <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.club?.club_id+'.png'" [alt]="'Emblem '+clubStatistic.club?.name">
+                {{ clubStatistic.club?.name }}
+            </td>
+            <td>{{ clubStatistic.games.length }}</td>
+            <td>{{ clubStatistic.wins }}</td>
+            <td>{{ clubStatistic.draws }}</td>
+            <td>{{ clubStatistic.loses }}</td>
+            <td>{{ clubStatistic.goalsScored }}:{{ clubStatistic.goalsConceded }}</td>
+            <td></td>
+            <td>{{ clubStatistic.points }}</td>
+        </tr>
+        }
+    </tbody>
+</table>
