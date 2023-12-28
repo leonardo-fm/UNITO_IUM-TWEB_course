@@ -1,0 +1,11 @@
+.game-container{
+    color: var(--text-secondary);
+}
+
+.winner-label{
+    color: var(--text-primary);
+}
+
+.game-club-container{
+    border-left: 1px solid var(--text-secondary);
+}

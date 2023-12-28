@@ -1,0 +1,4 @@
+.competition-container, .game-history-container{
+    border-radius: 8px;
+    background-color: var(--white);
+}

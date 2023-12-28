@@ -12,7 +12,7 @@
             </div>
         </div>
         @for(game of competition.games; track game.game_id){
-        <div class="d-flex flex-column game-container my-2 px-2">
+        <div class="d-flex flex-column game-container gap-1 my-2 px-2">
             <div class="d-flex gap-2">
                 <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.home_club_id+'.png'" [alt]="'Emblem '+game.home_club_name">
                 <span>{{ game.home_club_name }}</span>
