@@ -11,17 +11,6 @@ import { environment } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'frontend';
-
-  constructor(
-    private languageService: LanguageService
-  ) { }
-
-  ngOnInit(): void {
-    let language = localStorage.getItem('language');
-    if (!language || !environment.languages.includes(language))
-      language = 'en';
-    this.languageService.selectLanguage(language);
-  }
 }
