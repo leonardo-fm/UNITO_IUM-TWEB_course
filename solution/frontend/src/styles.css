@@ -4,6 +4,8 @@
     --primary: #682d63;
     --white: #ffffff;
     --white-shade: #f5f6fa;
+    --text-primary: #000000;
+    --text-secondary: #b9b9b9;
 }
 
 body {

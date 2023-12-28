@@ -1,0 +1,7 @@
+.competition-country-label{
+    color: var(--text-secondary);
+}
+.game-container{
+    margin-left: 48px;
+    border-left: 1px solid var(--text-secondary);
+}

@@ -6,7 +6,7 @@ export class GameModel {
     competition_id: string;
     season: number;
     round: string;
-    date: Date;
+    date: string;
     home_club_id: number;
     away_club_id: number;
     home_club_goals: number;
@@ -31,7 +31,13 @@ export class GameModel {
     away_club: ClubModel;
 }
 
+export class GroupGameByCompetitionModel {
+    competition_id: string;
+    competition: CompetitionModel | undefined;
+    games: GameModel[];
+}
+
 export class GameHistoryModel {
-    date: Date;
-    games: GameModel[]
+    date: string;
+    competitions: GroupGameByCompetitionModel[]
 }

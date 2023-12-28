@@ -9,7 +9,7 @@
 @for (competitionCountry of competitionsByCountry; track competitionCountry) {
     <div class="d-flex country-league-container py-1" (click)="onExpand(leagueExpand)">
         <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competitionCountry[0].country_id+'.webp'" [alt]="'Flag ' + competitionCountry[0].country_name">
-        <span>{{ languageService.selectedLanguage['homepage_country_name_'+competitionCountry[0].country_id] }}</span>
+        <span>{{ languageService.selectedLanguage['country_name_'+competitionCountry[0].country_id] }}</span>
         @if (leagueExpand.classList.contains('expand-open')){
             <img class="ms-auto" width="24" height="24" src="assets/icons/expand_less.svg" alt="">
         }

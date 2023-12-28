@@ -1,0 +1,29 @@
+@for (dayCompetitions of gameHistory; track dayCompetitions.date){
+<div class="d-flex flex-column date-group-container">
+    @for(competition of dayCompetitions.competitions; track competition.competition_id){
+    <div class="d-flex flex-column competition-container">
+        <div class="d-flex">
+            <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competition.competition?.country_id"
+                [alt]="'Flag ' + competition.competition?.country_name">
+            <div class="d-flex flex-column">
+                <span class="competition-country-label">{{ languageService.selectedLanguage['country_name_'+competition.competition?.country_name] }} {{
+                    moment(dayCompetitions.date).format(languageService.selectedLanguage['date_format']) }}</span>
+                <span>{{ competition.competition?.name }}</span>
+            </div>
+        </div>
+        @for(game of competition.games; track game.game_id){
+        <div class="d-flex flex-column game-container my-2 px-2">
+            <div class="d-flex gap-2">
+                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.home_club_id+'.png'" [alt]="'Emblem '+game.home_club_name">
+                <span>{{ game.home_club_name }}</span>
+            </div>
+            <div class="d-flex gap-2">
+                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.away_club_id+'.png'" [alt]="'Emblem '+game.away_club_name">
+                <span>{{ game.away_club_name }}</span>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>
+}
