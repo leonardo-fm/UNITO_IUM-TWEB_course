@@ -22,6 +22,6 @@ export class GameHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.gameService.getLastGames().then(res => this.gameHistory = res);
+    this.gameService.getGameHistory().then(res => this.gameHistory = res);
   }
 }

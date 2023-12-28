@@ -9,7 +9,7 @@ export class GameService {
 
   constructor() { }
 
-  getLastGames() {
+  getGameHistory() {
     return axios.get<GameModel[]>('assets/data/games.json').then(res => {
       let groupByDate: any = {};
       res.data.forEach(game => (groupByDate[game.date] = groupByDate[game.date] || []).push(game));
