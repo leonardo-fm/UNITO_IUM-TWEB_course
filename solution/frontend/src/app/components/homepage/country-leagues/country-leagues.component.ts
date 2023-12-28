@@ -3,11 +3,12 @@ import { CompetitionModel } from '../../../models/competition.model';
 import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-country-leagues',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './country-leagues.component.html',
   styleUrl: './country-leagues.component.css'
 })
