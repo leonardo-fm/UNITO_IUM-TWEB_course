@@ -1,18 +1,18 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.dto.CompetitionDto;
+import com.example.springboot.model.Competition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompetitionRepository {
 
-    public CompetitionDto GetCompetition(int competitionId) {
+    public Competition GetCompetition(int competitionId) {
         // Connect to Db and take data
-        return new CompetitionDto();
+        return new Competition();
     }
 
-    public List<CompetitionDto> GetAllCompetitions() {
+    public List<Competition> GetAllCompetitions() {
         // Connect to Db and take data
         return new ArrayList<>();
     }

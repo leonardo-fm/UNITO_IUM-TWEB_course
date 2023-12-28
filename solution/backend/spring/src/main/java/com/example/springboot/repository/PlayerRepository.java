@@ -1,18 +1,18 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.dto.PlayerDto;
+import com.example.springboot.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerRepository {
 
-    public PlayerDto GetPlayer(int playerId) {
+    public Player GetPlayer(int playerId) {
         // Connect to Db and take data
-        return new PlayerDto();
+        return new Player();
     }
 
-    public List<PlayerDto> GetAllPlayersFromClub(int clubId) {
+    public List<Player> GetAllPlayersFromClub(int clubId) {
         // Connect to Db and take data
         return new ArrayList<>();
     }

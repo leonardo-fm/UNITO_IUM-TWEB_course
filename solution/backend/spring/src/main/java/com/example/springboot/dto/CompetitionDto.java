@@ -1,14 +1,20 @@
 package com.example.springboot.dto;
 
 public class CompetitionDto {
-    private String id;
-    private String code;
     private String name;
-    private String competitionSubType;
-    private String competitionType;
-    private int countryId;
-    private String countryName;
-    private String domesticLeagueCode;
-    private String confederation;
-    private String url;
+    private String link;
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLink() {
+        return link;
+    }
+    public void setLink(String link) {
+        this.link = link;
+    }
 }

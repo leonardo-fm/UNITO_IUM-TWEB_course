@@ -1,6 +1,6 @@
-package com.example.springboot.dto;
+package com.example.springboot.model;
 
-public class ClubDto {
+public class Club {
     private int id;
     private String code;
     private String name;
