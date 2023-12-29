@@ -15,7 +15,7 @@ import { SeasonDetailComponent } from './season-detail/season-detail.component';
   styleUrl: './competition.component.css'
 })
 export class CompetitionComponent implements OnInit {
-  
+
   competitionId: string;
   competition: CompetitionModel | undefined;
   seasons: number[];
@@ -30,11 +30,13 @@ export class CompetitionComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.competitionId = params['id'];
       this.competitionService.getCompetitionById(this.competitionId).then(x => this.competition = x);
-    })
+    });
+
     this.competitionService.getAllSeason().then(res => {
       this.seasons = res.data;
       this.choosedSeason.patchValue(this.seasons[0]);
     });
+
     this.choosedSeason.valueChanges.subscribe(season => {
       this.competitionService.getGameHistoryByCompetition(this.competitionId, season);
     });

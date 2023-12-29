@@ -1,4 +1,5 @@
 import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
+    provideAnimationsAsync(),
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApplication,
