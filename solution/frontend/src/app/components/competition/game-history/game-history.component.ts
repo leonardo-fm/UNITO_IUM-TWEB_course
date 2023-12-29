@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompetitionService } from '../../../services/competition.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GameModel } from '../../../models/game.model';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-game-history',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   host: { class: 'w-100' },
   templateUrl: './game-history.component.html',
   styleUrl: './game-history.component.css'

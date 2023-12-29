@@ -1,7 +1,13 @@
-.competition-country-label{
+.competition-country-label {
     color: var(--text-secondary);
 }
-.game-container{
+
+.game-container {
     margin-left: 48px;
     border-left: 1px solid var(--text-secondary);
+    cursor: pointer;
+}
+
+.game-container:hover {
+    background-color: var(--white-shade);
 }

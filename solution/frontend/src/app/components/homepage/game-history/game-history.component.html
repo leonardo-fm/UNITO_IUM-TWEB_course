@@ -3,7 +3,7 @@
     @for(competition of dayCompetitions.competitions; track competition.competition_id){
     <div class="d-flex flex-column competition-container">
         <div class="d-flex">
-            <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competition.competition?.country_id"
+            <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competition.competition?.country_id+'.webp'"
                 [alt]="'Flag ' + competition.competition?.country_name">
             <div class="d-flex flex-column">
                 <span class="competition-country-label">{{ languageService.selectedLanguage['country_name_'+competition.competition?.country_name] }} {{
@@ -12,7 +12,7 @@
             </div>
         </div>
         @for(game of competition.games; track game.game_id){
-        <div class="d-flex flex-column game-container gap-1 my-2 px-2">
+        <div class="d-flex flex-column game-container gap-1 my-2 px-2" [routerLink]="['/game', game.game_id]">
             <div class="d-flex gap-2">
                 <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.home_club_id+'.png'" [alt]="'Emblem '+game.home_club_name">
                 <span>{{ game.home_club_name }}</span>

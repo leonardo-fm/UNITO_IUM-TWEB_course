@@ -1,11 +1,16 @@
-.game-container{
+.game-container {
+    cursor: pointer;
     color: var(--text-secondary);
 }
 
-.winner-label{
+.game-container:hover {
+    background-color: var(--white-shade);
+}
+
+.winner-label {
     color: var(--text-primary);
 }
 
-.game-club-container{
+.game-club-container {
     border-left: 1px solid var(--text-secondary);
 }
