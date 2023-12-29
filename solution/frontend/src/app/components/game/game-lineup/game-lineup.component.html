@@ -1,0 +1,106 @@
+<div class="d-flex flex-column home-starting-lineup align-items-center justify-content-center col-4 p-3">
+    <div class="d-flex gap-3">
+        @for(lineup of startingHomeLineup[LineupPositionType.Goalkeeper]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingHomeLineup[LineupPositionType['Right-Back']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingHomeLineup[LineupPositionType['Centre-Back']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingHomeLineup[LineupPositionType['Left-Back']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingHomeLineup[LineupPositionType['Defensive Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingHomeLineup[LineupPositionType['Right Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingHomeLineup[LineupPositionType['Central Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingHomeLineup[LineupPositionType['Left Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingHomeLineup[LineupPositionType['Attacking Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingHomeLineup[LineupPositionType['Right Winger']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingHomeLineup[LineupPositionType['Centre-Forward']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingHomeLineup[LineupPositionType['Left Winger']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+</div>
+<div class="d-flex flex-column away-starting-lineup align-items-center justify-content-center col-4 p-3">
+    <div class="d-flex gap-3">
+        @for(lineup of startingAwayLineup[LineupPositionType.Goalkeeper]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingAwayLineup[LineupPositionType['Right-Back']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingAwayLineup[LineupPositionType['Centre-Back']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingAwayLineup[LineupPositionType['Left-Back']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingAwayLineup[LineupPositionType['Defensive Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingAwayLineup[LineupPositionType['Right Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingAwayLineup[LineupPositionType['Central Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingAwayLineup[LineupPositionType['Left Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingAwayLineup[LineupPositionType['Attacking Midfield']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+    <div class="d-flex gap-3">
+        @for(lineup of startingAwayLineup[LineupPositionType['Right Winger']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingAwayLineup[LineupPositionType['Centre-Forward']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+        @for(lineup of startingAwayLineup[LineupPositionType['Left Winger']]; track lineup.game_lineups_id){
+        <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
+        }
+    </div>
+</div>
+
+<ng-template #lineupTemplate let-lineup>
+    <div>
+        {{ lineup.number }}
+    </div>
+</ng-template>

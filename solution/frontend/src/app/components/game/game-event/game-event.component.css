@@ -1,0 +1,15 @@
+.game-event-container {
+    border-radius: 8px;
+    background-color: var(--white);
+}
+
+.card-icon {
+    border-radius: 2px;
+    width: 18px;
+    height: 24px;
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}

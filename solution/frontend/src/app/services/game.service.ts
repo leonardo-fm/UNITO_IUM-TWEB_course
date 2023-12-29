@@ -1,13 +1,30 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { GameHistoryModel, GameModel, GroupGameByCompetitionModel } from '../models/game.model';
+import { GameEventModel, GameHistoryModel, GameLineupModel, GameModel, GroupGameByCompetitionModel } from '../models/game.model';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
+  public gameSubject = new ReplaySubject<GameModel>(1);
 
   constructor() { }
+
+  getGameById(id: number) {
+    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
+      return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
+        return axios.get<GameEventModel[]>('assets/data/game_events.json').then(res3 => {
+          let game: GameModel = res.data.find(x => x.game_id == id) || new GameModel()
+          game.lineups = res2.data.filter(x => x.game_id == id);
+          game.events = res3.data.filter(x => x.game_id == id);
+          game.events.sort((x, y) => y.minute - x.minute);
+          this.gameSubject.next(game);
+          return game;
+        })
+      });
+    });
+  }
 
   getGameHistory() {
     return axios.get<GameModel[]>('assets/data/games.json').then(res => {

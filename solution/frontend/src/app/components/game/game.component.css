@@ -1,0 +1,9 @@
+.score-container{
+    border-radius: 8px;
+    background-color: #616a93;
+    color: white;
+}
+
+.score-label{
+    font-size: xx-large;
+}
