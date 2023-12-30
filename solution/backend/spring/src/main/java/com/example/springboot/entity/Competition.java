@@ -23,7 +23,7 @@ public class Competition {
     private String competitionType;
 
     @Column(name = "country_id")
-    private int countryId;
+    private Integer countryId;
 
     @Column(name = "country_name")
     private String countryName;
@@ -37,10 +37,9 @@ public class Competition {
     @Column(name = "url")
     private String url;
 
-    public Competition() {
-    }
+    public Competition() { }
 
-    public Competition(String id, String code, String name, String competitionSubType, String competitionType, int countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
+    public Competition(String id, String code, String name, String competitionSubType, String competitionType, Integer countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -93,11 +92,11 @@ public class Competition {
         this.competitionType = competitionType;
     }
 
-    public int getCountryId() {
+    public Integer getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(Integer countryId) {
         this.countryId = countryId;
     }
 
