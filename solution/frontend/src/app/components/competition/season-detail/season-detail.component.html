@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         @for (clubStatistic of clubsStatistics; track clubStatistic; let index = $index){
-        <tr>
+        <tr [routerLink]="['/club', clubStatistic.club?.club_id]">
             <td>{{ index + 1 }}</td>
             <td>
                 <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.club?.club_id+'.png'" [alt]="'Emblem '+clubStatistic.club?.name">

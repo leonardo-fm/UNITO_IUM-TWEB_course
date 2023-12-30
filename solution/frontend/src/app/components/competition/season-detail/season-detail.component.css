@@ -5,3 +5,7 @@ tr > td:not(:nth-child(2)) {
 tbody td {
     border-bottom: none;
 }
+
+tbody tr:hover td {
+    background-color: var(--white-shade);
+}

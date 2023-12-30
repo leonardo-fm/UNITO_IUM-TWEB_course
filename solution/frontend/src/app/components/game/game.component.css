@@ -7,3 +7,7 @@
 .score-label{
     font-size: xx-large;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}

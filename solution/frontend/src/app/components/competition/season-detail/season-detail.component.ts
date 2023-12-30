@@ -5,11 +5,12 @@ import { GameModel } from '../../../models/game.model';
 import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
 import { ClubStatistics } from '../../../models/club.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-season-detail',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   host: { class: 'w-100' },
   templateUrl: './season-detail.component.html',
   styleUrl: './season-detail.component.css'
