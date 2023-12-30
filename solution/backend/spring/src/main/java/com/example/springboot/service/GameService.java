@@ -33,7 +33,7 @@ public class GameService {
         return gameRepository.getClubGames(take, offset, clubId, season);
     }
 
-    public List<Game> getPlayerGames(int take, int offset, long playerId, int season) {
-        return gameRepository.getPlayerGames(take, offset, playerId, season);
+    public List<Game> getPlayerGames(List<Long> games) {
+        return gameRepository.getPlayerGames(games);
     }
 }

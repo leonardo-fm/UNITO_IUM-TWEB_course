@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 public final class GameDto {
     private Integer countryId;
-    private String countryName;
     private String competitionId;
     private String competitionName;
     private Long homeClubId;
@@ -20,7 +19,6 @@ public final class GameDto {
     // TODO to finish
     public GameDto(Game game) {
         countryId = -1;
-        countryName = "country name test";
         competitionId = game.getCompetitionId();
         competitionName = "competition name test";
         homeClubId = game.getHomeClubId();
@@ -38,14 +36,6 @@ public final class GameDto {
 
     public void setCountryId(Integer countryId) {
         this.countryId = countryId;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
     }
 
     public String getCompetitionId() {

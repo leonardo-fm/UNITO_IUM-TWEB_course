@@ -55,13 +55,11 @@ public class GameController {
         return response;
     }
 
-    // TODO to finish
-    @GetMapping("/player/{playerId}/{season}")
-    public List<GameDto> GetAllGamesOfPlayer(@PathVariable int playerId, @PathVariable int season,
-                                                  @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
-        List<Game> games = gameService.getPlayerGames(take, offset, playerId, season);
+    @PostMapping("/player")
+    public List<GameDto> GetAllGamesOfPlayer(@RequestBody List<Long> games) {
+        List<Game> playerGames = gameService.getPlayerGames(games);
         List<GameDto> response = new ArrayList<>();
-        for (Game game : games) response.add(new GameDto(game));
+        for (Game game : playerGames) response.add(new GameDto(game));
         return response;
     }
 }
