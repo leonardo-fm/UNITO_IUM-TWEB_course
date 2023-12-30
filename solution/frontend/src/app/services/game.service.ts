@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { GameEventModel, GameHistoryModel, GameLineupModel, GameModel, GroupGameByCompetitionModel } from '../models/game.model';
 import { ReplaySubject } from 'rxjs';
+import { CompetitionModel } from '../models/competition.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class GameService {
         for (let [competition_id, competition_games] of Object.entries(groupByLeagues))
           competitionGames.push({
             competition_id: competition_id,
-            competition: (<GameModel[]>competition_games)[0]?.competition, 
+            competition: (<GameModel[]>competition_games)[0]?.competition,
             games: <GameModel[]>competition_games
           });
         historyGame.push({ date: key, competitions: competitionGames });
@@ -50,6 +51,17 @@ export class GameService {
       // TO REMOVE: Get last 7 days
       return historyGame.slice(0, 7);
     });
+  }
+
+  getClubGameHistory(club_id: number) {
+    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
+      return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res2 => {
+        let games = res.data.filter(x => x.home_club_id == club_id || x.away_club_id == club_id);
+        games.forEach(x => x.competition = res2.data.find(y => y.competition_id == x.competition_id) || new CompetitionModel());
+        games.sort((x, y) => x.date >= y.date ? -1 : 1);
+        return games;
+      })
+    })
   }
 
 }

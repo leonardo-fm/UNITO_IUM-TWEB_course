@@ -6,7 +6,7 @@
             <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competition.competition?.country_id+'.webp'"
                 [alt]="'Flag ' + competition.competition?.country_name">
             <div class="d-flex flex-column">
-                <span class="competition-country-label">{{ languageService.selectedLanguage['country_name_'+competition.competition?.country_name] }} {{
+                <span class="competition-country-label">{{ languageService.selectedLanguage['country_name_'+competition.competition?.country_id] }} {{
                     moment(dayCompetitions.date).format(languageService.selectedLanguage['date_format']) }}</span>
                 <span>{{ competition.competition?.name }}</span>
             </div>

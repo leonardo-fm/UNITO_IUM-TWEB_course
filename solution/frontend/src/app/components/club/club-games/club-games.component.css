@@ -1,0 +1,36 @@
+.game-container {
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.game-container:hover {
+    background-color: var(--white-shade);
+}
+
+.winner-label {
+    color: var(--text-primary);
+}
+
+.game-club-container {
+    border-left: 1px solid var(--text-secondary);
+}
+
+.score-container {
+    border-right: 1px solid var(--text-secondary);
+}
+
+.win, .draw, .lose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.win { background-color: var(--win); }
+.draw { background-color: var(--draw); }
+.lose { background-color: var(--lose); }

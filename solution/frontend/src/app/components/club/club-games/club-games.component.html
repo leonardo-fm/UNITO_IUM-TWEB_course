@@ -1,1 +1,42 @@
-<p>club-games works!</p>
+@for (gameGroup of groupedGames; track gameGroup){
+<div class="d-flex competition-group align-items-center">
+    <img class="object-fit" width="48" height="48"
+        [src]="'https://tmssl.akamaized.net/images/logo/header/'+ gameGroup[0].competition_id.toLowerCase()+'.png'"
+        alt="">
+    <span>{{ gameGroup[0].competition.name }}</span>
+</div>
+@for (game of gameGroup; track game.game_id){
+<div class="d-flex game-container align-items-center" [routerLink]="['/game', game.game_id]">
+    <span>{{ moment(game.date).format(languageService.selectedLanguage['date_format']) }}</span>
+    <div class="d-flex flex-column game-club-container gap-1 m-2 px-2">
+        <div class="d-flex gap-2">
+            <img width="24" height="24"
+                [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.home_club_id+'.png'"
+                [alt]="'Emblem '+game.home_club_name">
+            <span [class.winner-label]="game.home_club_goals > game.away_club_goals">{{ game.home_club_name }}</span>
+        </div>
+        <div class="d-flex gap-2">
+            <img width="24" height="24"
+                [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.away_club_id+'.png'"
+                [alt]="'Emblem '+game.away_club_name">
+            <span [class.winner-label]="game.away_club_goals > game.home_club_goals">{{ game.away_club_name }}</span>
+        </div>
+    </div>
+    <div class="d-flex flex-column score-container gap-1 ms-auto my-2 px-2">
+        <span [class.winner-label]="game.home_club_goals > game.away_club_goals">{{ game.home_club_goals }}</span>
+        <span [class.winner-label]="game.away_club_goals > game.home_club_goals">{{ game.away_club_goals }}</span>
+    </div>
+    @switch (winDrawLose(game)){
+    @case('win'){
+    <span class="win mx-3">{{ languageService.selectedLanguage['club_games_win'] }}</span>
+    }
+    @case('draw'){
+    <span class="draw mx-3">{{ languageService.selectedLanguage['club_games_draw'] }}</span>
+    }
+    @case('lose'){
+    <span class="lose mx-3">{{ languageService.selectedLanguage['club_games_lose'] }}</span>
+    }
+    }
+</div>
+}
+}
