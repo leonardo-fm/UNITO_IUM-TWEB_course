@@ -1,4 +1,4 @@
-package com.example.springboot.model;
+package com.example.springboot.entity;
 
 public class Club {
     private int id;

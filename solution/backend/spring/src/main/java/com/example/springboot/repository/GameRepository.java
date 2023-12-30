@@ -1,6 +1,6 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.model.Game;
+import com.example.springboot.entity.Game;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

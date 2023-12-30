@@ -1,6 +1,6 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.model.Game;
+import com.example.springboot.entity.Game;
 import com.example.springboot.dto.GameDto;
 import com.example.springboot.repository.GameRepository;
 import com.google.gson.Gson;

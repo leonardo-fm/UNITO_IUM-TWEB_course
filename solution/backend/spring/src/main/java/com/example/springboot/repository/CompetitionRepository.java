@@ -1,19 +1,17 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.model.Competition;
+import com.example.springboot.entity.Competition;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompetitionRepository {
+public interface CompetitionRepository extends JpaRepository<Competition, String> {
 
-    public Competition GetCompetition(int competitionId) {
-        // Connect to Db and take data
-        return new Competition();
-    }
+    @Query(value = "SELECT c FROM competition c WHERE c.competition_id IN :competitionId", nativeQuery = true)
+    Competition findCompetitionById(String competitionId);
 
-    public List<Competition> GetAllCompetitions() {
-        // Connect to Db and take data
-        return new ArrayList<>();
-    }
+    @Query(value = "SELECT * FROM competition", nativeQuery = true)
+    List<Competition> getAllCompetitions();
 }

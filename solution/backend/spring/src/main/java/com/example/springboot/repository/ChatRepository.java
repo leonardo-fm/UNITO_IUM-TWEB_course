@@ -1,6 +1,6 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.model.Chat;
+import com.example.springboot.entity.Chat;
 
 public class ChatRepository {
 

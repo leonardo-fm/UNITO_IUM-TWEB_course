@@ -1,39 +1,41 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.model.Competition;
-import com.example.springboot.dto.CompetitionDto;
-import com.example.springboot.repository.CompetitionRepository;
-import com.google.gson.Gson;
-import org.springframework.web.bind.annotation.*;
+import com.example.springboot.entity.Competition;
+import com.example.springboot.service.CompetitionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/competition")
 public class CompetitionController {
 
+    @Autowired
+    private final CompetitionService competitionService;
+
+    public CompetitionController(CompetitionService competitionService) {
+        this.competitionService = competitionService;
+    }
+
     @GetMapping("/all")
-    public String GetAllCompetitions() {
-        List<Competition> allCompetitions = new CompetitionRepository().GetAllCompetitions();
-        // Logic
-        Gson gson = new Gson();
-        return gson.toJson(new ArrayList<>());
+    public List<Competition> GetAllCompetitions() {
+        List<Competition> allCompetitions = competitionService.getAllCompetitions();
+        return allCompetitions;
     }
 
     @GetMapping("/{competitionId}")
-    public String GetCompetition(@PathVariable int competitionId) {
-        Competition competition = new CompetitionRepository().GetCompetition(competitionId);
-        // Logic
-        Gson gson = new Gson();
-        return gson.toJson(new CompetitionDto());
+    public Competition GetCompetition(@PathVariable String competitionId) {
+        Competition competition = competitionService.getCompetition(competitionId);
+        return competition;
     }
 
     @GetMapping("/details/{competitionId}")
-    public String GetCompetitionDetails(@PathVariable int competitionId) {
-        Competition competition = new CompetitionRepository().GetCompetition(competitionId);
-        // Logic
-        Gson gson = new Gson();
-        return gson.toJson(new CompetitionDto());
+    public Competition GetCompetitionDetails(@PathVariable String competitionId) {
+        Competition competition = competitionService.getCompetition(competitionId);
+        return competition;
     }
 }

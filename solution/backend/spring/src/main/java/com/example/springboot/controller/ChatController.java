@@ -1,7 +1,6 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.dto.PlayerDto;
-import com.example.springboot.model.Chat;
+import com.example.springboot.entity.Chat;
 import com.example.springboot.dto.ChatDto;
 import com.example.springboot.repository.ChatRepository;
 import com.google.gson.Gson;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/chat")
