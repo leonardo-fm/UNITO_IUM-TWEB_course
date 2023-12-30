@@ -1,0 +1,27 @@
+<span>{{ languageService.selectedLanguage['club_players'] }}</span>
+
+<div class="d-flex search-container my-2">
+    <input class="form-control" type="search"
+        [placeholder]="languageService.selectedLanguage['homepage_leagues_search_placeholder']"
+        aria-label="Search leagues" [(ngModel)]="filter" (ngModelChange)="onFilterPlayers()">
+    <button class="d-flex btn">
+        <img src="assets/icons/search.svg" alt="Search button">
+    </button>
+</div>
+
+<div class="d-flex flex-column mt-3 gap-3">
+    @for (player of players; track player.player_id){
+    <div class="d-flex gap-2">
+        <img class="player-image" width="48" height="48" [src]="player.image_url" alt="">
+        <div class="d-flex flex-column justify-content-center">
+            <span class="player-name-label">{{player.name}}</span>
+            <span class="player-position-label">
+                {{ languageService.selectedLanguage['club_players_position_'+player.position]}}
+                @if(player.sub_position && player.position != player.sub_position){
+                / {{ languageService.selectedLanguage['club_players_sub_position_'+player.sub_position] }}
+                }
+            </span>
+        </div>
+    </div>
+    }
+</div>

@@ -1,9 +1,13 @@
 .score-container{
     border-radius: 8px;
-    background-color: #616a93;
+    background-color: var(--secondary);
     color: white;
 }
 
 .score-label{
     font-size: xx-large;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }

@@ -5,6 +5,7 @@ import { CompetitionModel } from '../../models/competition.model';
 import { GameHistoryComponent } from './game-history/game-history.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SeasonDetailComponent } from './season-detail/season-detail.component';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-competition',
@@ -23,22 +24,28 @@ export class CompetitionComponent implements OnInit {
 
   constructor(
     private competitionService: CompetitionService,
+    private loaderService: LoaderService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.competitionId = params['id'];
-      this.competitionService.getCompetitionById(this.competitionId).then(x => this.competition = x);
+      this.loaderService.show();
+      this.competitionService.getCompetitionById(this.competitionId)
+        .then(x => this.competition = x)
+        .finally(() => this.loaderService.hide());
     });
 
+    this.loaderService.show();
     this.competitionService.getAllSeason().then(res => {
       this.seasons = res.data;
       this.choosedSeason.patchValue(this.seasons[0]);
-    });
+    }).finally(() => this.loaderService.hide());
 
     this.choosedSeason.valueChanges.subscribe(season => {
-      this.competitionService.getGameHistoryByCompetition(this.competitionId, season);
+      this.loaderService.show();
+      this.competitionService.getGameHistoryByCompetition(this.competitionId, season).finally(() => this.loaderService.hide());
     });
   }
 }
