@@ -1,30 +1,14 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.model.Game;
+import com.example.springboot.entity.Competition;
+import com.example.springboot.entity.Game;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-public class GameRepository {
+public interface GameRepository extends JpaRepository<Game, Integer> {
 
-    public Game GetGame(int gameId) {
-        // Connect to Db and take data
-        return new Game();
-    }
-
-    public List<Game> GetAllGame(LocalDate date) {
-        // Connect to Db and take data
-        return new ArrayList<>();
-    }
-
-    public List<Game> GetAllGameOfCompetition(int competitionId) {
-        // Connect to Db and take data
-        return new ArrayList<>();
-    }
-
-    public List<Game> GetAllGameOfPlayer(int playerId) {
-        // Connect to Db and take data
-        return new ArrayList<>();
-    }
+    @Query(value = "SELECT * FROM game ORDER BY date DESC, game_id DESC OFFSET :offset LIMIT :take", nativeQuery = true)
+    List<Game> getGames(int take, int offset);
 }

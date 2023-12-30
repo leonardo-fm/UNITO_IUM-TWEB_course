@@ -1,6 +1,6 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.model.Player;
+import com.example.springboot.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;

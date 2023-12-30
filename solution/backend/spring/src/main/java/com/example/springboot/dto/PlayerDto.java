@@ -1,8 +1,9 @@
 package com.example.springboot.dto;
 
 public class PlayerDto {
-    private String name;
-    private String surname;
+    private int id;
+    private String fullName;
+    private String position;
+    private String subPosition;
     private String imageUrl;
-    private String link;
 }
