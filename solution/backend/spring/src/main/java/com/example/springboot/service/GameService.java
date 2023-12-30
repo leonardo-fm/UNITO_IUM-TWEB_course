@@ -17,6 +17,10 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
+    public Game getGame(long gameId) {
+        return gameRepository.getGame(gameId);
+    }
+
     public List<Game> getGames(int take, int offset) {
         return gameRepository.getGames(take, offset);
     }
@@ -25,11 +29,11 @@ public class GameService {
         return gameRepository.getCompetitionGames(take, offset, competitionId, season);
     }
 
-    public List<Game> getClubGames(int take, int offset, int clubId, int season) {
+    public List<Game> getClubGames(int take, int offset, long clubId, int season) {
         return gameRepository.getClubGames(take, offset, clubId, season);
     }
 
-    public List<Game> getPlayerGames(int take, int offset, int playerId, int season) {
+    public List<Game> getPlayerGames(int take, int offset, long playerId, int season) {
         return gameRepository.getPlayerGames(take, offset, playerId, season);
     }
 }

@@ -23,6 +23,12 @@ public class GameController {
         this.gameService = gameService;
     }
 
+    @GetMapping("/{gameId}")
+    public GameDto GetGame(@PathVariable int gameId) {
+        Game game = gameService.getGame(gameId);
+        return new GameDto(game);
+    }
+
     @GetMapping()
     public List<GameDto> GetAllGamesInDate(@RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
         List<Game> games = gameService.getGames(take, offset);
@@ -41,7 +47,7 @@ public class GameController {
     }
 
     @GetMapping("/club/{clubId}/{season}")
-    public List<GameDto> GetAllGamesOfClub(@PathVariable int clubId, @PathVariable int season,
+    public List<GameDto> GetAllGamesOfClub(@PathVariable long clubId, @PathVariable int season,
                                                   @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
         List<Game> games = gameService.getClubGames(take, offset, clubId, season);
         List<GameDto> response = new ArrayList<>();

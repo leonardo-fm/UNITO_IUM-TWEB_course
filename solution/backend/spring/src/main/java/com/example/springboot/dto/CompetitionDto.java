@@ -4,11 +4,11 @@ import com.example.springboot.entity.Competition;
 
 public final class CompetitionDto {
     private String competitionId;
-    private int countryId;
+    private Integer countryId;
     private String name;
-    private int[] seasons;
+    private Integer[] seasons;
 
-    public CompetitionDto(Competition competition, int[] seasons) {
+    public CompetitionDto(Competition competition, Integer[] seasons) {
         competitionId = competition.getId();
         countryId = competition.getCountryId();
         name = competition.getName();
@@ -23,11 +23,11 @@ public final class CompetitionDto {
         this.competitionId = competition_id;
     }
 
-    public int getCountry_id() {
+    public Integer getCountry_id() {
         return countryId;
     }
 
-    public void setCountry_id(int country_id) {
+    public void setCountry_id(Integer country_id) {
         this.countryId = country_id;
     }
 
@@ -39,11 +39,11 @@ public final class CompetitionDto {
         this.name = name;
     }
 
-    public int[] getSeasons() {
+    public Integer[] getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(int[] seasons) {
+    public void setSeasons(Integer[] seasons) {
         this.seasons = seasons;
     }
 }

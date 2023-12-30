@@ -4,19 +4,20 @@ import com.example.springboot.entity.Game;
 
 import java.time.LocalDate;
 
-public class GameDto {
-    private int countryId;
+public final class GameDto {
+    private Integer countryId;
     private String countryName;
     private String competitionId;
     private String competitionName;
-    private long homeClubId;
+    private Long homeClubId;
     private String homeClubName;
-    private int homeClubScore;
-    private long awayClubId;
+    private Integer homeClubScore;
+    private Long awayClubId;
     private String awayClubName;
-    private int awayClubScore;
+    private Integer awayClubScore;
     private LocalDate date;
 
+    // TODO to finish
     public GameDto(Game game) {
         countryId = -1;
         countryName = "country name test";
@@ -31,11 +32,11 @@ public class GameDto {
         date = game.getDate();
     }
 
-    public int getCountryId() {
+    public Integer getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(Integer countryId) {
         this.countryId = countryId;
     }
 
@@ -63,11 +64,11 @@ public class GameDto {
         this.competitionName = competitionName;
     }
 
-    public long getHomeClubId() {
+    public Long getHomeClubId() {
         return homeClubId;
     }
 
-    public void setHomeClubId(long homeClubId) {
+    public void setHomeClubId(Long homeClubId) {
         this.homeClubId = homeClubId;
     }
 
@@ -79,19 +80,19 @@ public class GameDto {
         this.homeClubName = homeClubName;
     }
 
-    public int getHomeClubScore() {
+    public Integer getHomeClubScore() {
         return homeClubScore;
     }
 
-    public void setHomeClubScore(int homeClubScore) {
+    public void setHomeClubScore(Integer homeClubScore) {
         this.homeClubScore = homeClubScore;
     }
 
-    public long getAwayClubId() {
+    public Long getAwayClubId() {
         return awayClubId;
     }
 
-    public void setAwayClubId(long awayClubId) {
+    public void setAwayClubId(Long awayClubId) {
         this.awayClubId = awayClubId;
     }
 
@@ -103,11 +104,11 @@ public class GameDto {
         this.awayClubName = awayClubName;
     }
 
-    public int getAwayClubScore() {
+    public Integer getAwayClubScore() {
         return awayClubScore;
     }
 
-    public void setAwayClubScore(int awayClubScore) {
+    public void setAwayClubScore(Integer awayClubScore) {
         this.awayClubScore = awayClubScore;
     }
 
