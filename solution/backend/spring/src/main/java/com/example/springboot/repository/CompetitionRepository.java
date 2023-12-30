@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CompetitionRepository extends JpaRepository<Competition, String> {
 
-    @Query(value = "SELECT c FROM competition c WHERE c.competition_id IN :competitionId", nativeQuery = true)
+    @Query(value = "SELECT * FROM competition WHERE competition_id = :competitionId", nativeQuery = true)
     Competition findCompetitionById(String competitionId);
 
     @Query(value = "SELECT * FROM competition", nativeQuery = true)
