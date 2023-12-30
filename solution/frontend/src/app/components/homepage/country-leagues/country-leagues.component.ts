@@ -4,6 +4,7 @@ import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { LoaderService } from '../../../services/loader.service';
 
 @Component({
   selector: 'app-country-leagues',
@@ -20,14 +21,16 @@ export class CountryLeaguesComponent implements OnInit {
 
   constructor(
     private competitionService: CompetitionService,
+    private loaderService: LoaderService,
     public languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
+    this.loaderService.show();
     this.competitionService.getAllCompetitions().then(res => {
       this.data = res.data;
       this.groupByCountry(this.data);
-    });
+    }).finally(() => this.loaderService.hide());
   }
 
   groupByCountry(competitions: CompetitionModel[]) {

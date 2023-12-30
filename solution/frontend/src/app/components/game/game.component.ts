@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { GameModel } from '../../models/game.model';
 import { GameLineupComponent } from './game-lineup/game-lineup.component';
 import { GameEventComponent } from './game-event/game-event.component';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-game',
@@ -19,20 +19,20 @@ export class GameComponent implements OnInit{
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private spinner: NgxSpinnerService,
+    private loaderService: LoaderService,
     private gameService: GameService
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       let gameId = params['id'];
-      this.spinner.show();
+      this.loaderService.show();
       this.gameService.getGameById(gameId)
         .then(game => {
           console.log('Game', game);
           this.game = game;
         })
-        .finally(() => this.spinner.hide());
+        .finally(() => this.loaderService.hide());
     })    
   }
 }
