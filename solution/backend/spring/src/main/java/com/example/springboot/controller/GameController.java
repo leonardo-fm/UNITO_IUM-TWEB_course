@@ -31,21 +31,31 @@ public class GameController {
         return response;
     }
 
-//    @GetMapping("/competition/{competitionId}")
-//    public String GetAllGamesOfCompetition(@PathVariable int competitionId) {
-//        List<Game> allGames = new GameRepository().GetAllGameOfCompetition(competitionId);
-//        return "";
-//    }
-//
-//    @GetMapping("/player/{playerId}")
-//    public String GetAllGamesOfPlayer(@PathVariable int playerId) {
-//        List<Game> allGames = new GameRepository().GetAllGameOfPlayer(playerId);
-//        return "";
-//    }
-//
-//    @GetMapping("/{gameId}")
-//    public String GetGame(@PathVariable int gameId) {
-//        Game game = new GameRepository().GetGame(gameId);
-//        return "";
-//    }
+    @GetMapping("/competition/{competitionId}/{season}")
+    public List<GameDto> GetAllGamesOfCompetition(@PathVariable String competitionId, @PathVariable int season,
+                                                  @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
+        List<Game> games = gameService.getCompetitionGames(take, offset, competitionId, season);
+        List<GameDto> response = new ArrayList<>();
+        for (Game game : games) response.add(new GameDto(game));
+        return response;
+    }
+
+    @GetMapping("/club/{clubId}/{season}")
+    public List<GameDto> GetAllGamesOfClub(@PathVariable int clubId, @PathVariable int season,
+                                                  @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
+        List<Game> games = gameService.getClubGames(take, offset, clubId, season);
+        List<GameDto> response = new ArrayList<>();
+        for (Game game : games) response.add(new GameDto(game));
+        return response;
+    }
+
+    // TODO to finish
+    @GetMapping("/player/{playerId}/{season}")
+    public List<GameDto> GetAllGamesOfPlayer(@PathVariable int playerId, @PathVariable int season,
+                                                  @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
+        List<Game> games = gameService.getPlayerGames(take, offset, playerId, season);
+        List<GameDto> response = new ArrayList<>();
+        for (Game game : games) response.add(new GameDto(game));
+        return response;
+    }
 }
