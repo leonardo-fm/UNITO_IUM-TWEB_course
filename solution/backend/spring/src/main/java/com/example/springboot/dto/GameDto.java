@@ -1,5 +1,6 @@
 package com.example.springboot.dto;
 
+import com.example.springboot.entity.Competition;
 import com.example.springboot.entity.Game;
 
 import java.time.LocalDate;
@@ -16,11 +17,10 @@ public final class GameDto {
     private Integer awayClubScore;
     private LocalDate date;
 
-    // TODO to finish
-    public GameDto(Game game) {
-        countryId = -1;
+    public GameDto(Game game, Competition competition) {
+        countryId = competition.getCountryId();
         competitionId = game.getCompetitionId();
-        competitionName = "competition name test";
+        competitionName = competition.getName();
         homeClubId = game.getHomeClubId();
         homeClubName = getHomeClubName();
         homeClubScore = getHomeClubScore();

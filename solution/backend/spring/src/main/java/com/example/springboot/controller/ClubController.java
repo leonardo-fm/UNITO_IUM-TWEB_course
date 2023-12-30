@@ -23,14 +23,19 @@ public class ClubController {
     @Autowired
     private final ClubService clubService;
 
-    public ClubController(ClubService clubService) {
+    @Autowired
+    private final CompetitionService competitionService;
+
+    public ClubController(ClubService clubService, CompetitionService competitionService) {
         this.clubService = clubService;
+        this.competitionService = competitionService;
     }
 
     @GetMapping("/{clubId}")
     public ClubDto GetCompetition(@PathVariable int clubId) {
         Club club = clubService.getClub(clubId);
-        return new ClubDto(club);
+        Competition competition = competitionService.getCompetition(club.getDomesticCompetitionId());
+        return new ClubDto(club, competition);
     }
 
     @GetMapping("/competition/{competitionId}/{season}")

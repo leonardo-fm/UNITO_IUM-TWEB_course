@@ -1,17 +1,17 @@
 package com.example.springboot.dto;
 
 import com.example.springboot.entity.Club;
+import com.example.springboot.entity.Competition;
 
 public final class ClubDto {
     private Long clubId;
     private String clubName;
     private Integer countryId;
 
-    // TODO to finish
-    public ClubDto(Club club) {
+    public ClubDto(Club club, Competition competition) {
         clubId = club.getId();
         clubName = club.getName();
-        countryId = -1;
+        countryId = competition.getCountryId();
     }
 
     public Long getClubId() {
