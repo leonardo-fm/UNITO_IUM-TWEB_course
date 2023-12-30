@@ -12,7 +12,9 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
     @Query(value = "SELECT * FROM club WHERE club_id = :clubId", nativeQuery = true)
     Club getClub(long clubId);
 
-    // TODO to finish
-    @Query(value = "SELECT * FROM club", nativeQuery = true)
+    @Query(value = "SELECT c.* FROM club AS c " +
+            "INNER JOIN competition AS cp " +
+            "ON c.domestic_competition_id = cp.domestic_league_code " +
+            "WHERE cp.competition_id = :competitionId AND c.last_season >= :season", nativeQuery = true)
     List<Club> getCompetitionSeasonClubs(String competitionId, int season);
 }

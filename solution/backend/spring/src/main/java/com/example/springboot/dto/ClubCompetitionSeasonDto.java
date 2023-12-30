@@ -11,16 +11,14 @@ public final class ClubCompetitionSeasonDto {
     private Integer scoreGoals;
     private Integer takenGoals;
 
-
-    // TODO to finishs
-    public ClubCompetitionSeasonDto(Club club) {
+    public ClubCompetitionSeasonDto(Club club, int wins, int draws, int loses, int scoreGoals, int takenGoals) {
         clubId = club.getId();
         clubName = club.getName();
-        wins = -1;
-        draws = -1;
-        loses = -1;
-        scoreGoals = -1;
-        takenGoals = -1;
+        this.wins = wins;
+        this.draws = draws;
+        this.loses = loses;
+        this.scoreGoals = scoreGoals;
+        this.takenGoals = takenGoals;
     }
 
     public Long getClubId() {
