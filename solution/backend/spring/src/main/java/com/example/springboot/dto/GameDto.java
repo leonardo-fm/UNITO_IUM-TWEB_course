@@ -1,27 +1,26 @@
 package com.example.springboot.dto;
 
+import com.example.springboot.entity.Competition;
 import com.example.springboot.entity.Game;
 
 import java.time.LocalDate;
 
-public class GameDto {
-    private int countryId;
-    private String countryName;
+public final class GameDto {
+    private Integer countryId;
     private String competitionId;
     private String competitionName;
-    private long homeClubId;
+    private Long homeClubId;
     private String homeClubName;
-    private int homeClubScore;
-    private long awayClubId;
+    private Integer homeClubScore;
+    private Long awayClubId;
     private String awayClubName;
-    private int awayClubScore;
+    private Integer awayClubScore;
     private LocalDate date;
 
-    public GameDto(Game game) {
-        countryId = -1;
-        countryName = "country name test";
+    public GameDto(Game game, Competition competition) {
+        countryId = competition.getCountryId();
         competitionId = game.getCompetitionId();
-        competitionName = "competition name test";
+        competitionName = competition.getName();
         homeClubId = game.getHomeClubId();
         homeClubName = getHomeClubName();
         homeClubScore = getHomeClubScore();
@@ -31,20 +30,12 @@ public class GameDto {
         date = game.getDate();
     }
 
-    public int getCountryId() {
+    public Integer getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(Integer countryId) {
         this.countryId = countryId;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
     }
 
     public String getCompetitionId() {
@@ -63,11 +54,11 @@ public class GameDto {
         this.competitionName = competitionName;
     }
 
-    public long getHomeClubId() {
+    public Long getHomeClubId() {
         return homeClubId;
     }
 
-    public void setHomeClubId(long homeClubId) {
+    public void setHomeClubId(Long homeClubId) {
         this.homeClubId = homeClubId;
     }
 
@@ -79,19 +70,19 @@ public class GameDto {
         this.homeClubName = homeClubName;
     }
 
-    public int getHomeClubScore() {
+    public Integer getHomeClubScore() {
         return homeClubScore;
     }
 
-    public void setHomeClubScore(int homeClubScore) {
+    public void setHomeClubScore(Integer homeClubScore) {
         this.homeClubScore = homeClubScore;
     }
 
-    public long getAwayClubId() {
+    public Long getAwayClubId() {
         return awayClubId;
     }
 
-    public void setAwayClubId(long awayClubId) {
+    public void setAwayClubId(Long awayClubId) {
         this.awayClubId = awayClubId;
     }
 
@@ -103,11 +94,11 @@ public class GameDto {
         this.awayClubName = awayClubName;
     }
 
-    public int getAwayClubScore() {
+    public Integer getAwayClubScore() {
         return awayClubScore;
     }
 
-    public void setAwayClubScore(int awayClubScore) {
+    public void setAwayClubScore(Integer awayClubScore) {
         this.awayClubScore = awayClubScore;
     }
 

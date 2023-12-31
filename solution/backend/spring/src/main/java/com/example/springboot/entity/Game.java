@@ -26,6 +26,7 @@ public class Game {
 
     @Column(name = "date")
     private LocalDate date;
+
     @Column(name = "home_club_id")
     private Long homeClubId;
 
@@ -82,7 +83,7 @@ public class Game {
 
     public Game() { }
 
-    public Game(Long id, String competitionId, Integer season, String round, LocalDate date, long homeClubId, long awayClubId, Integer homeClubGoals, Integer awayClubGoals, Integer homeClubPosition, Integer awayClubPosition, String homeClubManagerName, String awayClubManagerName, String stadium, Long attendance, String referee, String url, String homeClubFormation, String awayClubFormation, String homeClubName, String awayClubName, String aggregate, String competitionType) {
+    public Game(Long id, String competitionId, Integer season, String round, LocalDate date, Long homeClubId, Long awayClubId, Integer homeClubGoals, Integer awayClubGoals, Integer homeClubPosition, Integer awayClubPosition, String homeClubManagerName, String awayClubManagerName, String stadium, Long attendance, String referee, String url, String homeClubFormation, String awayClubFormation, String homeClubName, String awayClubName, String aggregate, String competitionType) {
         this.id = id;
         this.competitionId = competitionId;
         this.season = season;

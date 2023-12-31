@@ -1,19 +1,16 @@
 package com.example.springboot.repository;
 
 import com.example.springboot.entity.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerRepository {
+public interface PlayerRepository extends JpaRepository<Player, Long> {
 
-    public Player GetPlayer(int playerId) {
-        // Connect to Db and take data
-        return new Player();
-    }
+    @Query(value = "SELECT * FROM player WHERE player_id = :playerId", nativeQuery = true)
+    Player getPlayer(long playerId);
 
-    public List<Player> GetAllPlayersFromClub(int clubId) {
-        // Connect to Db and take data
-        return new ArrayList<>();
-    }
+    @Query(value = "SELECT * FROM player WHERE current_club_id = :clubId", nativeQuery = true)
+    List<Player> getClubPlayers(long clubId);
 }

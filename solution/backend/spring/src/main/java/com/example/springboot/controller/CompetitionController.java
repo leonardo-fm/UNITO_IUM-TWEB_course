@@ -23,17 +23,17 @@ public class CompetitionController {
         this.competitionService = competitionService;
     }
 
+    @GetMapping("/{competitionId}")
+    public CompetitionDto GetCompetition(@PathVariable String competitionId) {
+        Competition competition = competitionService.getCompetition(competitionId);
+        return new CompetitionDto(competition, null);
+    }
+
     @GetMapping("/all")
     public List<CompetitionDto> GetAllCompetitions() {
         List<Competition> allCompetitions = competitionService.getAllCompetitions();
         List<CompetitionDto> response = new ArrayList<>();
         for (Competition competition : allCompetitions) response.add(new CompetitionDto(competition, null));
         return response;
-    }
-
-    @GetMapping("/{competitionId}")
-    public CompetitionDto GetCompetition(@PathVariable String competitionId) {
-        Competition competition = competitionService.getCompetition(competitionId);
-        return new CompetitionDto(competition, null);
     }
 }
