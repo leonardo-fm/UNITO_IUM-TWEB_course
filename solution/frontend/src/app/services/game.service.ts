@@ -64,4 +64,35 @@ export class GameService {
     })
   }
 
+  getPlayerGameHistory(playerId: number){
+    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
+      return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
+        return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res3 => {
+          let gameIds = res2.data.filter(x => x.player_id == playerId).map(x => x.game_id);
+          let games = res.data.filter(x => gameIds.includes(x.game_id));
+          games.forEach(x => x.competition = res3.data.find(y => y.competition_id == x.competition_id) || new CompetitionModel());
+          games.sort((x, y) => x.date >= y.date ? -1 : 1);
+          return games;
+        })
+      })
+    })
+  }
+
+  groupConsequentCompetitionGame(games: GameModel[]) {
+    let grouped: GameModel[][] = [];
+    let count = 0;
+    let lastCompetition: string;
+    games.forEach(game => {
+      if (!lastCompetition || lastCompetition == game.competition_id) {
+        (grouped[count] = grouped[count] || []).push(game);
+      }
+      else {
+        count++;
+        (grouped[count] = grouped[count] || []).push(game);
+      }
+      lastCompetition = game.competition_id;
+    });
+    return grouped;
+  }
+
 }

@@ -5,11 +5,12 @@ import { PlayerModel } from '../../models/player.model';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
 import moment from 'moment';
+import { PlayerGamesComponent } from './player-games/player-games.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [],
+  imports: [PlayerGamesComponent],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './player.component.html',
   styleUrl: './player.component.css'
