@@ -3,11 +3,12 @@ import { GameService } from '../../../services/game.service';
 import { Subscription } from 'rxjs';
 import { GameLineupModel, LineupPositionType } from '../../../models/game.model';
 import { NgTemplateOutlet } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-game-lineup',
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, RouterLink],
   host: { class: 'd-flex justify-content-between' },
   templateUrl: './game-lineup.component.html',
   styleUrl: './game-lineup.component.css'

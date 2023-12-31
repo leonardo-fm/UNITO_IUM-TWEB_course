@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
 import { PlayerModel } from '../../../models/player.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { ClubService } from '../../../services/club.service';
 
 @Component({
   selector: 'app-club-players',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './club-players.component.html',
   styleUrl: './club-players.component.css'
 })

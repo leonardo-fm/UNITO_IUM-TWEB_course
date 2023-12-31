@@ -11,7 +11,7 @@
 
 <div class="d-flex flex-column mt-3 gap-3">
     @for (player of players; track player.player_id){
-    <div class="d-flex gap-2">
+    <div class="d-flex player-container cursor-pointer gap-2" [routerLink]="['/player', player.player_id]">
         <img class="player-image" width="48" height="48" [src]="player.image_url" alt="">
         <div class="d-flex flex-column justify-content-center">
             <span class="player-name-label">{{player.name}}</span>

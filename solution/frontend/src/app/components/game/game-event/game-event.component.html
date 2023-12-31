@@ -9,6 +9,7 @@
         }
         <span>{{event.type}}</span>
         <span>{{event.minute}}</span>
+        <span class="cursor-pointer" [routerLink]="['/player', event.player_id]">{{event.player_id}}</span>
         <span>{{event.description}}</span>
     </div>
     }

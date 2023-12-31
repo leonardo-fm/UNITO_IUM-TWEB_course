@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GameService } from '../../../services/game.service';
-import { GameEventModel, GameEventType, GameModel } from '../../../models/game.model';
+import { GameEventType, GameModel } from '../../../models/game.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-game-event',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   host: { class: 'w-100' },
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.css'
