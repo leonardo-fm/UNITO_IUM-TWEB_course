@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import moment from 'moment';
+import 'moment/min/locales';
 
 @Injectable({
   providedIn: 'root'

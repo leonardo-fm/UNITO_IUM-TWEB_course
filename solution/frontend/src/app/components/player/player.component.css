@@ -1,0 +1,33 @@
+.player-container {
+    border-radius: 8px;
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+.player-container>img {
+    border-radius: 50%;
+}
+
+.player-container>span {
+    font-size: x-large;
+}
+
+.player-detail-container {
+    border-radius: 8px;
+    background-color: var(--white);
+}
+
+.separator{
+    border-bottom: 1px solid var(--text-secondary);
+}
+
+.player_detail_label{
+    color: var(--text-secondary);
+    font-size: small;
+}
+
+.player_detail_value{
+    color: var(--text);
+    font-size: medium;
+    font-weight: bold;
+}

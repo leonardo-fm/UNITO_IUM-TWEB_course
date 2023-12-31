@@ -1,1 +1,54 @@
-<p>player works!</p>
+@if(player){
+<div class="d-flex player-container align-items-center p-3 gap-3">
+    <img width="72" height="72" [src]="player.image_url" alt="">
+    <span>{{player.name}}</span>
+</div>
+
+<div class="d-flex flex-column player-detail-container p-3">
+    <div class="d-flex gap-3">
+        <img width="48" height="48"
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+player.current_club_id+'.png'" alt="">
+        <div class="d-flex flex-column">
+            <span class="player_detail_value">{{player.current_club_name}}</span>
+            @if (player.contract_expiration_date){
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_contract_expiration'] }} {{
+                moment(player.contract_expiration_date).format('LL') }}</span>
+            }
+        </div>
+    </div>
+    <div class="separator my-2"></div>
+    <div class="d-flex flex-wrap justify-content-evenly gap-5">
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_nationality'] }}</span>
+            <span class="player_detail_value">{{ player.country_of_citizenship }}</span>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ moment(player.date_of_birth).format('ll').toUpperCase() }}</span>
+            <span class="player_detail_value">{{ moment().diff(player.date_of_birth, 'years') }} {{ languageService.selectedLanguage['player_years']
+                }}</span>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_height'] }}</span>
+            <span class="player_detail_value">{{ player.height_in_cm ? player.height_in_cm + ' cm' : '/' }}</span>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_foot'] }}</span>
+            <span class="player_detail_value">{{ languageService.selectedLanguage['player_foot_' + player.foot] }}</span>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_position'] }}</span>
+            <span class="player_detail_value">{{ languageService.selectedLanguage['club_players_position_' + player.position] }}</span>
+        </div>
+        @if (player.sub_position && player.position != player.sub_position){
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_sub_position'] }}</span>
+            <span class="player_detail_value">{{ languageService.selectedLanguage['club_players_sub_position_' + player.sub_position] }}</span>
+        </div>
+        }
+        <div class="d-flex flex-column align-items-center">
+            <span class="player_detail_label">{{ languageService.selectedLanguage['player_market_value'] }}</span>
+            <span class="player_detail_value">{{ player.market_value_in_eur ? nFormatter(player.market_value_in_eur) + ' €' : 'n/a' }}</span>
+        </div>
+    </div>
+</div>
+}
