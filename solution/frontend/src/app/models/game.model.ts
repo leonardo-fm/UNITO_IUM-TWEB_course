@@ -79,14 +79,3 @@ export enum LineupPositionType {
     "Left Winger" = "Left Winger",
     "Central Midfield" = "Central Midfield"
 }
-
-export class GroupGameByCompetitionModel {
-    competition_id: string;
-    competition: CompetitionModel | undefined;
-    games: GameModel[];
-}
-
-export class GameHistoryModel {
-    date: string;
-    competitions: GroupGameByCompetitionModel[]
-}

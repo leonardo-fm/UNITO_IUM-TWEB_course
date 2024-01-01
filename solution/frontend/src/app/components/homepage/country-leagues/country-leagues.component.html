@@ -8,8 +8,8 @@
 </div>
 @for (competitionCountry of competitionsByCountry; track competitionCountry) {
     <div class="d-flex country-league-container py-1" (click)="onExpand(leagueExpand)">
-        <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competitionCountry[0].country_id+'.webp'" [alt]="'Flag ' + competitionCountry[0].country_name">
-        <span>{{ languageService.selectedLanguage['country_name_'+competitionCountry[0].country_id] }}</span>
+        <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competitionCountry[0].countryId+'.webp'" [alt]="'Flag ' + competitionCountry[0].countryName">
+        <span>{{ languageService.selectedLanguage['country_name_'+competitionCountry[0].countryId] }}</span>
         @if (leagueExpand.classList.contains('expand-open')){
             <img class="ms-auto" width="24" height="24" src="assets/icons/expand_less.svg" alt="">
         }
@@ -19,8 +19,8 @@
     </div>
     <div #leagueExpand class="d-flex flex-column expand-container ps-3">
         @for (competition of competitionCountry; track competition) {
-            <a [routerLink]="['competition', competition.competition_id]">
-                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competition_id.toLowerCase()+'.png'" alt="">
+            <a [routerLink]="['competition', competition.competitionId]">
+                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competitionId.toLowerCase()+'.png'" alt="">
                 {{ competition.name }}
             </a>
         }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CompetitionModel } from '../../../models/competition.model';
 import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
+import { CompetitionDto } from '../../../models/competition.dto.model';
 
 @Component({
   selector: 'app-country-leagues',
@@ -14,7 +14,7 @@ import { LoaderService } from '../../../services/loader.service';
   styleUrl: './country-leagues.component.css'
 })
 export class CountryLeaguesComponent implements OnInit {
-  data: CompetitionModel[];
+  data: CompetitionDto[];
   competitions: any = {};
   competitionsByCountry: any[] = [];
   filter: string;
@@ -27,21 +27,22 @@ export class CountryLeaguesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaderService.show();
-    this.competitionService.getAllCompetitions().then(res => {
-      this.data = res.data;
+    this.competitionService.getAllCompetitions().then(competitions => {
+      this.data = competitions;
       this.groupByCountry(this.data);
     }).finally(() => this.loaderService.hide());
   }
 
-  groupByCountry(competitions: CompetitionModel[]) {
+  groupByCountry(competitions: CompetitionDto[]) {
     this.competitions = {};
     for (let competition of competitions) {
-      (this.competitions[competition.country_id] = this.competitions[competition.country_id] || []).push(competition);
+      (this.competitions[competition.countryId] = this.competitions[competition.countryId] || []).push(competition);
     }
     this.competitionsByCountry = [];
     for (let [key, competition] of Object.entries(this.competitions)) {
       this.competitionsByCountry.push(competition);
     }
+    console.log(this.competitionsByCountry);
   }
 
   onExpand(element: HTMLElement) {
@@ -52,7 +53,7 @@ export class CountryLeaguesComponent implements OnInit {
     let filter = this.filter.toLowerCase();
     let filtered = this.data.filter(x =>
       x.name.toLowerCase().includes(filter) ||
-      this.languageService.selectedLanguage['homepage_country_name_' + x.country_id]?.toLowerCase().includes(filter)
+      this.languageService.selectedLanguage['homepage_country_name_' + x.countryId]?.toLowerCase().includes(filter)
     )
     this.groupByCountry(filtered);
   }

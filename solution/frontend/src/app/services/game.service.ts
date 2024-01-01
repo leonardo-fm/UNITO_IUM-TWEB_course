@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { GameEventModel, GameHistoryModel, GameLineupModel, GameModel, GroupGameByCompetitionModel } from '../models/game.model';
+import { GameEventModel, GameLineupModel, GameModel } from '../models/game.model';
 import { ReplaySubject } from 'rxjs';
 import { CompetitionModel } from '../models/competition.model';
+import { GameDto } from '../models/game.dto.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,30 +29,13 @@ export class GameService {
     });
   }
 
-  getGameHistory() {
-    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
-      let groupByDate: any = {};
-      res.data.forEach(game => (groupByDate[game.date] = groupByDate[game.date] || []).push(game));
-
-      let historyGame: GameHistoryModel[] = [];
-      for (let [key, historyGames] of Object.entries(groupByDate)) {
-        let groupByLeagues: any = {};
-        (<GameModel[]>historyGames).forEach(game => (groupByLeagues[game.competition_id] = groupByLeagues[game.competition_id] || []).push(game));
-
-        let competitionGames: GroupGameByCompetitionModel[] = [];
-        for (let [competition_id, competition_games] of Object.entries(groupByLeagues))
-          competitionGames.push({
-            competition_id: competition_id,
-            competition: (<GameModel[]>competition_games)[0]?.competition,
-            games: <GameModel[]>competition_games
-          });
-        historyGame.push({ date: key, competitions: competitionGames });
+  getGameHistory(take: number = 25, offset: number = 0) {
+    return axios.get<GameDto[]>(environment.apiUrl + '/getGameHistory', { 
+      params: {
+        take: take,
+        offset: offset
       }
-
-      historyGame.sort((x, y) => x.date >= y.date ? -1 : 1);
-      // TO REMOVE: Get last 7 days
-      return historyGame.slice(0, 7);
-    });
+    }).then(res => res.data);
   }
 
   getClubGameHistory(club_id: number) {
@@ -64,7 +49,7 @@ export class GameService {
     })
   }
 
-  getPlayerGameHistory(playerId: number){
+  getPlayerGameHistory(playerId: number) {
     return axios.get<GameModel[]>('assets/data/games.json').then(res => {
       return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
         return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res3 => {

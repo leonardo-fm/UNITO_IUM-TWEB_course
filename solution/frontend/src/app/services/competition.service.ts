@@ -3,6 +3,8 @@ import axios from 'axios';
 import { CompetitionModel } from '../models/competition.model';
 import { GameModel } from '../models/game.model';
 import { ReplaySubject } from 'rxjs';
+import { CompetitionDto } from '../models/competition.dto.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,7 @@ export class CompetitionService {
   }
 
   getAllCompetitions() {
-    return axios.get<CompetitionModel[]>('assets/data/competition.json');
+    return axios.get<CompetitionDto[]>(environment.apiUrl + '/getAllCompetition').then(res => res.data);
   }
 
   getAllSeason(){
