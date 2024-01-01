@@ -17,15 +17,60 @@ app.get('/getAllCompetition', (req, res) => {
 });
 
 app.get('/getGameHistory', (req, res) => {
-  console.log(req.query)
-  if (!req.query.take || !req.query.offset){
+  if (!req.query.take || !req.query.offset) {
     res.sendStatus(403);
+    return;
   }
 
   axios.get(hostSpring + '/game', { params: req.query }).then(response => {
     res.json(response.data);
   });
 });
+
+app.get('/getCompetitionById', (req, res) => {
+  if (!req.query.competitionId) {
+    res.sendStatus(403);
+    return;
+  }
+  axios.get(hostSpring + '/competition/' + req.query.competitionId).then(response => {
+    res.json(response.data);
+  })
+})
+
+app.get('/getCompetitionStats', (req, res) => {
+  if (!req.query.competitionId || !req.query.season) {
+    res.sendStatus(403);
+    return;
+  }
+  if (isNaN(req.query.season)) {
+    res.sendStatus(403);
+    return;
+  }
+
+  axios.get(hostSpring + '/club/competition/' + req.query.competitionId + '/' + req.query.season).then(response => {
+    res.json(response.data);
+  })
+})
+
+app.get('/getCompetitionGameHistory', (req, res) => {
+  if (!req.query.competitionId || !req.query.season || !req.query.take || !req.query.offset) {
+    res.sendStatus(403);
+    return;
+  }
+  if (isNaN(req.query.season)) {
+    res.sendStatus(403);
+    return;
+  }
+
+  axios.get(hostSpring + '/game/competition/' + req.query.competitionId + '/' + req.query.season, {
+    params: {
+      take: req.query.take,
+      offset: req.query.offset
+    }
+  }).then(response => {
+    res.json(response.data);
+  })
+})
 
 // Hosting static browser files
 app.use('/browser', express.static(__dirname + '/static/browser'));

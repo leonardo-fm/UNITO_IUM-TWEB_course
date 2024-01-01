@@ -39,6 +39,17 @@ export class GameService {
     }).then(res => res.data);
   }
 
+  getCompetitionGameHistory(competitionId: string, season: number, offset: number = 0, take: number = 25){
+    return axios.get<GameDto[]>(environment.apiUrl + '/getCompetitionGameHistory', { 
+      params: {
+        competitionId: competitionId,
+        season: season,
+        take: take,
+        offset: offset
+      }
+    }).then(res => res.data);
+  }
+
   getClubGameHistory(club_id: number) {
     return axios.get<GameModel[]>('assets/data/games.json').then(res => {
       return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res2 => {

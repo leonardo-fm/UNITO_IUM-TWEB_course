@@ -14,17 +14,17 @@
     </thead>
     <tbody>
         @for (clubStatistic of clubsStatistics; track clubStatistic; let index = $index){
-        <tr [routerLink]="['/club', clubStatistic.club?.club_id]">
+        <tr [routerLink]="['/club', clubStatistic.clubId]">
             <td>{{ index + 1 }}</td>
             <td>
-                <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.club?.club_id+'.png'" [alt]="'Emblem '+clubStatistic.club?.name">
-                {{ clubStatistic.club?.name }}
+                <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.clubId+'.png'" [alt]="'Emblem '+clubStatistic.clubName">
+                {{ clubStatistic.clubName }}
             </td>
-            <td>{{ clubStatistic.games.length }}</td>
+            <td>{{ clubStatistic.wins + clubStatistic.draws + clubStatistic.loses }}</td>
             <td>{{ clubStatistic.wins }}</td>
             <td>{{ clubStatistic.draws }}</td>
             <td>{{ clubStatistic.loses }}</td>
-            <td>{{ clubStatistic.goalsScored }}:{{ clubStatistic.goalsConceded }}</td>
+            <td>{{ clubStatistic.scoreGoals }}:{{ clubStatistic.takenGoals }}</td>
             <td></td>
             <td>{{ clubStatistic.points }}</td>
         </tr>

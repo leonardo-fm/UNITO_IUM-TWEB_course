@@ -5,6 +5,9 @@ import { GameModel } from '../../../models/game.model';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
 import { Subscription } from 'rxjs';
+import { GameDto } from '../../../models/game.dto.model';
+import { LoaderService } from '../../../services/loader.service';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'app-game-history',
@@ -16,23 +19,33 @@ import { Subscription } from 'rxjs';
 })
 export class GameHistoryComponent implements OnInit, OnDestroy {
 
-  gameHistory: GameModel[];
+  games: GameDto[];
   moment = moment;
 
-  gameHistorySubscription: Subscription;
+  seasonSubscription: Subscription;
 
   constructor(
     public languageService: LanguageService,
+    private activatedRoute: ActivatedRoute,
+    private loaderService: LoaderService,
+    private gameService: GameService,
     private competitionService: CompetitionService  
   ) { }
 
   ngOnInit(): void {
-    this.gameHistorySubscription = this.competitionService.gameHistorySubject.subscribe(games => {
-      this.gameHistory = games;
+    this.activatedRoute.params.subscribe(params => {
+      let competitionId = params['id'];
+      if (this.seasonSubscription) this.seasonSubscription.unsubscribe();
+      this.seasonSubscription = this.competitionService.competitionSeasonSubject.subscribe(season => {
+        this.loaderService.show();
+        this.gameService.getCompetitionGameHistory(competitionId, season)
+          .then(games => this.games = games)
+          .finally(() => this.loaderService.hide());
+      })
     })
   }
 
   ngOnDestroy(): void {
-    if (this.gameHistorySubscription) this.gameHistorySubscription.unsubscribe();
+    if (this.seasonSubscription) this.seasonSubscription.unsubscribe();
   }
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompetitionService } from '../../services/competition.service';
-import { CompetitionModel } from '../../models/competition.model';
 import { GameHistoryComponent } from './game-history/game-history.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SeasonDetailComponent } from './season-detail/season-detail.component';
 import { LoaderService } from '../../services/loader.service';
+import { CompetitionDto } from '../../models/competition.dto.model';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-competition',
@@ -18,11 +19,12 @@ import { LoaderService } from '../../services/loader.service';
 export class CompetitionComponent implements OnInit {
 
   competitionId: string;
-  competition: CompetitionModel | undefined;
+  competition: CompetitionDto;
   seasons: number[];
   choosedSeason = new FormControl<number>(0);
 
   constructor(
+    public languageService: LanguageService,
     private competitionService: CompetitionService,
     private loaderService: LoaderService,
     private activatedRoute: ActivatedRoute
@@ -33,7 +35,7 @@ export class CompetitionComponent implements OnInit {
       this.competitionId = params['id'];
       this.loaderService.show();
       this.competitionService.getCompetitionById(this.competitionId)
-        .then(x => this.competition = x)
+        .then(competition => this.competition = competition)
         .finally(() => this.loaderService.hide());
     });
 
@@ -44,8 +46,7 @@ export class CompetitionComponent implements OnInit {
     }).finally(() => this.loaderService.hide());
 
     this.choosedSeason.valueChanges.subscribe(season => {
-      this.loaderService.show();
-      this.competitionService.getGameHistoryByCompetition(this.competitionId, season).finally(() => this.loaderService.hide());
+      this.competitionService.competitionSeasonSubject.next(Number(season));
     });
   }
 }

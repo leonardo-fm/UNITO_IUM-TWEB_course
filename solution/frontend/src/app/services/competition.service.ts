@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CompetitionModel } from '../models/competition.model';
 import { GameModel } from '../models/game.model';
 import { ReplaySubject } from 'rxjs';
-import { CompetitionDto } from '../models/competition.dto.model';
+import { CompetitionDto, CompetitionStatsDto } from '../models/competition.dto.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,13 +11,27 @@ import { environment } from '../../environments/environment';
 })
 export class CompetitionService {
   public gameHistorySubject = new ReplaySubject<GameModel[]>(1);
+  public competitionSeasonSubject = new ReplaySubject<number>(1);
 
   constructor() { }
 
   getCompetitionById(id: string) {
-    return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res => {
-      return res.data.find(x => x.competition_id == id);
-    })
+    return axios.get<CompetitionDto>(environment.apiUrl + '/getCompetitionById', {
+      params: { competitionId: id}
+    }).then(res => res.data);
+  }
+
+  getCompetitionStats(competitionId: string, season: number){
+    return axios.get<CompetitionStatsDto[]>(environment.apiUrl + '/getCompetitionStats', {
+      params: {
+        competitionId: competitionId,
+        season: season
+      }
+    }).then(res => {
+      res.data.forEach(x => x.points = x.wins * 3 + x.draws);
+      res.data.sort((x, y) => y.points - x.points);
+      return res.data;
+    });
   }
 
   getGameHistoryByCompetition(competitionId: string, season: number | null = null){

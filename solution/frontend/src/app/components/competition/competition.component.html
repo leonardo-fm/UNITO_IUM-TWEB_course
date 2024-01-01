@@ -1,21 +1,23 @@
-<div class="d-flex competition-container p-3">
-    <img class="object-fit" width="128" height="128"
-        [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition?.competition_id?.toLowerCase()+'.png'"
-        alt="">
-    <div class="d-flex flex-column justify-content-around">
-        <span>{{ competition?.name }}</span>
-        <span class="d-flex gap-2">
-            <img width="24" height="24" [src]="'assets/icons/flags/'+competition?.country_id +'.webp'"
-                [alt]="'Flag ' + competition?.country_name">
-            {{ competition?.country_name }}
-        </span>
-        <select class="form-select" name="season" id="season" [formControl]="choosedSeason">
-            @for(season of seasons; track season; let first = $first){
-            <option [value]="season">{{season}}</option>
-            }
-        </select>
+@if (competition){
+    <div class="d-flex competition-container p-3">
+        <img class="object-fit" width="128" height="128"
+            [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competitionId.toLowerCase()+'.png'"
+            alt="">
+        <div class="d-flex flex-column justify-content-around">
+            <span>{{ competition.name }}</span>
+            <span class="d-flex gap-2">
+                <img width="24" height="24" [src]="'assets/icons/flags/'+competition.countryId +'.webp'"
+                    [alt]="'Flag ' + languageService.selectedLanguage['country_name_'+competition.countryId]">
+                {{ languageService.selectedLanguage['country_name_'+competition.countryId] }}
+            </span>
+            <select class="form-select" name="season" id="season" [formControl]="choosedSeason">
+                @for(season of seasons; track season; let first = $first){
+                <option [value]="season">{{season}}</option>
+                }
+            </select>
+        </div>
     </div>
-</div>
+}
 
 <div class="d-flex game-history-container p-3 mt-3">
     <app-season-detail></app-season-detail>
