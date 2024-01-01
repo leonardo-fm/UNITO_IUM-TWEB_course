@@ -6,6 +6,7 @@ import com.example.springboot.entity.Game;
 import java.time.LocalDate;
 
 public final class GameDto {
+    private Long gameId;
     private Integer countryId;
     private String competitionId;
     private String competitionName;
@@ -18,6 +19,7 @@ public final class GameDto {
     private LocalDate date;
 
     public GameDto(Game game, Competition competition) {
+        gameId = game.getId();
         countryId = competition.getCountryId();
         competitionId = game.getCompetitionId();
         competitionName = competition.getName();
@@ -28,6 +30,14 @@ public final class GameDto {
         awayClubName = game.getAwayClubName();
         awayClubScore = getAwayClubScore();
         date = game.getDate();
+    }
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public Integer getCountryId() {

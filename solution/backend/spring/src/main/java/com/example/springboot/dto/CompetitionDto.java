@@ -15,19 +15,19 @@ public final class CompetitionDto {
         this.seasons = seasons;
     }
 
-    public String getCompetition_id() {
+    public String getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetition_id(String competition_id) {
+    public void setCompetitionId(String competition_id) {
         this.competitionId = competition_id;
     }
 
-    public Integer getCountry_id() {
+    public Integer getCountryId() {
         return countryId;
     }
 
-    public void setCountry_id(Integer country_id) {
+    public void setCountryId(Integer country_id) {
         this.countryId = country_id;
     }
 
