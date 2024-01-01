@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LanguageService } from '../../../services/language.service';
 import { GameService } from '../../../services/game.service';
 import moment from 'moment';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { GameDto } from '../../../models/game.dto.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-history',
@@ -13,7 +14,9 @@ import { GameDto } from '../../../models/game.dto.model';
   templateUrl: './game-history.component.html',
   styleUrl: './game-history.component.css'
 })
-export class GameHistoryComponent implements OnInit {
+export class GameHistoryComponent implements OnInit, OnDestroy {
+
+  public scrollSubscription: Subscription;
 
   public gameHistory: GroupGameByDate[];
   public games: GameDto[];
@@ -28,11 +31,26 @@ export class GameHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.loaderService.show();
     this.gameService.getGameHistory()
-      .then(res => {
-        this.games = res;
+      .then(games => {
+        this.games = games;
         this.gameHistory = this.groupGameData(this.games);
       })
       .finally(() => this.loaderService.hide());
+
+    this.scrollSubscription = this.gameService.gameHistoryScroll.subscribe(() => {
+      this.loaderService.show();
+      this.gameService.getGameHistory(this.games.length)
+        .then(games =>  {
+          this.games = this.games.concat(games);
+          this.gameHistory = this.groupGameData(this.games);
+        })
+        .finally(() => this.loaderService.hide());
+      console.log('SCROLL IN');
+    });
+  }
+
+  ngOnDestroy(): void {
+      if (this.scrollSubscription) this.scrollSubscription.unsubscribe();
   }
 
   groupGameData(games: GameDto[]) {

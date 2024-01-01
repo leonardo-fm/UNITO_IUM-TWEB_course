@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { GameEventModel, GameLineupModel, GameModel } from '../models/game.model';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { CompetitionModel } from '../models/competition.model';
 import { GameDto } from '../models/game.dto.model';
 import { environment } from '../../environments/environment';
@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class GameService {
   public gameSubject = new ReplaySubject<GameModel>(1);
+  public gameHistoryScroll = new Subject();
 
   constructor() { }
 
@@ -29,7 +30,7 @@ export class GameService {
     });
   }
 
-  getGameHistory(take: number = 25, offset: number = 0) {
+  getGameHistory(offset: number = 0, take: number = 25,) {
     return axios.get<GameDto[]>(environment.apiUrl + '/getGameHistory', { 
       params: {
         take: take,

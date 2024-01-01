@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CountryLeaguesComponent } from './country-leagues/country-leagues.component';
 import { GameHistoryComponent } from './game-history/game-history.component';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,6 +11,19 @@ import { GameHistoryComponent } from './game-history/game-history.component';
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
-export class HomepageComponent {
-  
+export class HomepageComponent implements AfterViewInit {
+  @ViewChild('element') element: ElementRef;
+
+  constructor(
+    private gameService: GameService 
+  ) { }
+
+  ngAfterViewInit(): void {
+    const componentEl: HTMLElement = this.element.nativeElement.parentElement;
+    componentEl.onscroll = () => {
+      if (componentEl.offsetHeight + componentEl.scrollTop >= componentEl.scrollHeight - 1) {
+        this.gameService.gameHistoryScroll.next(null);
+      }
+    };
+  }
 }
