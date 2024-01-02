@@ -62,7 +62,7 @@ public class ClubController {
             for (Game game : playedGames) {
                 if (game.getHomeClubGoals() > game.getAwayClubGoals()) {
                     // home win
-                    if (game.getHomeClubId() == club.getId()) {
+                    if (game.getHomeClubId().longValue() == club.getId()) {
                         // have win
                         wins++;
                         scoredGoals += game.getHomeClubGoals();
@@ -75,7 +75,7 @@ public class ClubController {
                     }
                 } else if (game.getHomeClubGoals() < game.getAwayClubGoals()) {
                     // away win
-                    if (game.getAwayClubId() == club.getId()) {
+                    if (game.getAwayClubId().longValue() == club.getId()) {
                         // have win
                         wins++;
                         scoredGoals += game.getAwayClubGoals();
