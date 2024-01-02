@@ -15,5 +15,6 @@ public interface CompetitionRepository extends JpaRepository<Competition, String
     @Query(value = "SELECT * FROM competition", nativeQuery = true)
     List<Competition> getAllCompetitions();
 
-
+    @Query(value = "SELECT DISTINCT g.season FROM game AS g INNER JOIN competition AS c ON g.competition_id = c.competition_id WHERE c.competition_id = :competitionId ORDER BY g.season desc", nativeQuery = true)
+    List<Integer> getCompetitionSeasons(String competitionId);
 }

@@ -24,4 +24,8 @@ public class CompetitionService {
     public List<Competition> getAllCompetitions() {
         return competitionRepository.getAllCompetitions();
     }
+
+    public List<Integer> getCompetitionSeasons(String competitionId) {
+        return competitionRepository.getCompetitionSeasons(competitionId);
+    }
 }
