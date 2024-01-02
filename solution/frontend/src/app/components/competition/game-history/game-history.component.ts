@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompetitionService } from '../../../services/competition.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { GameModel } from '../../../models/game.model';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
 import { Subscription } from 'rxjs';

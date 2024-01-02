@@ -10,15 +10,15 @@
 </div>
 
 <div class="d-flex flex-column mt-3 gap-3">
-    @for (player of players; track player.player_id){
-    <div class="d-flex player-container cursor-pointer gap-2" [routerLink]="['/player', player.player_id]">
-        <img class="player-image" width="48" height="48" [src]="player.image_url" alt="">
+    @for (player of players; track player.id){
+    <div class="d-flex player-container cursor-pointer gap-2" [routerLink]="['/player', player.id]">
+        <img class="player-image" width="48" height="48" [src]="player.imageUrl" alt="">
         <div class="d-flex flex-column justify-content-center">
-            <span class="player-name-label">{{player.name}}</span>
+            <span class="player-name-label">{{player.fullName}}</span>
             <span class="player-position-label">
                 {{ languageService.selectedLanguage['club_players_position_'+player.position]}}
-                @if(player.sub_position && player.position != player.sub_position){
-                / {{ languageService.selectedLanguage['club_players_sub_position_'+player.sub_position] }}
+                @if(player.subPosition && player.position != player.subPosition){
+                / {{ languageService.selectedLanguage['club_players_sub_position_'+player.subPosition] }}
                 }
             </span>
         </div>

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { GameModel } from '../models/game.model';
 import { ReplaySubject, Subject } from 'rxjs';
-import { CompetitionModel } from '../models/competition.model';
 import { GameDto, GameEventModel, GameLineupModel } from '../models/game.dto.model';
 import { environment } from '../../environments/environment';
 
@@ -17,7 +15,7 @@ export class GameService {
 
   getGameById(id: number) {
     console.log(id)
-    return axios.get<GameDto>(environment.apiUrl + '/getGameById', {params: { gameId: id }}).then(res => {
+    return axios.get<GameDto>(environment.apiUrl + '/getGameById', { params: { gameId: id } }).then(res => {
       return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
         return axios.get<GameEventModel[]>('assets/data/game_events.json').then(res3 => {
           let game: GameDto = res.data;
@@ -33,7 +31,7 @@ export class GameService {
   }
 
   getGameHistory(offset: number = 0, take: number = 25,) {
-    return axios.get<GameDto[]>(environment.apiUrl + '/getGameHistory', { 
+    return axios.get<GameDto[]>(environment.apiUrl + '/getGameHistory', {
       params: {
         take: take,
         offset: offset
@@ -41,8 +39,8 @@ export class GameService {
     }).then(res => res.data);
   }
 
-  getCompetitionGameHistory(competitionId: string, season: number, offset: number = 0, take: number = 25){
-    return axios.get<GameDto[]>(environment.apiUrl + '/getCompetitionGameHistory', { 
+  getCompetitionGameHistory(competitionId: string, season: number, offset: number = 0, take: number = 25) {
+    return axios.get<GameDto[]>(environment.apiUrl + '/getCompetitionGameHistory', {
       params: {
         competitionId: competitionId,
         season: season,
@@ -52,44 +50,47 @@ export class GameService {
     }).then(res => res.data);
   }
 
-  getClubGameHistory(club_id: number) {
-    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
-      return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res2 => {
-        let games = res.data.filter(x => x.home_club_id == club_id || x.away_club_id == club_id);
-        games.forEach(x => x.competition = res2.data.find(y => y.competition_id == x.competition_id) || new CompetitionModel());
-        games.sort((x, y) => x.date >= y.date ? -1 : 1);
-        return games;
-      })
-    })
+  getClubGameHistory(clubId: number, season: number, offset: number = 0, take: number = 25) {
+    return axios.get<GameDto[]>(environment.apiUrl + '/getClubGameHistory', {
+      params: {
+        clubId: clubId,
+        season: season,
+        take: take,
+        offset: offset
+      }
+    }).then(res => res.data);
   }
 
   getPlayerGameHistory(playerId: number) {
-    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
-      return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
-        return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res3 => {
-          let gameIds = res2.data.filter(x => x.player_id == playerId).map(x => x.game_id);
-          let games = res.data.filter(x => gameIds.includes(x.game_id));
-          games.forEach(x => x.competition = res3.data.find(y => y.competition_id == x.competition_id) || new CompetitionModel());
-          games.sort((x, y) => x.date >= y.date ? -1 : 1);
-          return games;
-        })
-      })
+    return axios.get<GameDto[]>(environment.apiUrl + '/getCompetitionGameHistory', { params: { playerId: playerId } }).then(res => {
+      return res.data;
     })
+    // return axios.get<GameModel[]>('assets/data/games.json').then(res => {
+    //   return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
+    //     return axios.get<CompetitionModel[]>('assets/data/competition.json').then(res3 => {
+    //       let gameIds = res2.data.filter(x => x.player_id == playerId).map(x => x.game_id);
+    //       let games = res.data.filter(x => gameIds.includes(x.game_id));
+    //       games.forEach(x => x.competition = res3.data.find(y => y.competition_id == x.competition_id) || new CompetitionModel());
+    //       games.sort((x, y) => x.date >= y.date ? -1 : 1);
+    //       return games;
+    //     })
+    //   })
+    // })
   }
 
-  groupConsequentCompetitionGame(games: GameModel[]) {
-    let grouped: GameModel[][] = [];
+  groupConsequentCompetitionGame(games: GameDto[]) {
+    let grouped: GameDto[][] = [];
     let count = 0;
     let lastCompetition: string;
     games.forEach(game => {
-      if (!lastCompetition || lastCompetition == game.competition_id) {
+      if (!lastCompetition || lastCompetition == game.competitionId) {
         (grouped[count] = grouped[count] || []).push(game);
       }
       else {
         count++;
         (grouped[count] = grouped[count] || []).push(game);
       }
-      lastCompetition = game.competition_id;
+      lastCompetition = game.competitionId;
     });
     return grouped;
   }

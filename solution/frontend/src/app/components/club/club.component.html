@@ -1,13 +1,13 @@
 @if(club){
 <div class="d-flex club-container p-3 gap-3">
-    <img width="72" height="72" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+club.club_id+'.png'"
+    <img width="72" height="72" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+club.clubId+'.png'"
         alt="">
     <div class="d-flex flex-column justify-content-center gap-1">
-        <span>{{club.name}}</span>
+        <span>{{club.clubName}}</span>
         <div class="d-flex gap-2">
-            <img width="24" height="24" [src]="'assets/icons/flags/'+club.competition.country_id+'.webp'"
-                [alt]="'Flag ' + club.competition.country_id">
-            <span>{{ languageService.selectedLanguage['country_name_'+club.competition.country_id] }}</span>
+            <img width="24" height="24" [src]="'assets/icons/flags/'+club.countryId+'.webp'"
+                [alt]="'Flag ' + club.countryId">
+            <span>{{ languageService.selectedLanguage['country_name_'+club.countryId] }}</span>
         </div>
     </div>
 </div>

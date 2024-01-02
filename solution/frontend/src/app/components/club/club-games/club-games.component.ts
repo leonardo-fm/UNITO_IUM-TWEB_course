@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../../services/game.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
-import { GameModel } from '../../../models/game.model';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
+import { GameDto } from '../../../models/game.dto.model';
 
 @Component({
   selector: 'app-club-games',
@@ -16,7 +16,7 @@ import { LanguageService } from '../../../services/language.service';
 })
 export class ClubGamesComponent implements OnInit {
   clubId: number;
-  groupedGames: GameModel[][];
+  groupedGames: GameDto[][];
   moment = moment;
 
   constructor(
@@ -30,18 +30,18 @@ export class ClubGamesComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.clubId = params['id'];
       this.loaderService.show();
-      this.gameService.getClubGameHistory(this.clubId).then(games => {
+      this.gameService.getClubGameHistory(this.clubId, 2023).then(games => {
         this.groupedGames = this.gameService.groupConsequentCompetitionGame(games);
       }).finally(() => this.loaderService.hide());
     })
   }
 
-  winDrawLose(game: GameModel){
+  winDrawLose(game: GameDto){
   let res;
-    if (this.clubId == game.home_club_id)
-      res = Number(game.home_club_goals) - Number(game.away_club_goals);
+    if (this.clubId == game.homeClubId)
+      res = Number(game.homeClubScore) - Number(game.awayClubScore);
     else 
-      res = Number(game.away_club_goals) - Number(game.home_club_goals)
+      res = Number(game.awayClubScore) - Number(game.homeClubScore)
     
     if (res > 0)
       return 'win';
