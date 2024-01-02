@@ -3,6 +3,7 @@ package com.example.springboot.controller;
 import com.example.springboot.dto.CompetitionDto;
 import com.example.springboot.entity.Competition;
 import com.example.springboot.service.CompetitionService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ public class CompetitionController {
     }
 
     @GetMapping("/{competitionId}")
+    @Operation(summary = "Return a competition by Id", description = "Given an Id of a competition, return all the data of a competition")
     public CompetitionDto GetCompetition(@PathVariable String competitionId) {
         Competition competition = competitionService.getCompetition(competitionId);
         List<Integer> seasons = competitionService.getCompetitionSeasons(competitionId);
@@ -31,6 +33,7 @@ public class CompetitionController {
     }
 
     @GetMapping("/all")
+    @Operation(summary = "Return a list of all competition")
     public List<CompetitionDto> GetAllCompetitions() {
         List<Competition> allCompetitions = competitionService.getAllCompetitions();
         List<CompetitionDto> response = new ArrayList<>();

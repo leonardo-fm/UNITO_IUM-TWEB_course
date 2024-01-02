@@ -2,6 +2,7 @@ package com.example.springboot.dto;
 
 import com.example.springboot.entity.Competition;
 import com.example.springboot.entity.Game;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,7 @@ public final class GameDto {
     private Long awayClubId;
     private String awayClubName;
     private Integer awayClubScore;
+    @Schema(description = "Date of the game")
     private LocalDate date;
 
     public GameDto(Game game, Competition competition) {
