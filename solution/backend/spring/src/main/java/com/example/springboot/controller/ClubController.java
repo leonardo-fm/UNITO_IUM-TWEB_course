@@ -54,6 +54,7 @@ public class ClubController {
                     .filter(x -> x.getHomeClubId().longValue() == club.getId().longValue() || x.getAwayClubId().longValue() == club.getId().longValue())
                             .toList();
 
+            // TODO check
             int wins = 0, draws = 0, loses = 0, scoredGoals = 0, takenGoals = 0;
             for (Game game : playedGames) {
                 if (game.getHomeClubGoals() > game.getAwayClubGoals()) {
@@ -74,13 +75,13 @@ public class ClubController {
                     if (game.getAwayClubId() == club.getId()) {
                         // have win
                         wins++;
-                        scoredGoals += game.getHomeClubGoals();
-                        takenGoals += game.getAwayClubGoals();
+                        scoredGoals += game.getAwayClubGoals();
+                        takenGoals += game.getHomeClubGoals();
                     } else {
                         // have lost
                         loses++;
-                        scoredGoals += game.getAwayClubGoals();
-                        takenGoals += game.getHomeClubGoals();
+                        scoredGoals += game.getHomeClubGoals();
+                        takenGoals += game.getAwayClubGoals();
                     }
                 } else {
                     // draw
