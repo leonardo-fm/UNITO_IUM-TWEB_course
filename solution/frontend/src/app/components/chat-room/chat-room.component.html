@@ -1,1 +1,45 @@
-<p>chat-room works!</p>
+@switch(roomType){
+@case(ChatRoomType.Competition){
+@if(competition){
+<div class="d-flex competition-container p-3">
+    <img class="object-fit" width="128" height="128"
+        [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competitionId.toLowerCase()+'.png'" alt="">
+    <div class="d-flex flex-column justify-content-around">
+        <span>{{ competition.name }}</span>
+        <span class="d-flex gap-2">
+            <img width="24" height="24" [src]="'assets/icons/flags/'+competition.countryId +'.webp'"
+                [alt]="'Flag ' + languageService.selectedLanguage['country_name_'+competition.countryId]">
+            {{ languageService.selectedLanguage['country_name_'+competition.countryId] }}
+        </span>
+    </div>
+</div>
+}
+}
+@case (ChatRoomType.Club) {
+@if(club){
+<div class="d-flex club-container p-3 gap-3">
+    <img width="72" height="72" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+club.clubId+'.png'" alt="">
+    <div class="d-flex flex-column justify-content-center gap-1">
+        <span>{{club.clubName}}</span>
+        <div class="d-flex gap-2">
+            <img width="24" height="24" [src]="'assets/icons/flags/'+club.countryId+'.webp'"
+                [alt]="'Flag ' + club.countryId">
+            <span>{{ languageService.selectedLanguage['country_name_'+club.countryId] }}</span>
+        </div>
+    </div>
+</div>
+}
+}
+@case (ChatRoomType.Player) {
+@if(player){
+<div class="d-flex player-container align-items-center p-3 gap-3">
+    <img width="72" height="72" [src]="player.imageUrl" alt="">
+    <span>{{player.fullName}}</span>
+</div>
+}
+}
+}
+
+<div class="d-flex messaging-container h-100 p-3">
+    <app-messaging></app-messaging>
+</div>

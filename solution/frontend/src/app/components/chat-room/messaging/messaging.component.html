@@ -1,0 +1,18 @@
+<div class="d-flex chat-container position-relative h-100">
+    <div class="d-flex flex-column scroll-container gap-3">
+        @for (message of chat; track message){
+        <div class="d-flex gap-2" [class.flex-row-reverse]="message.accountId == accountId">
+            <img class="profile-icon" height="32" width="32" src="assets/icons/account_circle.svg" alt="">
+            <div class="d-flex flex-column">
+                <div class="d-flex align-items-end gap-2" [class.flex-row-reverse]="message.accountId == accountId">
+                    <span class="account-label">{{ message.accountName ?? accountId }}</span>
+                    <span class="date-label">{{ formatDate(message.date) }}</span>
+                </div>
+                <span [class.text-end]="message.accountId == accountId">{{ message.message }}</span>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<input type="text" class="form-control" [(ngModel)]="message" (keydown.enter)="onMessageSend()">
