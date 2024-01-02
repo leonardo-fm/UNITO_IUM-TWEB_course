@@ -9,10 +9,10 @@
         <img width="48" height="48"
             [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+player.clubId+'.png'" alt="">
         <div class="d-flex flex-column">
-            <span class="player_detail_value">{{//player.current_club_name}}</span>
-            @if (//player.contract_expiration_date){
+            <span class="player_detail_value">{{player.clubName}}</span>
+            @if (player.contractExpirationDate){
             <span class="player_detail_label">{{ languageService.selectedLanguage['player_contract_expiration'] }} {{
-                //moment(player.contract_expiration_date).format('LL') }}</span>
+                moment(player.contractExpirationDate).format('LL') }}</span>
             }
         </div>
     </div>

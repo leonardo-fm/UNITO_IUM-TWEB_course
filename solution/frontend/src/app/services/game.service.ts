@@ -62,7 +62,7 @@ export class GameService {
   }
 
   getPlayerGameHistory(playerId: number) {
-    return axios.get<GameDto[]>(environment.apiUrl + '/getCompetitionGameHistory', { params: { playerId: playerId } }).then(res => {
+    return axios.get<GameDto[]>(environment.apiUrl + '/getPlayerGameHistory', { params: { playerId: playerId } }).then(res => {
       return res.data;
     })
     // return axios.get<GameModel[]>('assets/data/games.json').then(res => {

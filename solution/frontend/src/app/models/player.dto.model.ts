@@ -10,12 +10,14 @@ export class PlayerDetailDto {
     id: number;
     fullName: string;
     clubId: number;
+    clubName: string;
     countryName: string;
     dateOfBirth: Date;
     position: string;
     subPosition: string;
     foot: string;
     height: string;
+    contractExpirationDate: Date;
     marketValue: number;
     imageUrl: string;
 }

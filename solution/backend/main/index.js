@@ -92,12 +92,22 @@ app.get('/getPlayerById', (req, res) => {
   })
 })
 
+app.get('/getPlayersByClub', (req, res) => {
+  if (!req.query.clubId) {
+    res.sendStatus(403);
+    return;
+  }
+  axios.get(hostSpring + '/player/club/' + req.query.clubId).then(response => {
+    res.json(response.data);
+  })
+})
+
 app.get('/getPlayerGameHistory', (req, res) => {
   if (!req.query.playerId) {
     res.sendStatus(403);
     return;
   }
-  axios.get(hostSpring + '/game/player/' + req.query.playerId).then(response => {
+  axios.get(hostSpring + '/game/player/').then(response => {
     res.json(response.data);
   })
 }) 
@@ -122,7 +132,7 @@ app.get('/getClubGameHistory', (req, res) => {
     return;
   }
 
-  axios.get(hostSpring + '/game/club/' + req.query.competitionId + '/' + req.query.season, {
+  axios.get(hostSpring + '/game/club/' + req.query.clubId + '/' + req.query.season, {
     params: {
       take: req.query.take,
       offset: req.query.offset
