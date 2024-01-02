@@ -14,4 +14,6 @@ public interface CompetitionRepository extends JpaRepository<Competition, String
 
     @Query(value = "SELECT * FROM competition", nativeQuery = true)
     List<Competition> getAllCompetitions();
+
+
 }

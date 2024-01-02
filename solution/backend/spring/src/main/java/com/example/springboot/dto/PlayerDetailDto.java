@@ -8,6 +8,7 @@ public final class PlayerDetailDto {
     private Long id;
     private String fullName;
     private Long clubId;
+    private String clubName;
     private String countryName;
     private LocalDate dateOfBirth;
     private String position;
@@ -15,12 +16,14 @@ public final class PlayerDetailDto {
     private String foot;
     private Integer height;
     private Long marketValue;
+    private LocalDate contractExpirationDate;
     private String imageUrl;
 
     public PlayerDetailDto(Player player) {
         id = player.getId();
         fullName = player.getName();
         clubId = player.getClubId();
+        clubName = player.getCurrentClubName();
         countryName = player.getCountryOfCitizenship();
         dateOfBirth = player.getDateOfBirth();
         position = player.getPosition();
@@ -28,6 +31,7 @@ public final class PlayerDetailDto {
         foot = player.getFoot();
         height = player.getHeightInCm();
         marketValue = player.getMarketValueInEur();
+        contractExpirationDate = player.getContractExpirationDate();
         imageUrl = player.getImageUrl();
     }
 
@@ -53,6 +57,14 @@ public final class PlayerDetailDto {
 
     public void setClubId(Long clubId) {
         this.clubId = clubId;
+    }
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
     }
 
     public String getCountryName() {
@@ -109,6 +121,14 @@ public final class PlayerDetailDto {
 
     public void setMarketValue(Long marketValue) {
         this.marketValue = marketValue;
+    }
+
+    public LocalDate contractExpirationDate() {
+        return contractExpirationDate;
+    }
+
+    public void contractExpirationDate(LocalDate contractExpirationDate) {
+        this.contractExpirationDate = contractExpirationDate;
     }
 
     public String getImageUrl() {
