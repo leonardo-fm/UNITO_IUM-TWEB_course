@@ -1,0 +1,13 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "express server",
+  "scripts": {
+    "main": "node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
