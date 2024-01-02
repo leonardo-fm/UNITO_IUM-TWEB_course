@@ -13,6 +13,9 @@ app.use(cors({
 app.get('/getAllCompetition', (req, res) => {
   axios.get(hostSpring + '/competition/all').then(response => {
     res.json(response.data);
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
   });
 });
 
@@ -24,6 +27,9 @@ app.get('/getGameHistory', (req, res) => {
 
   axios.get(hostSpring + '/game', { params: req.query }).then(response => {
     res.json(response.data);
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
   });
 });
 
@@ -34,7 +40,10 @@ app.get('/getCompetitionById', (req, res) => {
   }
   axios.get(hostSpring + '/competition/' + req.query.competitionId).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getCompetitionStats', (req, res) => {
@@ -49,7 +58,10 @@ app.get('/getCompetitionStats', (req, res) => {
 
   axios.get(hostSpring + '/club/competition/' + req.query.competitionId + '/' + req.query.season).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getCompetitionGameHistory', (req, res) => {
@@ -69,7 +81,10 @@ app.get('/getCompetitionGameHistory', (req, res) => {
     }
   }).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getGameById', (req, res) => {
@@ -79,7 +94,10 @@ app.get('/getGameById', (req, res) => {
   }
   axios.get(hostSpring + '/game/' + req.query.gameId).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getPlayerById', (req, res) => {
@@ -89,7 +107,10 @@ app.get('/getPlayerById', (req, res) => {
   }
   axios.get(hostSpring + '/player/' + req.query.playerId).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getPlayersByClub', (req, res) => {
@@ -99,7 +120,10 @@ app.get('/getPlayersByClub', (req, res) => {
   }
   axios.get(hostSpring + '/player/club/' + req.query.clubId).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getPlayerGameHistory', (req, res) => {
@@ -107,9 +131,12 @@ app.get('/getPlayerGameHistory', (req, res) => {
     res.sendStatus(403);
     return;
   }
-  axios.get(hostSpring + '/game/player/').then(response => {
+  axios.get(hostSpring + '/game/player').then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 }) 
 
 app.get('/getClubById', (req, res) => {
@@ -119,7 +146,10 @@ app.get('/getClubById', (req, res) => {
   }
   axios.get(hostSpring + '/club/' + req.query.clubId).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 app.get('/getClubGameHistory', (req, res) => {
@@ -139,7 +169,10 @@ app.get('/getClubGameHistory', (req, res) => {
     }
   }).then(response => {
     res.json(response.data);
-  })
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 // Hosting static browser files
