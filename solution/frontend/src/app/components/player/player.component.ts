@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
-import { PlayerModel } from '../../models/player.model';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
 import moment from 'moment';
 import { PlayerGamesComponent } from './player-games/player-games.component';
+import { PlayerDetailDto } from '../../models/player.dto.model';
 
 @Component({
   selector: 'app-player',
@@ -16,7 +16,7 @@ import { PlayerGamesComponent } from './player-games/player-games.component';
   styleUrl: './player.component.css'
 })
 export class PlayerComponent implements OnInit {
-  player: PlayerModel;
+  player: PlayerDetailDto;
   moment = moment;
 
   constructor(

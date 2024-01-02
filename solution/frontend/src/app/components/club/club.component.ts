@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ClubModel } from '../../models/club.model';
 import { ClubService } from '../../services/club.service';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
 import { ClubPlayersComponent } from './club-players/club-players.component';
 import { ClubGamesComponent } from './club-games/club-games.component';
+import { ClubDto } from '../../models/club.dto.model';
 
 @Component({
   selector: 'app-club',
@@ -17,7 +17,7 @@ import { ClubGamesComponent } from './club-games/club-games.component';
 })
 export class ClubComponent implements OnInit {
 
-  club: ClubModel;
+  club: ClubDto;
 
   constructor(
     public languageService: LanguageService,

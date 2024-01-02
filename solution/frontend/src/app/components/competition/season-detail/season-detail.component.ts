@@ -1,10 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import moment from 'moment';
 import { Subscription } from 'rxjs';
-import { GameModel } from '../../../models/game.model';
 import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
-import { ClubStatistics } from '../../../models/club.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CompetitionStatsDto } from '../../../models/competition.dto.model';
 import { LoaderService } from '../../../services/loader.service';
