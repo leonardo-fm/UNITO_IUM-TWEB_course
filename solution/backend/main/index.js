@@ -72,6 +72,16 @@ app.get('/getCompetitionGameHistory', (req, res) => {
   })
 })
 
+app.get('/getGameById', (req, res) => {
+  if (!req.query.gameId) {
+    res.sendStatus(403);
+    return;
+  }
+  axios.get(hostSpring + '/game/' + req.query.gameId).then(response => {
+    res.json(response.data);
+  })
+})
+
 // Hosting static browser files
 app.use('/browser', express.static(__dirname + '/static/browser'));
 // For working angular routing on refresh, need to redirect all requests to index.html 

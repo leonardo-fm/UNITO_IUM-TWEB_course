@@ -1,17 +1,17 @@
 @if(game){
 <div class="d-flex score-container justify-content-evenly p-3">
-    <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.home_club_id]">
+    <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.homeClubId]">
         <img width="72" height="72"
-            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.home_club_id+'.png'" alt="">
-        <span class="text-center">{{ game.home_club_name }}</span>
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'" alt="">
+        <span class="text-center">{{ game.homeClubName }}</span>
     </div>
     <div class="d-flex flex-column justify-content-center">
-        <span class="score-label">{{game.home_club_goals}} - {{game.away_club_goals}}</span>
+        <span class="score-label">{{game.homeClubScore}} - {{game.awayClubScore}}</span>
     </div>
-    <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.away_club_id]">
+    <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.awayClubId]">
         <img width="72" height="72"
-            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.away_club_id+'.png'" alt="">
-        <span class="text-center">{{ game.away_club_name }}</span>
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'" alt="">
+        <span class="text-center">{{ game.awayClubName }}</span>
     </div>
 </div>
 

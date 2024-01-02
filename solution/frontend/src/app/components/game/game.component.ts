@@ -5,6 +5,7 @@ import { GameModel } from '../../models/game.model';
 import { GameLineupComponent } from './game-lineup/game-lineup.component';
 import { GameEventComponent } from './game-event/game-event.component';
 import { LoaderService } from '../../services/loader.service';
+import { GameDto } from '../../models/game.dto.model';
 
 @Component({
   selector: 'app-game',
@@ -15,7 +16,7 @@ import { LoaderService } from '../../services/loader.service';
   styleUrl: './game.component.css'
 })
 export class GameComponent implements OnInit{
-  game: GameModel;
+  game: GameDto;
 
   constructor(
     private activatedRoute: ActivatedRoute,

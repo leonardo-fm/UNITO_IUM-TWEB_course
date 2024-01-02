@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from '../../../services/game.service';
 import { Subscription } from 'rxjs';
-import { GameLineupModel, LineupPositionType } from '../../../models/game.model';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { GameLineupModel, LineupPositionType } from '../../../models/game.dto.model';
 
 @Component({
   selector: 'app-game-lineup',
@@ -27,12 +27,12 @@ export class GameLineupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.gameSubscription = this.gameService.gameSubject.subscribe(game => {
-      this.startingHomeLineup = game.lineups.filter(x => x.type == 'starting_lineup' && x.club_id == game.home_club_id);
+      this.startingHomeLineup = game.lineups.filter(x => x.type == 'starting_lineup' && x.club_id == game.homeClubId);
       this.startingHomeLineup = this.mapLineup(this.startingHomeLineup);
-      this.startingAwayLineup = game.lineups.filter(x => x.type == 'starting_lineup' && x.club_id == game.away_club_id);
+      this.startingAwayLineup = game.lineups.filter(x => x.type == 'starting_lineup' && x.club_id == game.awayClubId);
       this.startingAwayLineup = this.mapLineup(this.startingAwayLineup);
-      this.substituteHomeLineup = game.lineups.filter(x => x.type == 'substitutes' && x.club_id == game.home_club_id);
-      this.substituteAwayLineup = game.lineups.filter(x => x.type == 'substitutes' && x.club_id == game.away_club_id);
+      this.substituteHomeLineup = game.lineups.filter(x => x.type == 'substitutes' && x.club_id == game.homeClubId);
+      this.substituteAwayLineup = game.lineups.filter(x => x.type == 'substitutes' && x.club_id == game.awayClubId);
     })
   }
 

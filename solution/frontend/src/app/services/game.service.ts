@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { GameEventModel, GameLineupModel, GameModel } from '../models/game.model';
+import { GameModel } from '../models/game.model';
 import { ReplaySubject, Subject } from 'rxjs';
 import { CompetitionModel } from '../models/competition.model';
-import { GameDto } from '../models/game.dto.model';
+import { GameDto, GameEventModel, GameLineupModel } from '../models/game.dto.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  public gameSubject = new ReplaySubject<GameModel>(1);
+  public gameSubject = new ReplaySubject<GameDto>(1);
   public gameHistoryScroll = new Subject();
 
   constructor() { }
 
   getGameById(id: number) {
-    return axios.get<GameModel[]>('assets/data/games.json').then(res => {
+    console.log(id)
+    return axios.get<GameDto>(environment.apiUrl + '/getGameById', {params: { gameId: id }}).then(res => {
       return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
         return axios.get<GameEventModel[]>('assets/data/game_events.json').then(res3 => {
-          let game: GameModel = res.data.find(x => x.game_id == id) || new GameModel()
+          let game: GameDto = res.data;
+          console.log(game);
           game.lineups = res2.data.filter(x => x.game_id == id);
           game.events = res3.data.filter(x => x.game_id == id);
           game.events.sort((x, y) => y.minute - x.minute);

@@ -1,6 +1,6 @@
 <div class="d-flex flex-column game-event-container gap-2 p-3">
     @for (event of game.events; track event.game_event_id;){
-    <div class="d-flex gap-3" [class.flex-row-reverse]="event.club_id == game.away_club_id">
+    <div class="d-flex gap-3" [class.flex-row-reverse]="event.club_id == game.awayClubId">
         @if(event.type == GameEventType.Cards){
         <div class="card-icon" [class.red]="event.description.toLowerCase().includes('red')"></div>
         }

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GameService } from '../../../services/game.service';
-import { GameEventType, GameModel } from '../../../models/game.model';
 import { RouterLink } from '@angular/router';
+import { GameDto, GameEventType } from '../../../models/game.dto.model';
 
 @Component({
   selector: 'app-game-event',
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class GameEventComponent implements OnInit, OnDestroy {
   gameSubscription: Subscription;
-  game: GameModel;
+  game: GameDto;
   GameEventType = GameEventType;
 
   constructor(
