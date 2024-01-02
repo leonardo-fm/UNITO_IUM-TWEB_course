@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
 import moment from 'moment';
 import { PlayerGamesComponent } from './player-games/player-games.component';
 import { PlayerDetailDto } from '../../models/player.dto.model';
+import { ChatRoomType } from '../../models/chat.dto.model';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [PlayerGamesComponent],
+  imports: [PlayerGamesComponent, RouterLink],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './player.component.html',
   styleUrl: './player.component.css'
@@ -18,6 +19,7 @@ import { PlayerDetailDto } from '../../models/player.dto.model';
 export class PlayerComponent implements OnInit {
   player: PlayerDetailDto;
   moment = moment;
+  ChatRoomType = ChatRoomType;
 
   constructor(
     public languageService: LanguageService,

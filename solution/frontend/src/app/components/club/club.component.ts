@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClubService } from '../../services/club.service';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
 import { ClubPlayersComponent } from './club-players/club-players.component';
 import { ClubGamesComponent } from './club-games/club-games.component';
 import { ClubDto } from '../../models/club.dto.model';
+import { ChatRoomType } from '../../models/chat.dto.model';
 
 @Component({
   selector: 'app-club',
   standalone: true,
-  imports: [ClubPlayersComponent, ClubGamesComponent],
+  imports: [ClubPlayersComponent, ClubGamesComponent, RouterLink],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './club.component.html',
   styleUrl: './club.component.css'
@@ -18,6 +19,7 @@ import { ClubDto } from '../../models/club.dto.model';
 export class ClubComponent implements OnInit {
 
   club: ClubDto;
+  ChatRoomType = ChatRoomType;
 
   constructor(
     public languageService: LanguageService,
