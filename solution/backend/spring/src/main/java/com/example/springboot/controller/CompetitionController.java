@@ -26,7 +26,8 @@ public class CompetitionController {
     @GetMapping("/{competitionId}")
     public CompetitionDto GetCompetition(@PathVariable String competitionId) {
         Competition competition = competitionService.getCompetition(competitionId);
-        return new CompetitionDto(competition, null);
+        List<Integer> seasons = competitionService.getCompetitionSeasons(competitionId);
+        return new CompetitionDto(competition, seasons);
     }
 
     @GetMapping("/all")

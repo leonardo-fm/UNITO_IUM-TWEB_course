@@ -2,13 +2,15 @@ package com.example.springboot.dto;
 
 import com.example.springboot.entity.Competition;
 
+import java.util.List;
+
 public final class CompetitionDto {
     private String competitionId;
     private Integer countryId;
     private String name;
-    private Integer[] seasons;
+    private List<Integer> seasons;
 
-    public CompetitionDto(Competition competition, Integer[] seasons) {
+    public CompetitionDto(Competition competition, List<Integer> seasons) {
         competitionId = competition.getId();
         countryId = competition.getCountryId();
         name = competition.getName();
@@ -39,11 +41,11 @@ public final class CompetitionDto {
         this.name = name;
     }
 
-    public Integer[] getSeasons() {
+    public List<Integer> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(Integer[] seasons) {
+    public void setSeasons(List<Integer> seasons) {
         this.seasons = seasons;
     }
 }

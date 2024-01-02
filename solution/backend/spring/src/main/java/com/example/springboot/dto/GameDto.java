@@ -24,11 +24,11 @@ public final class GameDto {
         competitionId = game.getCompetitionId();
         competitionName = competition.getName();
         homeClubId = game.getHomeClubId();
-        homeClubName = getHomeClubName();
-        homeClubScore = getHomeClubScore();
+        homeClubName = game.getHomeClubName();
+        homeClubScore = game.getHomeClubGoals();
         awayClubId = game.getAwayClubId();
         awayClubName = game.getAwayClubName();
-        awayClubScore = getAwayClubScore();
+        awayClubScore = game.getAwayClubGoals();
         date = game.getDate();
     }
 
