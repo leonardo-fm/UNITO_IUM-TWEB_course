@@ -9,6 +9,7 @@ import com.example.springboot.entity.Game;
 import com.example.springboot.service.ClubService;
 import com.example.springboot.service.CompetitionService;
 import com.example.springboot.service.GameService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +39,7 @@ public class ClubController {
     }
 
     @GetMapping("/{clubId}")
+    @Operation(summary = "Return a club by Id", description = "Given an Id of a club, return all the data of a club")
     public ClubDto GetClub(@PathVariable int clubId) {
         Club club = clubService.getClub(clubId);
         Competition competition = competitionService.getCompetition(club.getDomesticCompetitionId());
@@ -45,6 +47,7 @@ public class ClubController {
     }
 
     @GetMapping("/competition/{competitionId}/{season}")
+    @Operation(summary = "Return all the data of clubs in a competition", description = "Given an Id of a competition and a season, return all the data for all the clubs playing the competition")
     public List<ClubCompetitionSeasonDto> GetClubCompetitionsSeason(@PathVariable String competitionId, @PathVariable int season) {
         List<Club> clubs = clubService.getCompetitionSeasonClubs(competitionId, season);
         List<Game> games = gameService.getCompetitionGames(10000, 0, competitionId, season);
@@ -54,6 +57,7 @@ public class ClubController {
                     .filter(x -> x.getHomeClubId().longValue() == club.getId().longValue() || x.getAwayClubId().longValue() == club.getId().longValue())
                             .toList();
 
+            // TODO check
             int wins = 0, draws = 0, loses = 0, scoredGoals = 0, takenGoals = 0;
             for (Game game : playedGames) {
                 if (game.getHomeClubGoals() > game.getAwayClubGoals()) {
@@ -74,13 +78,13 @@ public class ClubController {
                     if (game.getAwayClubId() == club.getId()) {
                         // have win
                         wins++;
-                        scoredGoals += game.getHomeClubGoals();
-                        takenGoals += game.getAwayClubGoals();
+                        scoredGoals += game.getAwayClubGoals();
+                        takenGoals += game.getHomeClubGoals();
                     } else {
                         // have lost
                         loses++;
-                        scoredGoals += game.getAwayClubGoals();
-                        takenGoals += game.getHomeClubGoals();
+                        scoredGoals += game.getHomeClubGoals();
+                        takenGoals += game.getAwayClubGoals();
                     }
                 } else {
                     // draw

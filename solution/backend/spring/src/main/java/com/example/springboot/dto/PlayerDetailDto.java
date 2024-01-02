@@ -1,11 +1,13 @@
 package com.example.springboot.dto;
 
 import com.example.springboot.entity.Player;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
 public final class PlayerDetailDto {
     private Long id;
+    @Schema(description = "Name and surname", example = "Paolo Rossi")
     private String fullName;
     private Long clubId;
     private String clubName;
@@ -14,6 +16,7 @@ public final class PlayerDetailDto {
     private String position;
     private String subPosition;
     private String foot;
+    @Schema(description = "Height in cm", example = "178")
     private Integer height;
     private Long marketValue;
     private LocalDate contractExpirationDate;

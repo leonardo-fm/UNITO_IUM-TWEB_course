@@ -5,6 +5,7 @@ import com.example.springboot.entity.Competition;
 import com.example.springboot.entity.Game;
 import com.example.springboot.service.CompetitionService;
 import com.example.springboot.service.GameService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,15 @@ public class GameController {
     }
 
     @GetMapping("/{gameId}")
+    @Operation(summary = "Return a game by Id", description = "Given an Id of a game, return all the data of a game")
     public GameDto GetGame(@PathVariable int gameId) {
         Game game = gameService.getGame(gameId);
         return new GameDto(game, Competitions.get(game.getCompetitionId()));
     }
 
     @GetMapping()
-    public List<GameDto> GetAllGamesInDate(@RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
+    @Operation(summary = "Return a list of the last games", description = "Given a take x and an offset y, return the list of games by date")
+    public List<GameDto> GetGames(@RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
         List<Game> games = gameService.getGames(take, offset);
         List<GameDto> response = new ArrayList<>();
         for (Game game : games) response.add(new GameDto(game, Competitions.get(game.getCompetitionId())));
@@ -45,7 +48,8 @@ public class GameController {
     }
 
     @GetMapping("/competition/{competitionId}/{season}")
-    public List<GameDto> GetAllGamesOfCompetition(@PathVariable String competitionId, @PathVariable int season,
+    @Operation(summary = "Return a list of the last games of a competition", description = "Given a competition Id and a season, take x by an offset of y, return the list of games by date")
+    public List<GameDto> GetGamesOfCompetition(@PathVariable String competitionId, @PathVariable int season,
                                                   @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
         List<Game> games = gameService.getCompetitionGames(take, offset, competitionId, season);
         List<GameDto> response = new ArrayList<>();
@@ -54,7 +58,8 @@ public class GameController {
     }
 
     @GetMapping("/club/{clubId}/{season}")
-    public List<GameDto> GetAllGamesOfClub(@PathVariable long clubId, @PathVariable int season,
+    @Operation(summary = "Return a list of the last games of a club", description = "Given a club Id and a season, take x by an offset of y, return the list of games by date")
+    public List<GameDto> GetGamesOfClub(@PathVariable long clubId, @PathVariable int season,
                                                   @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
         List<Game> games = gameService.getClubGames(take, offset, clubId, season);
         List<GameDto> response = new ArrayList<>();
@@ -63,6 +68,7 @@ public class GameController {
     }
 
     @PostMapping("/player")
+    @Operation(summary = "Return a list games", description = "Given a list of game Ids, return the games")
     public List<GameDto> GetGamesOfPlayer(@RequestBody List<Long> games) {
         List<Game> playerGames = gameService.getPlayerGames(games);
         List<GameDto> response = new ArrayList<>();

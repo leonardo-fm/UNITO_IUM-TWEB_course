@@ -1,9 +1,11 @@
 package com.example.springboot.dto;
 
 import com.example.springboot.entity.Player;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public final class PlayerDto {
     private Long id;
+    @Schema(description = "Name and surname", example = "Paolo Rossi")
     private String fullName;
     private String position;
     private String subPosition;

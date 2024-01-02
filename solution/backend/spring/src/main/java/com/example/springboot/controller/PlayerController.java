@@ -5,6 +5,7 @@ import com.example.springboot.dto.PlayerDto;
 import com.example.springboot.entity.Player;
 import com.example.springboot.service.GameService;
 import com.example.springboot.service.PlayerService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +27,15 @@ public class PlayerController {
     }
 
     @GetMapping("/{playerId}")
+    @Operation(summary = "Return a player by Id", description = "Given an Id of a player, return all the data of a player")
     public PlayerDetailDto GetPlayer(@PathVariable long playerId) {
         Player player = playerService.getPlayer(playerId);
         return new PlayerDetailDto(player);
     }
 
+    // TODO retuurn all the player also the retired ones
     @GetMapping("/club/{clubId}")
+    @Operation(summary = "Return a list of player of a club", description = "Given an Id of a club, return all the player that are in the club")
     public List<PlayerDto> GetClubPlayers(@PathVariable long clubId) {
         List<Player> players = playerService.getClubPlayers(clubId);
         List<PlayerDto> response = new ArrayList<>();
