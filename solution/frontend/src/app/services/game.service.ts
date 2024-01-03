@@ -56,8 +56,15 @@ export class GameService {
     }).then(res => res.data);
   }
 
-  getPlayerGameHistory(playerId: number) {
-    return axios.get<GameDto[]>(environment.apiUrl + '/getPlayerGameHistory', { params: { playerId: playerId } }).then(res => {
+  getPlayerGameHistory(playerId: number, offset: number = 0, take: number = 25) {
+    return axios.get<GameDto[]>(environment.apiUrl + '/getPlayerGameHistory', { 
+      params: { 
+        playerId: playerId,
+        take: take,
+        offset: offset
+      } 
+    }).then(res => {
+      res.data.sort((x, y) => x.date >= y.date ? -1 : 1);
       return res.data;
     })
     // return axios.get<GameModel[]>('assets/data/games.json').then(res => {

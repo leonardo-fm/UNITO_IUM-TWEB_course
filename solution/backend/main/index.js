@@ -155,12 +155,24 @@ app.get('/getPlayersByClub', (req, res) => {
 })
 
 app.get('/getPlayerGameHistory', (req, res) => {
-  if (!req.query.playerId) {
+  if (!req.query.playerId || !req.query.take || !req.query.offset) {
     res.sendStatus(403);
     return;
   }
-  axios.get(hostSpring + '/game/player').then(response => {
-    res.json(response.data);
+
+  axios.get(hostExpress + '/player/games/' + req.query.playerId, {
+    params: {
+      take: req.query.take,
+      skip: req.query.offset
+    }
+  }).then(response => {
+    let gameIds = response.data.map(x => x.game_id);
+    axios.post(hostSpring + '/game/player', gameIds).then(response => {
+      res.json(response.data);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
   }).catch(err => {
     console.log(err);
     res.sendStatus(500);
@@ -257,16 +269,16 @@ io.on('connection', (socket) => {
     io.to(roomId).emit('room size', roomSize);
     console.log('join room', roomId, 'SIZE: ', roomSize);
   });
-  
+
   socket.on('disconnecting', () => {
     console.log('disconnecting');
     // skip the first room (is the unique socket)
     let rooms = [...socket.rooms].slice(1);
     console.log(rooms);
-    for (let roomId of rooms){
+    for (let roomId of rooms) {
       // -1 because this socket is still in room
       let roomSize = io.sockets.adapter.rooms.get(roomId).size - 1;
-      console.log('leave room', roomId, 'SIZE: ', roomSize )
+      console.log('leave room', roomId, 'SIZE: ', roomSize)
       socket.to(roomId).emit('room size', roomSize);
     }
   });
