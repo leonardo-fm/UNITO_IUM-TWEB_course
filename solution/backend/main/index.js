@@ -4,6 +4,7 @@ const cors = require('cors')
 const http = require('http');
 
 const hostSpring = 'http://localhost:8082'
+const hostExpress = 'http://localhost:3001'
 const corsOrigin = 'http://localhost:4200'
 const port = 3000
 
@@ -99,6 +100,26 @@ app.get('/getGameById', (req, res) => {
   }
   axios.get(hostSpring + '/game/' + req.query.gameId).then(response => {
     res.json(response.data);
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
+})
+
+app.get('/getGameDetail', (req, res) => {
+  if (!req.query.gameId) {
+    res.sendStatus(403);
+    return;
+  }
+
+  Promise.all([
+    axios.get(hostExpress + '/game/events/' + req.query.gameId),
+    axios.get(hostExpress + '/game/lineups/' + req.query.gameId)
+  ]).then(([response1, response2]) => {
+    res.json({
+      events: response1.data,
+      lineups: response2.data
+    });
   }).catch(err => {
     console.log(err);
     res.sendStatus(500);
