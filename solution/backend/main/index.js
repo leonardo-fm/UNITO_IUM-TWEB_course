@@ -4,6 +4,7 @@ const cors = require('cors')
 const http = require('http');
 
 const hostSpring = 'http://localhost:8082'
+const corsOrigin = 'http://localhost:4200'
 const port = 3000
 
 const app = express()
@@ -11,7 +12,7 @@ app.set('port', port);
 var server = http.createServer(app);
 
 app.use(cors({
-  origin: '*'
+  origin: corsOrigin
 }))
 
 app.get('/getAllCompetition', (req, res) => {
@@ -191,7 +192,11 @@ server.listen(port, () => {
 });
 
 const socketIO = require('socket.io');
-const io = socketIO(server);
+const io = socketIO(server, {
+  cors: {
+    origin: corsOrigin,
+  }
+});
 io.on('connection', (socket) => {
   console.log('A user connected');
 
