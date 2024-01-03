@@ -25,12 +25,12 @@ router.post('/save', function(req, res) {
 
     let chatToBeSaved = req.body.length;
     req.body.forEach(chat => {
-        let messagesOrderedByDate = req.body.messages
+        let messagesOrderedByDate = chat.messages
         .sort((first, second) => {return new Date(second.date) - new Date(first.date)});
 
         getDb().collection('chat')
             .updateOne(
-                { chatId: req.body.chatId }, 
+                { chatId: chat.chatId }, 
                 { $push: { messages: { $each: messagesOrderedByDate, $position: 0 } } },
                 { upsert: true })
             .then(result => { chatToBeSaved-- })

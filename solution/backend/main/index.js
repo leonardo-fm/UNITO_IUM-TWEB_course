@@ -7,6 +7,8 @@ const hostSpring = 'http://localhost:8082'
 const hostExpress = 'http://localhost:3001'
 const corsOrigin = 'http://localhost:4200'
 const port = 3000;
+
+// Save all chat messages every x seconds
 const intervalSavingChat = 2;
 
 const chats = {};
@@ -258,11 +260,13 @@ setInterval(() => {
     }
   });
 
+  if (body.length == 0)
+    return;
+
   axios.post(hostExpress + '/chat/save', body).then(response => {
-    chats[chatId] = [];
+    chatsId.forEach(x => chats[x] = []);
   }).catch(err => {
     console.log(err);
-    res.sendStatus(500);
   });
 
 }, intervalSavingChat * 1000)
