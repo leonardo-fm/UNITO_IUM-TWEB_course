@@ -200,17 +200,29 @@ const io = socketIO(server, {
 io.on('connection', (socket) => {
   console.log('A user connected');
 
-  socket.on('message', (roomType, roomId, msg) => {
-    console.log('chat message to ', roomType+roomId, msg);
-    socket.to(roomType+roomId).emit('message', msg);
-  });
-  socket.on('join room', (roomType, roomId) => {
-    socket.join(roomType+roomId);
-    console.log('join room', roomType, roomId);
+  socket.on('message', (roomId, msg) => {
+    console.log('chat message to ', roomId, msg);
+    socket.to(roomId).emit('message', msg);
   });
 
-  socket.on('leave conversation', (name) => {
-    console.log('leave conversation', name);
+  socket.on('join room', (roomId) => {
+    socket.join(roomId);
+    let roomSize = io.sockets.adapter.rooms.get(roomId).size;
+    io.to(roomId).emit('room size', roomSize);
+    console.log('join room', roomId, 'SIZE: ', roomSize);
+  });
+  
+  socket.on('disconnecting', () => {
+    console.log('disconnecting');
+    // skip the first room (is the unique socket)
+    let rooms = [...socket.rooms].slice(1);
+    console.log(rooms);
+    for (let roomId of rooms){
+      // -1 because this socket is still in room
+      let roomSize = io.sockets.adapter.rooms.get(roomId).size - 1;
+      console.log('leave room', roomId, 'SIZE: ', roomSize )
+      socket.to(roomId).emit('room size', roomSize);
+    }
   });
 
   socket.on('disconnect', () => {

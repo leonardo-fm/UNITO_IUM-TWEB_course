@@ -10,6 +10,7 @@ import { ChatRoomType, MessageDto } from '../models/chat.dto.model';
 export class ChatService {
   
   public messageSubject = new Subject<MessageDto>();
+  public roomSizeSubject = new Subject<number>();
 
   private socket: Socket;
 
@@ -19,19 +20,23 @@ export class ChatService {
     this.socket.on('message', (message: MessageDto) => {
       console.log('Received Message', message);
       this.messageSubject.next(message);
-    })
+    });
+
+    this.socket.on('room size', (roomSize: number) => {
+      this.roomSizeSubject.next(roomSize);
+    });
   }
 
   sendMessage(roomType: ChatRoomType, roomId: string, message: MessageDto){
-    this.socket.emit('message', roomType, roomId, message);
+    this.socket.emit('message', roomType + roomId, message);
   }
   
   connectChat(roomType: ChatRoomType, roomId: string) {
     this.socket.connect()
-    this.socket.emit('join room', roomType, roomId);
+    this.socket.emit('join room', roomType + roomId);
   }
 
   disconnectChat() {
-    this.socket.disconnect()
+    this.socket.disconnect();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatRoomType, MessageDto } from '../../../models/chat.dto.model';
 import moment from 'moment';
@@ -15,9 +15,11 @@ import { Subscription } from 'rxjs';
   styleUrl: './messaging.component.css'
 })
 export class MessagingComponent implements OnInit, OnDestroy {
+  @ViewChild('scrollElement') scrollElement: ElementRef;
 
   roomId: string;
   roomType: ChatRoomType;
+  roomSize: number;
 
   chat: MessageDto[] = [];
   message: string;
@@ -25,12 +27,13 @@ export class MessagingComponent implements OnInit, OnDestroy {
   accontName: string;
 
   messageSubscription: Subscription;
+  roomSizeSubscription: Subscription;
 
   moment = moment;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -43,12 +46,15 @@ export class MessagingComponent implements OnInit, OnDestroy {
       this.chatService.connectChat(this.roomType, this.roomId);
     });
 
+    this.roomSizeSubscription = this.chatService.roomSizeSubject.subscribe(size => this.roomSize = size);
     this.messageSubscription = this.chatService.messageSubject.subscribe(message => {
       this.chat.push(message);
     })
   }
 
   onMessageSend() {
+    if (!this.message)
+      return;
     let message: MessageDto = {
       accountId: this.accountId,
       accountName: this.accontName,
@@ -56,7 +62,7 @@ export class MessagingComponent implements OnInit, OnDestroy {
       date: new Date()
     };
 
-    this.chat.push(message);
+    this.chatService.messageSubject.next(message);
     this.chatService.sendMessage(this.roomType, this.roomId, message);
 
     this.message = '';
