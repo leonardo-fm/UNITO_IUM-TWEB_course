@@ -6,7 +6,8 @@ const http = require('http');
 const hostSpring = 'http://localhost:8082'
 const hostExpress = 'http://localhost:3001'
 const corsOrigin = 'http://localhost:4200'
-const port = 3000
+const port = 3000;
+const intervalSavingChat = 2;
 
 const chats = {};
 
@@ -227,10 +228,10 @@ app.get('/getChatMessages', (req, res) => {
       skip: req.query.offset
     }
   }).then(response => {
-    console.log(response.data)
+    let messages = response.data.messages || [];
     if (chats[req.query.chatId])
-      response.data.push(...chats[req.query.chatId]);
-    res.json(response.data);
+      messages.push(...chats[req.query.chatId]);
+    res.json(messages);
   }).catch(err => {
     console.log(err);
     res.sendStatus(500);
@@ -247,6 +248,24 @@ app.get('/browser/*', (req, res) => {
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
+
+setInterval(() => {
+  let chatsId = Object.keys(chats);
+  let body = chatsId.map(x => {
+    return {
+      chatId: x,
+      messages: chats[x]
+    }
+  });
+
+  axios.post(hostExpress + '/chat/save', body).then(response => {
+    chats[chatId] = [];
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
+
+}, intervalSavingChat * 1000)
 
 const socketIO = require('socket.io');
 const io = socketIO(server, {
