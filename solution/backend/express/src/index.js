@@ -1,4 +1,5 @@
 const express = require('express')
+const { connectToDb } = require('./db');
 
 const app = express()
 const port = 3000
@@ -9,6 +10,10 @@ const chatRouter = require('./routes/chat');
 app.use('/game', gameRouter);
 app.use('/chat', chatRouter);
 
-app.listen(port, () => {
-    console.log("Express listening on port" + port)
-  })
+connectToDb((err) => {
+    if (!err) {
+        app.listen(port, () => {
+            console.log("Express listening on port " + port)
+        })
+    }
+})

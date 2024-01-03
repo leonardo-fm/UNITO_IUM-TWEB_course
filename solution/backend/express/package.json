@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "express server",
   "scripts": {
-    "main": "node ./src/index.js"
+    "main": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "nodemon": "^3.0.2"
   }
 }

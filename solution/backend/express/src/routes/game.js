@@ -1,32 +1,36 @@
-var express = require('express');
+const express = require('express');
+const { getDb } = require('../db');
+
 var router = express.Router();
 
-router.get('/lineups', function(req, res) {
-    if (!req.query.gameId) {
-        return res.sendStatus(404);
+router.get('/lineups/:gameId', (req, res) => {
+    if (!req.params.gameId) {
+        return res.status(401).json({error: "No gameId provided"});
     }
 
-    let gameId = req.query.gameId;
-    let response = getLineupsForGame(gameId);
-    res.json(response);
+    let response = [];
+
+    getDb().collection('game_lineups')
+        .find({ game_id: BigInt(req.params.gameId) })
+        .sort({ club_id: 1 })
+        .forEach(lineup => response.push(lineup))
+        .then(() => { res.status(200).json(response); })
+        .catch(() => { res.status(500).json({error: "Could not fetch the document"})})
 });
 
-function getLineupsForGame(gameId) {
-    return "Hi!";
-}
-
-router.get('/events', function(req, res) {
-    if (!req.query.gameId) {
-        return res.sendStatus(404);
+router.get('/events/:gameId', function(req, res) {
+    if (!req.params.gameId) {
+        return res.status(401).json({error: "No gameId provided"});
     }
 
-    let gameId = req.query.gameId;
-    let response = getEventsForGame(gameId);
-    res.json(response);
-});
+    let response = [];
 
-function getEventsForGame(gameId) {
-    return "Hi event!";
-}
+    getDb().collection('game_events')
+        .find({ game_id: BigInt(req.params.gameId) })
+        .sort({ minute: -1 })
+        .forEach(gameEvent => response.push(gameEvent))
+        .then(() => { res.status(200).json(response); })
+        .catch(() => { res.status(500).json({error: "Could not fetch the document"})})
+});
 
 module.exports = router;
