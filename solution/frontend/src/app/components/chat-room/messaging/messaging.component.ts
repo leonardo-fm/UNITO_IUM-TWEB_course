@@ -43,6 +43,9 @@ export class MessagingComponent implements OnInit, OnDestroy {
 
       this.accountId = moment().unix().toString();
       this.accontName = 'Guest_' + this.accountId;
+      this.chatService.getMessages(this.roomType, this.roomId).then(messages => {
+        this.chat = messages;
+      })
       this.chatService.connectChat(this.roomType, this.roomId);
     });
 

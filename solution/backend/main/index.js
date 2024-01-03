@@ -8,6 +8,8 @@ const hostExpress = 'http://localhost:3001'
 const corsOrigin = 'http://localhost:4200'
 const port = 3000
 
+const chats = {};
+
 const app = express()
 app.set('port', port);
 var server = http.createServer(app);
@@ -153,12 +155,24 @@ app.get('/getPlayersByClub', (req, res) => {
 })
 
 app.get('/getPlayerGameHistory', (req, res) => {
-  if (!req.query.playerId) {
+  if (!req.query.playerId || !req.query.take || !req.query.offset) {
     res.sendStatus(403);
     return;
   }
-  axios.get(hostSpring + '/game/player').then(response => {
-    res.json(response.data);
+
+  axios.get(hostExpress + '/player/games/' + req.query.playerId, {
+    params: {
+      take: req.query.take,
+      skip: req.query.offset
+    }
+  }).then(response => {
+    let gameIds = response.data.map(x => x.game_id);
+    axios.post(hostSpring + '/game/player', gameIds).then(response => {
+      res.json(response.data);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
   }).catch(err => {
     console.log(err);
     res.sendStatus(500);
@@ -201,6 +215,28 @@ app.get('/getClubGameHistory', (req, res) => {
   });
 })
 
+app.get('/getChatMessages', (req, res) => {
+  if (!req.query.chatId || !req.query.take || !req.query.offset) {
+    res.sendStatus(403);
+    return;
+  }
+
+  axios.get(hostExpress + '/chat/' + req.query.chatId, {
+    params: {
+      take: req.query.take,
+      skip: req.query.offset
+    }
+  }).then(response => {
+    console.log(response.data)
+    if (chats[req.query.chatId])
+      response.data.push(...chats[req.query.chatId]);
+    res.json(response.data);
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
+});
+
 // Hosting static browser files
 app.use('/browser', express.static(__dirname + '/static/browser'));
 // For working angular routing on refresh, need to redirect all requests to index.html 
@@ -223,6 +259,7 @@ io.on('connection', (socket) => {
 
   socket.on('message', (roomId, msg) => {
     console.log('chat message to ', roomId, msg);
+    (chats[roomId] = chats[roomId] || []).push(msg);
     socket.to(roomId).emit('message', msg);
   });
 
@@ -232,16 +269,16 @@ io.on('connection', (socket) => {
     io.to(roomId).emit('room size', roomSize);
     console.log('join room', roomId, 'SIZE: ', roomSize);
   });
-  
+
   socket.on('disconnecting', () => {
     console.log('disconnecting');
     // skip the first room (is the unique socket)
     let rooms = [...socket.rooms].slice(1);
     console.log(rooms);
-    for (let roomId of rooms){
+    for (let roomId of rooms) {
       // -1 because this socket is still in room
       let roomSize = io.sockets.adapter.rooms.get(roomId).size - 1;
-      console.log('leave room', roomId, 'SIZE: ', roomSize )
+      console.log('leave room', roomId, 'SIZE: ', roomSize)
       socket.to(roomId).emit('room size', roomSize);
     }
   });

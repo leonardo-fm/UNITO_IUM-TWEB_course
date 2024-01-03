@@ -1,6 +1,7 @@
+@if (startingHomeLineup){
 <div class="d-flex flex-column home-starting-lineup align-items-center justify-content-center col-4 p-3">
     <div class="d-flex gap-3">
-        @for(lineup of startingHomeLineup[LineupPositionType.Goalkeeper]; track lineup.game_lineups_id){
+        @for(lineup of startingHomeLineup[LineupPositionType['Goalkeeper']]; track lineup.game_lineups_id){
         <ng-container *ngTemplateOutlet="lineupTemplate; context: {$implicit: lineup}"></ng-container>
         }
     </div>
@@ -46,6 +47,8 @@
         }
     </div>
 </div>
+}
+@if(startingAwayLineup){
 <div class="d-flex flex-column away-starting-lineup align-items-center justify-content-center col-4 p-3">
     <div class="d-flex gap-3">
         @for(lineup of startingAwayLineup[LineupPositionType.Goalkeeper]; track lineup.game_lineups_id){
@@ -94,6 +97,7 @@
         }
     </div>
 </div>
+}
 
 <ng-template #lineupTemplate let-lineup>
     <div class="cursor-pointer" [routerLink]="['/player', lineup.player_id]">
