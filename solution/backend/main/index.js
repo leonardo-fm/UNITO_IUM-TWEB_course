@@ -264,7 +264,7 @@ setInterval(() => {
     return;
 
   axios.post(hostExpress + '/chat/save', body).then(response => {
-    chatsId.forEach(x => chats[x] = []);
+    chatsId.forEach(x => delete chats[x]);
   }).catch(err => {
     console.log(err);
   });
