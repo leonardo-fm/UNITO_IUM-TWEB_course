@@ -25,7 +25,7 @@ export class GameService {
     })
   }
 
-  getGameHistory(offset: number = 0, take: number = 25,) {
+  getGameHistory(offset: number = 0, take: number = 25) {
     return axios.get<GameDto[]>(environment.apiUrl + '/getGameHistory', {
       params: {
         take: take,

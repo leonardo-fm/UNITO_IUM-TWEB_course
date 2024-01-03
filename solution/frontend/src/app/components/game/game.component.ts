@@ -31,11 +31,12 @@ export class GameComponent implements OnInit{
         .then(game => {
           console.log('Game', game);
           this.game = game;
+          this.loaderService.show();
           this.gameService.getGameDetails(gameId).then(res => {
             this.game.events = res.events;
             this.game.lineups = res.lineups;
             this.gameService.gameSubject.next(this.game);
-          })
+          }).finally(() => this.loaderService.hide());
         })
         .finally(() => this.loaderService.hide());
     })    
