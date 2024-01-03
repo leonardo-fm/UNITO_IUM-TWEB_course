@@ -1,10 +1,14 @@
 const express = require('express')
 const axios = require('axios')
-var cors = require('cors')
+const cors = require('cors')
+const http = require('http');
+
+const hostSpring = 'http://localhost:8082'
+const port = 3000
 
 const app = express()
-const port = 3000
-const hostSpring = 'http://localhost:8082'
+app.set('port', port);
+var server = http.createServer(app);
 
 app.use(cors({
   origin: '*'
@@ -137,7 +141,7 @@ app.get('/getPlayerGameHistory', (req, res) => {
     console.log(err);
     res.sendStatus(500);
   });
-}) 
+})
 
 app.get('/getClubById', (req, res) => {
   if (!req.query.clubId) {
@@ -182,6 +186,29 @@ app.get('/browser/*', (req, res) => {
   res.sendFile(__dirname + '/static/browser/index.html');
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-})
+});
+
+const socketIO = require('socket.io');
+const io = socketIO(server);
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  socket.on('message', (roomType, roomId, msg) => {
+    console.log('chat message to ', roomType+roomId, msg);
+    socket.to(roomType+roomId).emit('message', msg);
+  });
+  socket.on('join room', (roomType, roomId) => {
+    socket.join(roomType+roomId);
+    console.log('join room', roomType, roomId);
+  });
+
+  socket.on('leave conversation', (name) => {
+    console.log('leave conversation', name);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
