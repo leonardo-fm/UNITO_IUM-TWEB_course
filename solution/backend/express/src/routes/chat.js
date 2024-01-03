@@ -24,8 +24,8 @@ router.post('/save', function (req, res) {
     }
 
     let chatToBeSaved = req.body.length;
-    console.log('PRIMA', chatToBeSaved);
     let promises = [];
+
     req.body.forEach(chat => {
         let messagesOrderedByDate = chat.messages
             .sort((first, second) => { return new Date(second.date) - new Date(first.date) });
@@ -35,20 +35,12 @@ router.post('/save', function (req, res) {
                 { chatId: chat.chatId },
                 { $push: { messages: { $each: messagesOrderedByDate, $position: 0 } } },
                 { upsert: true })
-            // .then(result => { chatToBeSaved-- })
-            // .catch(err => { res.status(500).json({ error: "Could not update the chat" }) })
-        promises.push(promise);
+
+            promises.push(promise);
     });
+
     Promise.all(promises)
-        .then(result => { 
-            chatToBeSaved -= result.length;
-            
-            console.log(chatToBeSaved);
-            if (chatToBeSaved === 0)
-                return res.sendStatus(201);
-            else
-                return res.sendStatus(418); 
-        })
+        .then(result => { return chatToBeSaved == result.length ? res.sendStatus(201) : res.sendStatus(418); })
         .catch(err => { res.status(500).json({ error: "Could not update the chat" }) })
 });
 
