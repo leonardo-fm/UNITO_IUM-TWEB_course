@@ -13,21 +13,16 @@ export class GameService {
 
   constructor() { }
 
-  getGameById(id: number) {
-    console.log(id)
-    return axios.get<GameDto>(environment.apiUrl + '/getGameById', { params: { gameId: id } }).then(res => {
-      return axios.get<GameLineupModel[]>('assets/data/game_lineups.json').then(res2 => {
-        return axios.get<GameEventModel[]>('assets/data/game_events.json').then(res3 => {
-          let game: GameDto = res.data;
-          console.log(game);
-          game.lineups = res2.data.filter(x => x.game_id == id);
-          game.events = res3.data.filter(x => x.game_id == id);
-          game.events.sort((x, y) => y.minute - x.minute);
-          this.gameSubject.next(game);
-          return game;
-        })
-      });
+  getGameById(gameId: number) {
+    return axios.get<GameDto>(environment.apiUrl + '/getGameById', { params: { gameId: gameId } }).then(res => {
+      return res.data;
     });
+  }
+
+  getGameDetails(gameId: number){
+    return axios.get<{events: GameEventModel[], lineups: GameLineupModel[]}>(environment.apiUrl + '/getGameDetail', { params: { gameId: gameId } }).then(res => {
+      return res.data;
+    })
   }
 
   getGameHistory(offset: number = 0, take: number = 25,) {
