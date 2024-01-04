@@ -33,7 +33,6 @@ public class PlayerController {
         return new PlayerDetailDto(player);
     }
 
-    // TODO retuurn all the player also the retired ones
     @GetMapping("/club/{clubId}")
     @Operation(summary = "Return a list of player of a club", description = "Given an Id of a club, return all the player that are in the club")
     public List<PlayerDto> GetClubPlayers(@PathVariable long clubId) {
