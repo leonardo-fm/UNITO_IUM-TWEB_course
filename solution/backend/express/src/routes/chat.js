@@ -3,6 +3,31 @@ const { getDb } = require('../db');
 
 var router = express.Router();
 
+/**
+ * @openapi
+ * /chat/{chatId}:
+ *  get:
+ *     tags:
+ *     - Chat
+ *     summary: Get chat
+ *     parameters:
+ *      - name: chatId
+ *        in: path
+ *        description: The id of the chat
+ *        required: true
+ *      - name: take
+ *        in: query
+ *        description: The ammount of messages to take
+ *        required: true
+ *      - name: skip
+ *        in: query
+ *        description: The ammount of messages to skip
+ *        required: true
+ *     description: Return the list of messages of the chat
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/:chatId', function (req, res) {
     if (!req.params.chatId || !req.query.take || !req.query.skip) {
         return res.status(400).json({ error: "Wrong arguments" });
@@ -18,6 +43,30 @@ router.get('/:chatId', function (req, res) {
         .catch(err => { res.status(500).json({ error: "Could not fetch the document" }) })
 });
 
+/**
+ * @openapi
+ * /chat/save:
+ *  post:
+ *     tags:
+ *     - Chat
+ *     summary: Save a chat
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *              - chatId
+ *             properties:
+ *               chatId:
+ *                 type: string
+ *                 default: player_65342332
+ *     description: Save a chat
+ *     responses:
+ *       201:
+ *         description: Chat saved
+ */
 router.post('/save', function (req, res) {
     if (Object.keys(req.body).length === 0) {
         return res.status(400).json({ error: "No body" });

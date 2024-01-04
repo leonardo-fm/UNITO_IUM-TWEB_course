@@ -1,9 +1,9 @@
 const express = require('express');
 const { connectToDb } = require('./db');
+const { swaggerDocs } = require('./swagger');
 
 const app = express();
 const port = 3001;
-
 app.use(express.json());
 
 const gameRouter = require('./routes/game');
@@ -18,6 +18,7 @@ connectToDb((err) => {
     if (!err) {
         app.listen(port, () => {
             console.log("Express listening on port " + port);
+            swaggerDocs(app, port);
         })
     }
 })
