@@ -2,8 +2,8 @@ const express = require('express')
 const axios = require('axios')
 const cors = require('cors')
 const http = require('http');
+const { swaggerDocs } = require('./src/swagger');
 
-const hostSpring = 'http://localhost:8082'
 const hostExpress = 'http://localhost:3001'
 const corsOrigin = 'http://localhost:4200'
 const port = 3000;
@@ -28,6 +28,18 @@ app.use('/', playerRouter);
 app.use('/', clubRouter);
 app.use('/', chatRouter);
 
+// Hosting static browser files
+app.use('/browser', express.static(__dirname + '/static/browser'));
+
+// For working angular routing on refresh, need to redirect all requests to index.html 
+app.get('/browser/*', (req, res) => {
+    res.sendFile(__dirname + '/static/browser/index.html');
+});
+
+server.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+    swaggerDocs(app, port);
+});
 
 
 // TODO -------------------------------------------
@@ -39,19 +51,6 @@ const intervalSavingChat = 2;
 
 const chats = {};
 
-
-
-
-// Hosting static browser files
-app.use('/browser', express.static(__dirname + '/static/browser'));
-// For working angular routing on refresh, need to redirect all requests to index.html 
-app.get('/browser/*', (req, res) => {
-    res.sendFile(__dirname + '/static/browser/index.html');
-});
-
-server.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-});
 
 setInterval(() => {
     let chatsId = Object.keys(chats);

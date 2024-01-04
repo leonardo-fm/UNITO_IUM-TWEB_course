@@ -5,6 +5,23 @@ var router = express.Router();
 
 const hostSpring = 'http://localhost:8082'
 
+/**
+ * @openapi
+ * /getCompetitionById?competitionId:
+ *  get:
+ *     tags:
+ *     - Competition
+ *     summary: Get competition by id
+ *     parameters:
+ *      - name: competitionId
+ *        in: query
+ *        description: The id of the competition
+ *        required: true
+ *     description: Return the competition
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getCompetitionById', (req, res) => {
     if (!req.query.competitionId) {
         res.sendStatus(403);
@@ -18,6 +35,18 @@ router.get('/getCompetitionById', (req, res) => {
     });
 })
 
+/**
+ * @openapi
+ * /getAllCompetition:
+ *  get:
+ *     tags:
+ *     - Competition
+ *     summary: Get all the competitions
+ *     description: Return all the competition
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getAllCompetition', (req, res) => {
     axios.get(hostSpring + '/competition/all').then(response => {
         res.json(response.data);
@@ -27,6 +56,27 @@ router.get('/getAllCompetition', (req, res) => {
     });
 });
 
+/**
+ * @openapi
+ * /getCompetitionStats?competitionId&season:
+ *  get:
+ *     tags:
+ *     - Competition
+ *     summary: Get competition details by id and season
+ *     parameters:
+ *      - name: competitionId
+ *        in: query
+ *        description: The id of the competition
+ *        required: true
+ *      - name: season
+ *        in: query
+ *        description: The season of the competition
+ *        required: true
+ *     description: Return the competition details
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getCompetitionStats', (req, res) => {
     if (!req.query.competitionId || !req.query.season) {
         res.sendStatus(403);
@@ -46,6 +96,35 @@ router.get('/getCompetitionStats', (req, res) => {
         });
 })
 
+/**
+ * @openapi
+ * /getCompetitionGameHistory?competitionId&season&take&skip:
+ *  get:
+ *     tags:
+ *     - Competition
+ *     summary: Get games played in a competition
+ *     parameters:
+ *      - name: competitionId
+ *        in: query
+ *        description: The id of the competetion
+ *        required: true
+ *      - name: season
+ *        in: query
+ *        description: The season
+ *        required: true
+ *      - name: take
+ *        in: query
+ *        description: The ammount of games id to take
+ *        required: true
+ *      - name: skip
+ *        in: query
+ *        description: The ammount of games id to skip
+ *        required: true
+ *     description: Return the list of games played in a competition
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getCompetitionGameHistory', (req, res) => {
     if (!req.query.competitionId || !req.query.season || !req.query.take || !req.query.offset) {
         res.sendStatus(403);

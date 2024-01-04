@@ -5,6 +5,23 @@ var router = express.Router();
 
 const hostSpring = 'http://localhost:8082'
 
+/**
+ * @openapi
+ * /getClubById?clubId:
+ *  get:
+ *     tags:
+ *     - Club
+ *     summary: Get club by id
+ *     parameters:
+ *      - name: clubId
+ *        in: query
+ *        description: The id of the club
+ *        required: true
+ *     description: Return the club
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getClubById', (req, res) => {
     if (!req.query.clubId) {
         res.sendStatus(403);
@@ -18,6 +35,35 @@ router.get('/getClubById', (req, res) => {
     });
 })
 
+/**
+ * @openapi
+ * /getClubGameHistory?clubId&season&take&skip:
+ *  get:
+ *     tags:
+ *     - Club
+ *     summary: Get games played by a club
+ *     parameters:
+ *      - name: clubId
+ *        in: query
+ *        description: The id of the club
+ *        required: true
+ *      - name: season
+ *        in: query
+ *        description: The season
+ *        required: true
+ *      - name: take
+ *        in: query
+ *        description: The ammount of games id to take
+ *        required: true
+ *      - name: skip
+ *        in: query
+ *        description: The ammount of games id to skip
+ *        required: true
+ *     description: Return the list of games played by a club
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getClubGameHistory', (req, res) => {
     if (!req.query.clubId || !req.query.season || !req.query.take || !req.query.offset) {
         res.sendStatus(403);

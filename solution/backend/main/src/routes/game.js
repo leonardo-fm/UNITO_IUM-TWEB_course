@@ -6,6 +6,23 @@ var router = express.Router();
 const hostSpring = 'http://localhost:8082'
 const hostExpress = 'http://localhost:3001'
 
+/**
+ * @openapi
+ * /getGameById?gameId:
+ *  get:
+ *     tags:
+ *     - Game
+ *     summary: Get game by id
+ *     parameters:
+ *      - name: gameId
+ *        in: query
+ *        description: The id of the game
+ *        required: true
+ *     description: Return the game
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getGameById', (req, res) => {
     if (!req.query.gameId) {
         res.sendStatus(403);
@@ -19,6 +36,23 @@ router.get('/getGameById', (req, res) => {
     });
 })
 
+/**
+ * @openapi
+ * /getGameDetail?gameId:
+ *  get:
+ *     tags:
+ *     - Game
+ *     summary: Get game details by id
+ *     parameters:
+ *      - name: gameId
+ *        in: query
+ *        description: The id of the game
+ *        required: true
+ *     description: Return the game details
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getGameDetail', (req, res) => {
     if (!req.query.gameId) {
         res.sendStatus(403);
@@ -39,6 +73,27 @@ router.get('/getGameDetail', (req, res) => {
     });
 })
 
+/**
+ * @openapi
+ * /getGameHistory?take&offset:
+ *  get:
+ *     tags:
+ *     - Game
+ *     summary: Get games list
+ *     parameters:
+ *      - name: take
+ *        in: query
+ *        description: The ammount of games id to take
+ *        required: true
+ *      - name: skip
+ *        in: query
+ *        description: The ammount of games id to skip
+ *        required: true
+ *     description: Return the games list
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/getGameHistory', (req, res) => {
     if (!req.query.take || !req.query.offset) {
         res.sendStatus(403);
