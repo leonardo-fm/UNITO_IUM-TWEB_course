@@ -19,7 +19,7 @@ var router = express.Router();
  *        in: query
  *        description: The ammount of games id to take
  *        required: true
-*      - name: skip
+ *      - name: skip
  *        in: query
  *        description: The ammount of games id to skip
  *        required: true
