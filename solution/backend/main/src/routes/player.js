@@ -1,10 +1,8 @@
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
+const config = require('../config');
 
 var router = express.Router();
-
-const hostSpring = 'http://localhost:8082'
-const hostExpress = 'http://localhost:3001'
 
 /**
  * @openapi
@@ -28,7 +26,7 @@ router.get('/getPlayerById', (req, res) => {
         res.sendStatus(403);
         return;
     }
-    axios.get(hostSpring + '/player/' + req.query.playerId).then(response => {
+    axios.get(config.hostSpring + '/player/' + req.query.playerId).then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);
@@ -58,7 +56,7 @@ router.get('/getPlayersByClub', (req, res) => {
         res.sendStatus(403);
         return;
     }
-    axios.get(hostSpring + '/player/club/' + req.query.clubId).then(response => {
+    axios.get(config.hostSpring + '/player/club/' + req.query.clubId).then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);
@@ -97,14 +95,14 @@ router.get('/getPlayerGameHistory', (req, res) => {
         return;
     }
 
-    axios.get(hostExpress + '/player/games/' + req.query.playerId, {
+    axios.get(config.hostExpress + '/player/games/' + req.query.playerId, {
         params: {
             take: req.query.take,
             skip: req.query.offset
         }
     }).then(response => {
         let gameIds = response.data.map(x => x.game_id);
-        axios.post(hostSpring + '/game/player', gameIds).then(response => {
+        axios.post(config.hostSpring + '/game/player', gameIds).then(response => {
             res.json(response.data);
         }).catch(err => {
             console.log(err);

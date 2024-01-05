@@ -1,9 +1,8 @@
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
+const config = require('../config');
 
 var router = express.Router();
-
-const hostExpress = 'http://localhost:3001'
 
 /**
  * @openapi
@@ -36,15 +35,15 @@ router.get('/getChatMessages', (req, res) => {
         return;
     }
 
-    axios.get(hostExpress + '/chat/' + req.query.chatId, {
+    axios.get(config.hostExpress + '/chat/' + req.query.chatId, {
         params: {
             take: req.query.take,
             skip: req.query.offset
         }
     }).then(response => {
         let messages = response.data.messages || [];
-        if (chats[req.query.chatId])
-            messages.push(...chats[req.query.chatId]);
+        if (config.chats[req.query.chatId])
+            messages.push(...config.chats[req.query.chatId]);
         res.json(messages);
     }).catch(err => {
         console.log(err);

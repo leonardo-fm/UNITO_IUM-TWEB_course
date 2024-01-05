@@ -1,9 +1,8 @@
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
+const config = require('../config');
 
 var router = express.Router();
-
-const hostSpring = 'http://localhost:8082'
 
 /**
  * @openapi
@@ -27,7 +26,7 @@ router.get('/getClubById', (req, res) => {
         res.sendStatus(403);
         return;
     }
-    axios.get(hostSpring + '/club/' + req.query.clubId).then(response => {
+    axios.get(config.hostSpring + '/club/' + req.query.clubId).then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);
@@ -74,7 +73,7 @@ router.get('/getClubGameHistory', (req, res) => {
         return;
     }
 
-    axios.get(hostSpring + '/game/club/' + req.query.clubId + '/' + req.query.season, {
+    axios.get(config.hostSpring + '/game/club/' + req.query.clubId + '/' + req.query.season, {
         params: {
             take: req.query.take,
             offset: req.query.offset

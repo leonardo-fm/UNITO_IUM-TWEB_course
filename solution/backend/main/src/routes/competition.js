@@ -1,9 +1,8 @@
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
+const config = require('../config');
 
 var router = express.Router();
-
-const hostSpring = 'http://localhost:8082'
 
 /**
  * @openapi
@@ -27,7 +26,7 @@ router.get('/getCompetitionById', (req, res) => {
         res.sendStatus(403);
         return;
     }
-    axios.get(hostSpring + '/competition/' + req.query.competitionId).then(response => {
+    axios.get(config.hostSpring + '/competition/' + req.query.competitionId).then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);
@@ -48,7 +47,7 @@ router.get('/getCompetitionById', (req, res) => {
  *         description: OK
  */
 router.get('/getAllCompetition', (req, res) => {
-    axios.get(hostSpring + '/competition/all').then(response => {
+    axios.get(config.hostSpring + '/competition/all').then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);
@@ -87,7 +86,7 @@ router.get('/getCompetitionStats', (req, res) => {
         return;
     }
 
-    axios.get(hostSpring + '/club/competition/' + req.query.competitionId + '/' + req.query.season)
+    axios.get(config.hostSpring + '/club/competition/' + req.query.competitionId + '/' + req.query.season)
         .then(response => {
             res.json(response.data);
         }).catch(err => {
@@ -135,7 +134,7 @@ router.get('/getCompetitionGameHistory', (req, res) => {
         return;
     }
 
-    axios.get(hostSpring + '/game/competition/' + req.query.competitionId + '/' + req.query.season, {
+    axios.get(config.hostSpring + '/game/competition/' + req.query.competitionId + '/' + req.query.season, {
         params: {
             take: req.query.take,
             offset: req.query.offset
