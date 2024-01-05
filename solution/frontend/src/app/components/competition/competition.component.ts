@@ -21,7 +21,6 @@ export class CompetitionComponent implements OnInit {
 
   competitionId: string;
   competition: CompetitionDto;
-  seasons: number[];
   choosedSeason = new FormControl<number>(0);
   ChatRoomType = ChatRoomType;
 
@@ -37,15 +36,12 @@ export class CompetitionComponent implements OnInit {
       this.competitionId = params['id'];
       this.loaderService.show();
       this.competitionService.getCompetitionById(this.competitionId)
-        .then(competition => this.competition = competition)
+        .then(competition => {
+          this.competition = competition;
+          this.choosedSeason.patchValue(this.competition.seasons[0]);
+        })
         .finally(() => this.loaderService.hide());
     });
-
-    this.loaderService.show();
-    this.competitionService.getAllSeason().then(res => {
-      this.seasons = res.data;
-      this.choosedSeason.patchValue(this.seasons[0]);
-    }).finally(() => this.loaderService.hide());
 
     this.choosedSeason.valueChanges.subscribe(season => {
       this.competitionService.competitionSeasonSubject.next(Number(season));

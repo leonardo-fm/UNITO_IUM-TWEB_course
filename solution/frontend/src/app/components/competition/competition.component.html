@@ -11,7 +11,7 @@
                 {{ languageService.selectedLanguage['country_name_'+competition.countryId] }}
             </span>
             <select class="form-select" name="season" id="season" [formControl]="choosedSeason">
-                @for(season of seasons; track season; let first = $first){
+                @for(season of competition.seasons; track season; let first = $first){
                 <option [value]="season">{{season}}</option>
                 }
             </select>

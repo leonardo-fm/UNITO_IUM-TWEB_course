@@ -36,8 +36,4 @@ export class CompetitionService {
   getAllCompetitions() {
     return axios.get<CompetitionDto[]>(environment.apiUrl + '/getAllCompetition').then(res => res.data);
   }
-
-  getAllSeason(){
-    return axios.get<number[]>('assets/data/seasons.json');
-  }
 }
