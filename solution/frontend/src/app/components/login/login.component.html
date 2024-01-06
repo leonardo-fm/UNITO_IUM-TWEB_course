@@ -1,0 +1,12 @@
+<form class="d-flex flex-column form-container col-12 col-sm-12 col-md-10 col-lg-6 p-3" [formGroup]="loginForm" (submit)="onSubmit()">
+    <label class="form-label mt-3" for="username">{{ languageService.selectedLanguage['login_username'] }}</label>
+    <input class="form-control" id="username" type="text" formControlName="username">
+
+    <label class="form-label mt-3" for="password">{{ languageService.selectedLanguage['login_password'] }}</label>
+    <input class="form-control" id="password" type="password" formControlName="password">
+
+    <div class="d-flex justify-content-between mt-3">
+        <a [routerLink]="['/register']">{{ languageService.selectedLanguage['login_register_link'] }}</a>
+        <button type="submit" class="btn btn-primary">{{ languageService.selectedLanguage['login_button'] }}</button>
+    </div>
+</form>

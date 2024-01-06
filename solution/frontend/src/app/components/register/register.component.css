@@ -1,0 +1,8 @@
+.form-container {
+    background-color: var(--white);
+    border-radius: 8px;
+}
+
+form .ng-invalid.ng-touched {
+    border-color: var(--error);
+}

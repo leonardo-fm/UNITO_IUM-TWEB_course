@@ -10,6 +10,7 @@
     --win: green;
     --draw: lightgrey;
     --lose: red;
+    --error: red;
 }
 
 body {
