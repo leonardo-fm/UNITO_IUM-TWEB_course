@@ -1,5 +1,6 @@
 .navbar {
     background-color: var(--primary);
+    color: var(--white);
 }
 
 .search-form {
@@ -15,4 +16,8 @@
 
 .search-form>input {
     padding-left: 48px;
+}
+
+.lang-selected {
+    font-weight: bold;
 }

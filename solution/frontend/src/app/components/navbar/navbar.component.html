@@ -4,13 +4,18 @@
             <img class="m-auto" width="96" height="96" src="assets/icons/monitoring.svg" alt="Logo">
         </a>
         <form class="d-flex search-form" role="search" (submit)="onSubmit()">
-            <input class="form-control" type="search" [placeholder]="languageService.selectedLanguage['navbar_search_placeholder']" aria-label="Search">
+            <input class="form-control" type="search"
+                [placeholder]="languageService.selectedLanguage['navbar_search_placeholder']" aria-label="Search">
             <button class="d-flex btn" type="submit">
                 <img src="assets/icons/search.svg" alt="Search button">
             </button>
         </form>
-        <button class="d-flex btn">
-            <img width="64" height="64" src="assets/icons/account_circle.svg" alt="Profile button">
-        </button>
+        <div class="d-flex align-items-center gap-2">
+            <button class="d-flex btn">
+                <img width="64" height="64" src="assets/icons/account_circle.svg" alt="Profile button">
+            </button>
+            <span class="cursor-pointer" (click)="onLanguageChange('it')" [class.lang-selected]="languageService.activeLanguage == 'it'">IT</span> / 
+            <span class="cursor-pointer" (click)="onLanguageChange('en')" [class.lang-selected]="languageService.activeLanguage == 'en'">EN</span>
+        </div>
     </div>
 </nav>
