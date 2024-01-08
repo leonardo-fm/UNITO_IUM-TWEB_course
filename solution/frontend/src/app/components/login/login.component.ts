@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { UserDto } from '../../models/user.dto.model';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +16,13 @@ import { LanguageService } from '../../services/language.service';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    username: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
   constructor(
+    private authenticationService: AuthenticationService,
+    private loaderService: LoaderService,
     public languageService: LanguageService
   ) { }
 
@@ -26,6 +31,11 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-    console.log(this.loginForm.getRawValue());
+
+    let user: UserDto = this.loginForm.getRawValue();
+    this.loaderService.show();
+    this.authenticationService.login(user).catch(err => {
+      alert(this.languageService.selectedLanguage['login_error_not_valid'])
+    }).finally(() => this.loaderService.hide());
   }
 }
