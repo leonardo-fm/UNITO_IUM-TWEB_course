@@ -17,12 +17,15 @@ const gameRouter = require('./src/routes/game');
 const playerRouter = require('./src/routes/player');
 const clubRouter = require('./src/routes/club');
 const chatRouter = require('./src/routes/chat');
+const authenticationRouter = require('./src/routes/authentication');
+const utilsRouter = require('./src/routes/utils');
 
 app.use('/', competitionRouter);
 app.use('/', gameRouter);
 app.use('/', playerRouter);
 app.use('/', clubRouter);
 app.use('/', chatRouter);
+app.use('/', authenticationRouter);
 
 // Hosting static browser files
 app.use('/browser', express.static(__dirname + '/static/browser'));
