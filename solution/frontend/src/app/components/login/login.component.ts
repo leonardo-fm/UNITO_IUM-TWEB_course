@@ -34,8 +34,10 @@ export class LoginComponent {
 
     let user: UserDto = this.loginForm.getRawValue();
     this.loaderService.show();
-    this.authenticationService.login(user).catch(err => {
-      alert(this.languageService.selectedLanguage['login_error_not_valid'])
+    this.authenticationService.login(user).then(res => {
+      if (!res) alert(this.languageService.selectedLanguage['login_error_not_valid']);
+    }).catch(err => {
+      alert(this.languageService.selectedLanguage['login_error'])
     }).finally(() => this.loaderService.hide());
   }
 }

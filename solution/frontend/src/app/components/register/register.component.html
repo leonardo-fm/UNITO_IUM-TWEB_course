@@ -1,12 +1,17 @@
-<form class="d-flex flex-column form-container col-12 col-sm-12 col-md-10 col-lg-6 p-3" [formGroup]="loginForm" (submit)="onSubmit()">
+<form class="d-flex flex-column form-container col-12 col-sm-12 col-md-10 col-lg-6 p-3" [formGroup]="loginForm"
+    (submit)="onSubmit()">
     <label class="form-label mt-3" for="username">{{ languageService.selectedLanguage['register_username'] }}</label>
     <input class="form-control" id="username" type="text" formControlName="username">
 
     <label class="form-label mt-3" for="password">{{ languageService.selectedLanguage['register_password'] }}</label>
     <input class="form-control" id="password" type="password" formControlName="password">
 
-    <label class="form-label mt-3" for="password-confirm">{{ languageService.selectedLanguage['register_password_confirm'] }}</label>
+    <label class="form-label mt-3" for="password-confirm">{{
+        languageService.selectedLanguage['register_password_confirm'] }}</label>
     <input class="form-control" id="password-confirm" type="password" formControlName="passwordConfirm">
 
-    <button type="submit" class="btn btn-primary ms-auto mt-3">{{ languageService.selectedLanguage['register_button'] }}</button>
+    <div class="d-flex justify-content-between mt-3">
+        <a [routerLink]="['/login']">{{ languageService.selectedLanguage['register_already_registered'] }}</a>
+        <button type="submit" class="btn btn-primary ms-auto">{{ languageService.selectedLanguage['register_button'] }}</button>
+    </div>
 </form>
