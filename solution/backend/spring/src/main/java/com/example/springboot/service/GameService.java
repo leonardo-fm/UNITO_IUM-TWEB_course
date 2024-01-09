@@ -5,6 +5,7 @@ import com.example.springboot.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,8 +22,8 @@ public class GameService {
         return gameRepository.getGame(gameId);
     }
 
-    public List<Game> getGames(int take, int offset) {
-        return gameRepository.getGames(take, offset);
+    public List<Game> getGames(LocalDate date, int take, int offset) {
+        return gameRepository.getGames(date, take, offset);
     }
 
     public List<Game> getCompetitionGames(int take, int offset, String competitionId, int season) {
