@@ -7,6 +7,6 @@
     font-weight: bold;
 }
 
-.value-label:hover {
+.search-value-container:hover {
     background-color: var(--white-shade);
 }
