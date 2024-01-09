@@ -13,21 +13,21 @@ public interface SearchRepository extends JpaRepository<Search, String> {
             "CO.competition_id id, " +
             "CO.name, " +
             "1 myorder, " +
-            "NULL imageUrl " +
+            "NULL imageurl " +
             "FROM competition AS CO " +
             "union " +
             "SELECT 'club' entity, " +
             "CAST(C.club_id AS character varying) id, " +
             "C.name, " +
             "2 myorder, " +
-            "NULL imageUrl " +
+            "NULL imageurl " +
             "FROM club AS C " +
             "UNION " +
             "SELECT 'player' entity, " +
             "CAST(P.player_id AS character varying) id, " +
             "P.name, " +
             "3 myorder, " +
-            "P.image_url imageUrl " +
+            "P.image_url imageurl " +
             "FROM player AS P " +
             ") AS X " +
             "WHERE LOWER(X.name) LIKE CONCAT('%',LOWER(:src),'%') " +
