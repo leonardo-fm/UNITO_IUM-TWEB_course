@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
 import { UserDto } from '../../models/user.dto.model';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -24,6 +24,7 @@ export class RegisterComponent {
   constructor(
     private authenticationService: AuthenticationService,
     private loaderService: LoaderService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -37,10 +38,14 @@ export class RegisterComponent {
       return;
     }
 
-    let user: UserDto = this.loginForm.getRawValue();
+    let user: any = this.loginForm.getRawValue();
     this.loaderService.show();
     this.authenticationService.register(user).then(res => {
-      if (res) alert(this.languageService.selectedLanguage['register_error_duplicate']);
+      if (!res) {
+        alert(this.languageService.selectedLanguage['register_error_duplicate']);
+        return;
+      }
+      this.router.navigate(['/login']);
     }).catch(err => {
       alert(this.languageService.selectedLanguage['register_error']);
     }).finally(() => this.loaderService.hide());

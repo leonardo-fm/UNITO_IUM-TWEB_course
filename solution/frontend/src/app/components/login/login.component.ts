@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserDto } from '../../models/user.dto.model';
@@ -23,6 +23,7 @@ export class LoginComponent {
   constructor(
     private authenticationService: AuthenticationService,
     private loaderService: LoaderService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -32,10 +33,14 @@ export class LoginComponent {
       return;
     }
 
-    let user: UserDto = this.loginForm.getRawValue();
+    let user: any = this.loginForm.getRawValue();
     this.loaderService.show();
     this.authenticationService.login(user).then(res => {
-      if (!res) alert(this.languageService.selectedLanguage['login_error_not_valid']);
+      if (!res) {
+        alert(this.languageService.selectedLanguage['login_error_not_valid']);
+        return;
+      }
+      this.router.navigate(['']);
     }).catch(err => {
       alert(this.languageService.selectedLanguage['login_error'])
     }).finally(() => this.loaderService.hide());

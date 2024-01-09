@@ -23,8 +23,6 @@ export class AuthenticationService {
 
   register(user: UserDto){
     return axios.post<boolean>(environment.apiUrl + '/register', user).then(res => {
-      if (res.data)
-        this.loggedUserSubject.next(user);
       return res.data;
     });
   }

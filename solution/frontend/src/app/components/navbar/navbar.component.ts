@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LanguageService } from '../../services/language.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { UtilsService } from '../../services/utils.service';
+import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../../services/authentication.service';
+import { UserDto } from '../../models/user.dto.model';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +15,24 @@ import { UtilsService } from '../../services/utils.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   search = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+  loggedUser: UserDto;
+  loggedUserSubscription: Subscription;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private authenticationService: AuthenticationService,
     public languageService: LanguageService
   ) { }
 
   ngOnInit(): void {
+    this.loggedUserSubscription = this.authenticationService.loggedUserSubject.subscribe(user => {
+      this.loggedUser = user;
+    });
+
     this.activatedRoute.queryParams.subscribe(params => {
       if (params['search'])
         this.search.patchValue(params['search']);
@@ -45,5 +55,9 @@ export class NavbarComponent implements OnInit {
 
   onLanguageChange(language: string) {
     this.languageService.selectLanguage(language);
+  }
+
+  ngOnDestroy(): void {
+      if (this.loggedUserSubscription) this.loggedUserSubscription.unsubscribe();
   }
 }
