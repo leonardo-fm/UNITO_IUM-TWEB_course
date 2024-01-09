@@ -16,11 +16,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public boolean login(UserDto userDto) {
+    public UserDto login(UserDto userDto) {
         User user = userRepository.getUser(userDto.getUsername());
-        if (user == null) return false;
+        if (user == null) return null;
         String passwordHash = Integer.toString(userDto.getPassword().hashCode());
-        return user.getPassword().equals(passwordHash);
+        if (!user.getPassword().equals(passwordHash)) return null;
+        return new UserDto(userRepository.getUser(userDto.getUsername()));
     }
 
     public boolean register(UserDto userDto) {

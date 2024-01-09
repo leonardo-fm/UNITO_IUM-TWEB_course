@@ -22,7 +22,7 @@ public class UserController {
 
     @PostMapping("/login")
     @Operation(summary = "User login", description = "Return a boolean indicate if the login has been successful")
-    public boolean Login(@RequestBody UserDto userDto) {
+    public UserDto Login(@RequestBody UserDto userDto) {
         return userService.login(userDto);
     }
 

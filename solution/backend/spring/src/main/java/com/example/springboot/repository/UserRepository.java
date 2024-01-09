@@ -1,14 +1,10 @@
 package com.example.springboot.repository;
 
-import com.example.springboot.entity.Player;
 import com.example.springboot.entity.User;
 import jakarta.transaction.Transactional;
-import org.hibernate.annotations.SQLInsert;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
