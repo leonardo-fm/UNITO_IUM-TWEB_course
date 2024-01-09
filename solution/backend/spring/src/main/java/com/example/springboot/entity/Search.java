@@ -19,7 +19,7 @@ public class Search {
     @Column(name = "entity")
     private String entity;
 
-    @Column(name = "image_url")
+    @Column(name = "imageurl")
     private String imageUrl;
 
     public Search() { }
