@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.search.valueChanges.subscribe(val => {
       if (val.length >= 3)
         this.onSearch();
-      else if (val.length == 0)
+      else if (val.length == 0 && this.router.url.indexOf('/search') > -1)
         this.router.navigate(['']);
     })
   }
