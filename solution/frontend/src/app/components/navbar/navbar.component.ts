@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LanguageService } from '../../services/language.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { UtilsService } from '../../services/utils.service';
 
@@ -12,14 +12,23 @@ import { UtilsService } from '../../services/utils.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   search = new FormControl('', { nonNullable: true, validators: [Validators.required] });
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     public languageService: LanguageService
   ) { }
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.search.patchValue('');
+      if (params['search'])
+        this.search.patchValue(params['search']);
+    })
+  }
 
   onSearch() {
     if (this.search.valid)
