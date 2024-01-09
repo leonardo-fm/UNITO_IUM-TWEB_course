@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { CompetitionDto, CompetitionStatsDto } from '../models/competition.dto.model';
 import { environment } from '../../environments/environment';
 import { GameDto } from '../models/game.dto.model';
@@ -9,8 +9,9 @@ import { GameDto } from '../models/game.dto.model';
   providedIn: 'root'
 })
 export class CompetitionService {
-  public gameHistorySubject = new ReplaySubject<GameDto[]>(1);
   public competitionSeasonSubject = new ReplaySubject<number>(1);
+  public gameHistorySubject = new ReplaySubject<GameDto[]>(1);
+  public gameHistoryScroll = new Subject();
 
   constructor() { }
 

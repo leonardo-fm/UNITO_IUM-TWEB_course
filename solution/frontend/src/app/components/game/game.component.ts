@@ -5,6 +5,7 @@ import { GameLineupComponent } from './game-lineup/game-lineup.component';
 import { GameEventComponent } from './game-event/game-event.component';
 import { LoaderService } from '../../services/loader.service';
 import { GameDto } from '../../models/game.dto.model';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-game',
@@ -20,7 +21,8 @@ export class GameComponent implements OnInit{
   constructor(
     private activatedRoute: ActivatedRoute,
     private loaderService: LoaderService,
-    private gameService: GameService
+    private gameService: GameService,
+    public languageService: LanguageService
   ) { }
 
   ngOnInit(): void {

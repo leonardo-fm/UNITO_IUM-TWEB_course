@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatRoomType } from '../../models/chat.dto.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClubDto } from '../../models/club.dto.model';
 import { CompetitionDto } from '../../models/competition.dto.model';
 import { PlayerDto } from '../../models/player.dto.model';
@@ -14,7 +14,7 @@ import { MessagingComponent } from './messaging/messaging.component';
 @Component({
   selector: 'app-chat-room',
   standalone: true,
-  imports: [MessagingComponent],
+  imports: [MessagingComponent, RouterLink],
   host: { class: 'container d-flex flex-column h-100 w-100 gap-3 py-4' },
   templateUrl: './chat-room.component.html',
   styleUrl: './chat-room.component.css'

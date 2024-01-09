@@ -10,7 +10,7 @@ export class PlayerDetailDto {
     id: number;
     fullName: string;
     clubId: number;
-    clubName: string;
+    clubName: string | null;
     countryName: string;
     dateOfBirth: Date;
     position: string;

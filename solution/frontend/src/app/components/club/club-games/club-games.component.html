@@ -1,9 +1,9 @@
 @for (gameGroup of groupedGames; track gameGroup){
 <div class="d-flex competition-group align-items-center">
-    <img class="object-fit" width="48" height="48"
+    <img class="object-fit cursor-pointer" width="48" height="48"
         [src]="'https://tmssl.akamaized.net/images/logo/header/'+ gameGroup[0].competitionId.toLowerCase()+'.png'"
-        alt="">
-    <span>{{ gameGroup[0].competitionName }}</span>
+        [routerLink]="['/competition', gameGroup[0].competitionId]">
+    <span class="cursor-pointer" [routerLink]="['/competition', gameGroup[0].competitionId]">{{ gameGroup[0].competitionName }}</span>
 </div>
 @for (game of gameGroup; track game.gameId){
 <div class="d-flex game-container align-items-center" [routerLink]="['/game', game.gameId]">
@@ -11,15 +11,13 @@
     <div class="d-flex flex-column game-club-container gap-1 m-2 px-2">
         <div class="d-flex gap-2">
             <img width="24" height="24"
-                [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'"
-                [alt]="'Emblem '+game.homeClubName">
-            <span [class.winner-label]="game.homeClubScore > game.awayClubScore">{{ game.homeClubName }}</span>
+                [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
+            <span [class.winner-label]="game.homeClubScore > game.awayClubScore">{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
         </div>
         <div class="d-flex gap-2">
             <img width="24" height="24"
-                [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'"
-                [alt]="'Emblem '+game.awayClubName">
-            <span [class.winner-label]="game.awayClubScore > game.homeClubScore">{{ game.awayClubName }}</span>
+                [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
+            <span [class.winner-label]="game.awayClubScore > game.homeClubScore">{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
         </div>
     </div>
     <div class="d-flex flex-column score-container gap-1 ms-auto my-2 px-2">

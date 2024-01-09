@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { PlayerDto, PlayerDetailDto } from '../models/player.dto.model';
 import { environment } from '../../environments/environment';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
+  
+  public gameHistoryScroll = new Subject();
 
   constructor() { }
 

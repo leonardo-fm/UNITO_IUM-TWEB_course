@@ -19,9 +19,12 @@ import { GameService } from '../../../services/game.service';
 export class GameHistoryComponent implements OnInit, OnDestroy {
 
   games: GameDto[];
+  competitionId: string;
+  season: number;
   moment = moment;
 
   seasonSubscription: Subscription;
+  scrollSubscription: Subscription;
 
   constructor(
     public languageService: LanguageService,
@@ -33,18 +36,28 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      let competitionId = params['id'];
+      this.competitionId = params['id'];
       if (this.seasonSubscription) this.seasonSubscription.unsubscribe();
       this.seasonSubscription = this.competitionService.competitionSeasonSubject.subscribe(season => {
+        this.season = season;
         this.loaderService.show();
-        this.gameService.getCompetitionGameHistory(competitionId, season)
+        this.gameService.getCompetitionGameHistory(this.competitionId, season)
           .then(games => this.games = games)
           .finally(() => this.loaderService.hide());
       })
-    })
+    });
+
+    this.scrollSubscription = this.competitionService.gameHistoryScroll.subscribe(() => {
+      this.loaderService.show();
+        this.gameService.getCompetitionGameHistory(this.competitionId, this.season, this.games.length)
+          .then(games => this.games = this.games.concat(games))
+          .finally(() => this.loaderService.hide());
+      console.log('Load more');
+    });
   }
 
   ngOnDestroy(): void {
     if (this.seasonSubscription) this.seasonSubscription.unsubscribe();
+    if (this.scrollSubscription) this.scrollSubscription.unsubscribe();
   }
 }
