@@ -9,22 +9,25 @@ import java.util.List;
 public interface SearchRepository extends JpaRepository<Search, String> {
 
     @Query(value = "SELECT * FROM ( " +
-            "SELECT 'club' entity, " +
-            "CAST(C.club_id AS character varying) id, " +
-            "C.name, " +
-            "2 myorder " +
-            "FROM club AS C " +
-            "UNION " +
             "SELECT 'competition' entity, " +
             "CO.competition_id id, " +
             "CO.name, " +
-            "1 myorder " +
+            "1 myorder, " +
+            "NULL imageUrl " +
             "FROM competition AS CO " +
             "union " +
+            "SELECT 'club' entity, " +
+            "CAST(C.club_id AS character varying) id, " +
+            "C.name, " +
+            "2 myorder, " +
+            "NULL imageUrl " +
+            "FROM club AS C " +
+            "UNION " +
             "SELECT 'player' entity, " +
             "CAST(P.player_id AS character varying) id, " +
             "P.name, " +
-            "3 myorder " +
+            "3 myorder, " +
+            "P.image_url imageUrl " +
             "FROM player AS P " +
             ") AS X " +
             "WHERE LOWER(X.name) LIKE CONCAT('%',LOWER(:src),'%') " +

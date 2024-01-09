@@ -7,11 +7,13 @@ public class SearchDto {
     private String id;
     private String name;
     private String entity;
+    private String imageUrl;
 
     public SearchDto(Search search) {
         id = search.getId();
         name = search.getName();
         entity = search.getEntity();
+        imageUrl = search.getImageUrl();
     }
 
     public String getId() {
@@ -36,5 +38,13 @@ public class SearchDto {
 
     public void setEntity(String entity) {
         this.entity = entity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

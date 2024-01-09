@@ -19,12 +19,16 @@ public class Search {
     @Column(name = "entity")
     private String entity;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     public Search() { }
 
-    public Search(String id, String name, String entity) {
+    public Search(String id, String name, String entity, String imageUrl) {
         this.id = id;
         this.name = name;
         this.entity = entity;
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {
@@ -49,5 +53,13 @@ public class Search {
 
     public void setEntity(String entity) {
         this.entity = entity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
