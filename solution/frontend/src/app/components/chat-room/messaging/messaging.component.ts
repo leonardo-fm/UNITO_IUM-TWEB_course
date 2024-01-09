@@ -5,6 +5,7 @@ import moment from 'moment';
 import { ChatService } from '../../../services/chat.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-messaging',
@@ -28,25 +29,29 @@ export class MessagingComponent implements OnInit, OnDestroy {
 
   messageSubscription: Subscription;
   roomSizeSubscription: Subscription;
+  loggedUserSubscription: Subscription;
 
   moment = moment;
 
   constructor(
     private chatService: ChatService,
+    private authenticationService: AuthenticationService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.roomType = params['room'];
-      this.roomId = params['id'];
-
-      this.accountId = moment().unix().toString();
-      this.accontName = 'Guest_' + this.accountId;
-      this.chatService.getMessages(this.roomType, this.roomId).then(messages => {
-        this.chat = messages;
-      })
-      this.chatService.connectChat(this.roomType, this.roomId);
+    this.loggedUserSubscription = this.authenticationService.loggedUserSubject.subscribe(user => {
+      this.activatedRoute.params.subscribe(params => {
+        this.roomType = params['room'];
+        this.roomId = params['id'];
+  
+        this.accountId = user?.id ?? moment().unix().toString();
+        this.accontName = user?.username ?? 'Guest_' + this.accountId;
+        this.chatService.getMessages(this.roomType, this.roomId).then(messages => {
+          this.chat = messages.reverse();
+        })
+        this.chatService.connectChat(this.roomType, this.roomId);
+      });
     });
 
     this.roomSizeSubscription = this.chatService.roomSizeSubject.subscribe(size => this.roomSize = size);
@@ -73,6 +78,8 @@ export class MessagingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.messageSubscription) this.messageSubscription.unsubscribe();
+    if (this.roomSizeSubscription) this.roomSizeSubscription.unsubscribe();
+    if (this.loggedUserSubscription) this.loggedUserSubscription.unsubscribe();
     this.chatService.disconnectChat();
   }
 
