@@ -4,10 +4,10 @@ export class GameDto {
     competitionId: string;
     competitionName: string;
     homeClubId: number;
-    homeClubName: string;
+    homeClubName: string | null;
     homeClubScore: number;
     awayClubId: number;
-    awayClubName: string;
+    awayClubName: string | null;
     awayClubScore: number;
     date: string;
 

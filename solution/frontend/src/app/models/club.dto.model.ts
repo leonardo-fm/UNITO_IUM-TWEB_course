@@ -1,5 +1,5 @@
 export class ClubDto {
     clubId: number;
-    clubName: string;
+    clubName: string | null;
     countryId: number;
 }

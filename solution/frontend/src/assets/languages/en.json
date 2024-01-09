@@ -54,6 +54,7 @@
     "club_games_win": "W",
     "club_games_draw": "D",
     "club_games_lose": "L",
+    "club_unknown": "Unknown",
     "player_contract_expiration": "Contract until",
     "player_nationality": "NATIONALITY",
     "player_years": "yrs",

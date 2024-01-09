@@ -2,16 +2,16 @@
 <div class="d-flex score-container justify-content-evenly p-3">
     <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.homeClubId]">
         <img width="72" height="72"
-            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'" alt="">
-        <span class="text-center">{{ game.homeClubName }}</span>
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
+        <span class="text-center">{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
     </div>
     <div class="d-flex flex-column justify-content-center">
         <span class="score-label">{{game.homeClubScore}} - {{game.awayClubScore}}</span>
     </div>
     <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.awayClubId]">
         <img width="72" height="72"
-            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'" alt="">
-        <span class="text-center">{{ game.awayClubName }}</span>
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
+        <span class="text-center">{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
     </div>
 </div>
 

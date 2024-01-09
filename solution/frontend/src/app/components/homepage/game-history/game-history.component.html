@@ -14,12 +14,12 @@
         @for(game of competition.games; track game.gameId){
         <div class="d-flex flex-column game-container gap-1 my-2 px-2" [routerLink]="['/game', game.gameId]">
             <div class="d-flex gap-2">
-                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'" [alt]="'Emblem '+game.homeClubName">
-                <span>{{ game.homeClubName }}</span>
+                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
+                <span>{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
             </div>
             <div class="d-flex gap-2">
-                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'" [alt]="'Emblem '+game.awayClubName">
-                <span>{{ game.awayClubName }}</span>
+                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
+                <span>{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
             </div>
         </div>
         }

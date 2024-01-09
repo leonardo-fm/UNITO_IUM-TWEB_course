@@ -3,7 +3,7 @@
     <img width="72" height="72" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+club.clubId+'.png'"
         alt="">
     <div class="d-flex flex-column justify-content-center gap-1">
-        <span>{{club.clubName}}</span>
+        <span>{{club.clubName ?? this.languageService.selectedLanguage['club_unknown']}}</span>
         <div class="d-flex gap-2">
             <img width="24" height="24" [src]="'assets/icons/flags/'+club.countryId+'.webp'"
                 [alt]="'Flag ' + club.countryId">

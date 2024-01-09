@@ -7,7 +7,7 @@ export class CompetitionDto {
 
 export class CompetitionStatsDto {
     clubId: number;
-    clubName: string;
+    clubName: string | null;
     wins: number;
     draws: number;
     loses: number;

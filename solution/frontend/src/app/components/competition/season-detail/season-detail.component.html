@@ -17,8 +17,8 @@
         <tr [routerLink]="['/club', clubStatistic.clubId]">
             <td>{{ index + 1 }}</td>
             <td>
-                <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.clubId+'.png'" [alt]="'Emblem '+clubStatistic.clubName">
-                {{ clubStatistic.clubName }}
+                <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.clubId+'.png'">
+                {{ clubStatistic.clubName ?? this.languageService.selectedLanguage['club_unknown'] }}
             </td>
             <td>{{ clubStatistic.wins + clubStatistic.draws + clubStatistic.loses }}</td>
             <td>{{ clubStatistic.wins }}</td>
