@@ -7,11 +7,12 @@ import { ClubPlayersComponent } from './club-players/club-players.component';
 import { ClubGamesComponent } from './club-games/club-games.component';
 import { ClubDto } from '../../models/club.dto.model';
 import { ChatRoomType } from '../../models/chat.dto.model';
+import { ScrollDirective } from '../../directives/scroll.directive';
 
 @Component({
   selector: 'app-club',
   standalone: true,
-  imports: [ClubPlayersComponent, ClubGamesComponent, RouterLink],
+  imports: [ClubPlayersComponent, ClubGamesComponent, RouterLink, ScrollDirective],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './club.component.html',
   styleUrl: './club.component.css'
@@ -34,5 +35,9 @@ export class ClubComponent implements OnInit {
       this.loaderService.show();
       this.clubService.getClubById(clubId).then(club => {this.club = club; console.log(this.club)}).finally(() => this.loaderService.hide());
     });
+  }
+
+  onScrollBottom(){
+    this.clubService.gameHistoryScroll.next(null);
   }
 }

@@ -45,7 +45,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
           this.gameHistory = this.groupGameData(this.games);
         })
         .finally(() => this.loaderService.hide());
-      console.log('SCROLL IN');
+      console.log('Load more');
     });
   }
 

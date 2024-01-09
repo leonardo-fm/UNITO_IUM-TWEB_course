@@ -8,11 +8,12 @@ import { LoaderService } from '../../services/loader.service';
 import { CompetitionDto } from '../../models/competition.dto.model';
 import { LanguageService } from '../../services/language.service';
 import { ChatRoomType } from '../../models/chat.dto.model';
+import { ScrollDirective } from '../../directives/scroll.directive';
 
 @Component({
   selector: 'app-competition',
   standalone: true,
-  imports: [GameHistoryComponent, SeasonDetailComponent, ReactiveFormsModule, RouterLink],
+  imports: [GameHistoryComponent, SeasonDetailComponent, ReactiveFormsModule, RouterLink, ScrollDirective],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto py-4' },
   templateUrl: './competition.component.html',
   styleUrl: './competition.component.css'
@@ -46,5 +47,9 @@ export class CompetitionComponent implements OnInit {
     this.choosedSeason.valueChanges.subscribe(season => {
       this.competitionService.competitionSeasonSubject.next(Number(season));
     });
+  }
+
+  onScrollBottom(){
+    this.competitionService.gameHistoryScroll.next(null);
   }
 }

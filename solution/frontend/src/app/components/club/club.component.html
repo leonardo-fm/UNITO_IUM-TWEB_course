@@ -13,7 +13,7 @@
     <img class="ms-auto mt-auto cursor-pointer" width="48" height="48" src="assets/icons/chat_white.svg" alt="" [routerLink]="['/chat', ChatRoomType.Club, club.clubId]">
 </div>
 
-<div class="d-flex w-100">
+<div class="d-flex w-100" (scrollBottom)="onScrollBottom()">
     <div class="d-flex flex-column players-container p-3 me-3 w-25">
         <app-club-players></app-club-players>
     </div>

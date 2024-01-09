@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from '../../../services/game.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
 import { GameDto } from '../../../models/game.dto.model';
+import { Subscription } from 'rxjs';
+import { ClubService } from '../../../services/club.service';
 
 @Component({
   selector: 'app-club-games',
@@ -14,15 +16,19 @@ import { GameDto } from '../../../models/game.dto.model';
   templateUrl: './club-games.component.html',
   styleUrl: './club-games.component.css'
 })
-export class ClubGamesComponent implements OnInit {
+export class ClubGamesComponent implements OnInit, OnDestroy {
   clubId: number;
+  games: GameDto[];
   groupedGames: GameDto[][];
   moment = moment;
+
+  scrollSubscription: Subscription;
 
   constructor(
     public languageService: LanguageService,
     private activatedRoute: ActivatedRoute,
     private gameService: GameService,
+    private clubService: ClubService,
     private loaderService: LoaderService
   ) { }
 
@@ -31,9 +37,21 @@ export class ClubGamesComponent implements OnInit {
       this.clubId = params['id'];
       this.loaderService.show();
       this.gameService.getClubGameHistory(this.clubId, 2023).then(games => {
+        this.games = games;
         this.groupedGames = this.gameService.groupConsequentCompetitionGame(games);
       }).finally(() => this.loaderService.hide());
-    })
+    });
+
+    this.scrollSubscription = this.clubService.gameHistoryScroll.subscribe(() => {
+      this.loaderService.show();
+      this.gameService.getClubGameHistory(this.clubId, 2023, this.games.length)
+        .then(games =>  {
+          this.games = this.games.concat(games);
+          this.groupedGames = this.gameService.groupConsequentCompetitionGame(this.games);
+        })
+        .finally(() => this.loaderService.hide());
+      console.log('Load more');
+    });
   }
 
   winDrawLose(game: GameDto){
@@ -48,5 +66,9 @@ export class ClubGamesComponent implements OnInit {
     else if (res < 0)
       return 'lose';
     else return 'draw';
+  }
+
+  ngOnDestroy(): void {
+      if (this.scrollSubscription) this.scrollSubscription.unsubscribe();
   }
 }
