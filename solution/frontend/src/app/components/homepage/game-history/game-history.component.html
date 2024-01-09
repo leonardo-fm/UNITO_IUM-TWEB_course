@@ -2,27 +2,41 @@
 <div class="d-flex flex-column date-group-container">
     @for(competition of dayCompetitions.competitions; track competition.competitionId){
     <div class="d-flex flex-column competition-container">
-        <div class="d-flex">
-            <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competition.games[0].countryId+'.webp'"
+        <div class="d-flex align-items-center">
+            <img class="mx-2" width="24" height="24"
+                [src]="'assets/icons/flags/'+competition.games[0].countryId+'.webp'"
                 [alt]="'Flag ' + languageService.selectedLanguage['country_name_'+competition.games[0].countryId]">
             <div class="d-flex flex-column">
-                <span class="competition-country-label">{{ languageService.selectedLanguage['country_name_'+competition.games[0].countryId] }} {{
+                <span class="competition-country-label">{{
+                    languageService.selectedLanguage['country_name_'+competition.games[0].countryId] }} {{
                     moment(dayCompetitions.date).format(languageService.selectedLanguage['date_format']) }}</span>
                 <span>{{ competition.games[0].competitionName }}</span>
             </div>
+            <button class="btn ms-auto" (click)="groupExpand.classList.toggle('expand-close')">
+                @if (groupExpand.classList.contains('expand-close')){
+                <img width="24" height="24" src="assets/icons/expand_more.svg">
+                }
+                @else {
+                <img width="24" height="24" src="assets/icons/expand_less.svg">
+                }
+            </button>
         </div>
-        @for(game of competition.games; track game.gameId){
-        <div class="d-flex flex-column game-container gap-1 my-2 px-2" [routerLink]="['/game', game.gameId]">
-            <div class="d-flex gap-2">
-                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
-                <span>{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+        <div #groupExpand class="d-flex flex-column game-group-container">
+            @for(game of competition.games; track game.gameId){
+            <div class="d-flex flex-column game-container gap-1 my-2 px-2" [routerLink]="['/game', game.gameId]">
+                <div class="d-flex gap-2">
+                    <img width="24" height="24"
+                        [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
+                    <span>{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <img width="24" height="24"
+                        [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
+                    <span>{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+                </div>
             </div>
-            <div class="d-flex gap-2">
-                <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
-                <span>{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
-            </div>
+            }
         </div>
-        }
     </div>
     }
 </div>

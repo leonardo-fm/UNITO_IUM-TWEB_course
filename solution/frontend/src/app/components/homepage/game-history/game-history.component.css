@@ -11,3 +11,11 @@
 .game-container:hover {
     background-color: var(--white-shade);
 }
+
+.game-group-container {
+    overflow: hidden;
+}
+
+.expand-close {
+    max-height: 0;
+}
