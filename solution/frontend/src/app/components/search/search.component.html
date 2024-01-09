@@ -1,0 +1,13 @@
+<div class="d-flex flex-column search-container gap-3 p-3">
+    @if (searchResults && searchResults.length == 0) {
+    <span class="m-auto">{{ languageService.selectedLanguage['search_no_found'] }}</span>
+    }
+    @for (searchRes of groupedSearch; track searchRes){
+    <div class="d-flex flex-column mb-1">
+        <h4 class="title-label">{{ languageService.selectedLanguage['search_' + searchRes[0].entity] }}</h4>
+        @for (search of searchRes; track search.id) {
+        <h5 class="value-label cursor-pointer" [routerLink]="['/', search.entity, search.id]">{{ search.name }}</h5>
+        }
+    </div>
+    }
+</div>

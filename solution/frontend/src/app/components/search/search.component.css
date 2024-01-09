@@ -1,0 +1,12 @@
+.search-container {
+    border-radius: 8px;
+    background-color: var(--white);
+}
+
+.title-label {
+    font-weight: bold;
+}
+
+.value-label:hover {
+    background-color: var(--white-shade);
+}

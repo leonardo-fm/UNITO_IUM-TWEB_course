@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LanguageService } from '../../services/language.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,13 +13,20 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
+  search = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+
   constructor(
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
-  onSubmit(){}
+  onSearch() {
+    if (this.search.valid)
+      this.router.navigate(['/search'], { queryParams: { search: this.search.getRawValue() } });
+  }
 
-  onLanguageChange(language: string){
+  onLanguageChange(language: string) {
     this.languageService.selectLanguage(language);
   }
 }

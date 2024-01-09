@@ -5,7 +5,8 @@ const config = require('../config');
 var router = express.Router();
 
 router.post('/login', (req, res) => {
-    if (!req.body.username || !req.body.password) {
+    console.log(req.body)
+    if (!req.body?.username || !req.body?.password) {
         res.sendStatus(400);
         return;
     }

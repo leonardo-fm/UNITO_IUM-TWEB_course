@@ -4,7 +4,7 @@ const config = require('../config');
 
 var router = express.Router();
 
-router.get('siteSearch', (req, res) => {
+router.get('/siteSearch', (req, res) => {
     if (!req.query.src || !req.query.take) {
         res.sendStatus(400);
         return;

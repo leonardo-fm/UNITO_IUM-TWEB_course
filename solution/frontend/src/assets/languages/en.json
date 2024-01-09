@@ -2,6 +2,10 @@
     "date_format": "L",
     "date_lan": "en",
 
+    "search_no_found": "Nothing found",
+    "search_club": "CLUB",
+    "search_competition": "COMPETITION",
+    "search_player": "PLAYER",
     "login_username": "Username: ",
     "login_password": "Password: ",
     "login_register_link": "Not have an account? Register here",

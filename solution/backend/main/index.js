@@ -4,8 +4,9 @@ const http = require('http');
 const { swaggerDocs } = require('./src/swagger');
 const config = require('./src/config');
 
-const app = express()
+const app = express();
 app.set('port', config.port);
+app.use(express.json());
 var server = http.createServer(app);
 
 app.use(cors({
@@ -26,6 +27,7 @@ app.use('/', playerRouter);
 app.use('/', clubRouter);
 app.use('/', chatRouter);
 app.use('/', authenticationRouter);
+app.use('/', utilsRouter);
 
 // Hosting static browser files
 app.use('/browser', express.static(__dirname + '/static/browser'));
