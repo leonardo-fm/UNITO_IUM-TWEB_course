@@ -1,6 +1,8 @@
 package com.example.springboot.service;
 
+import com.example.springboot.dto.PlayerDto;
 import com.example.springboot.entity.Competition;
+import com.example.springboot.entity.Player;
 import com.example.springboot.repository.CompetitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +20,25 @@ public class CompetitionService {
     }
 
     public Competition getCompetition(String competitionId) {
-        return competitionRepository.findCompetitionById(competitionId);
+        Competition competition = competitionRepository.findCompetitionById(competitionId);
+        cleanCompetitionName(competition);
+        return competition;
     }
 
     public List<Competition> getAllCompetitions() {
-        return competitionRepository.getAllCompetitions();
+        List<Competition> competitions = competitionRepository.getAllCompetitions();
+        for (Competition competition : competitions) cleanCompetitionName(competition);
+        return competitions;
     }
 
     public List<Integer> getCompetitionSeasons(String competitionId) {
         return competitionRepository.getCompetitionSeasons(competitionId);
+    }
+
+    private void cleanCompetitionName(Competition competition) {
+        String comName = competition.getName();
+        comName = comName.replace('-', ' ');
+        comName = comName.substring(0, 1).toUpperCase() + comName.substring(1);
+        competition.setName(comName);
     }
 }

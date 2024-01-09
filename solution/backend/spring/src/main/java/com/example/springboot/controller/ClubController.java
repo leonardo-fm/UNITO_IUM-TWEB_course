@@ -57,7 +57,6 @@ public class ClubController {
                     .filter(x -> x.getHomeClubId().longValue() == club.getId().longValue() || x.getAwayClubId().longValue() == club.getId().longValue())
                             .toList();
 
-            // TODO check
             int wins = 0, draws = 0, loses = 0, scoredGoals = 0, takenGoals = 0;
             for (Game game : playedGames) {
                 if (game.getHomeClubGoals() > game.getAwayClubGoals()) {
@@ -94,7 +93,8 @@ public class ClubController {
                 }
             }
 
-            response.add(new ClubCompetitionSeasonDto(club, wins, draws, loses, scoredGoals, takenGoals));
+            if (wins + loses + draws != 0)
+                response.add(new ClubCompetitionSeasonDto(club, wins, draws, loses, scoredGoals, takenGoals));
         }
         return response;
     }
