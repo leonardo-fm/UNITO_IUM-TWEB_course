@@ -1,9 +1,9 @@
 @for (gameGroup of groupedGames; track gameGroup){
 <div class="d-flex competition-group align-items-center">
-    <img class="object-fit" width="48" height="48"
+    <img class="object-fit cursor-pointer" width="48" height="48"
         [src]="'https://tmssl.akamaized.net/images/logo/header/'+ gameGroup[0].competitionId.toLowerCase()+'.png'"
-        alt="">
-    <span>{{ gameGroup[0].competitionName }}</span>
+        [routerLink]="['/competition', gameGroup[0].competitionId]">
+    <span class="cursor-pointer" [routerLink]="['/competition', gameGroup[0].competitionId]">{{ gameGroup[0].competitionName }}</span>
 </div>
 @for (game of gameGroup; track game.gameId){
 <div class="d-flex game-container align-items-center" [routerLink]="['/game', game.gameId]">

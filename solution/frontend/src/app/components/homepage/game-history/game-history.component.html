@@ -10,7 +10,7 @@
                 <span class="competition-country-label">{{
                     languageService.selectedLanguage['country_name_'+competition.games[0].countryId] }} {{
                     moment(dayCompetitions.date).format(languageService.selectedLanguage['date_format']) }}</span>
-                <span>{{ competition.games[0].competitionName }}</span>
+                <span class="cursor-pointer" [routerLink]="['/competition', competition.games[0].competitionId]">{{ competition.games[0].competitionName }}</span>
             </div>
             <button class="btn ms-auto" (click)="groupExpand.classList.toggle('expand-close')">
                 @if (groupExpand.classList.contains('expand-close')){
