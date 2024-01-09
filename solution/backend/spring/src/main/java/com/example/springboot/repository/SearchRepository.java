@@ -28,7 +28,7 @@ public interface SearchRepository extends JpaRepository<Search, String> {
             "FROM player AS P " +
             ") AS X " +
             "WHERE LOWER(X.name) LIKE CONCAT('%',LOWER(:src),'%') " +
-            "ORDER BY X.myorder " +
+            "ORDER BY X.myorder, X.name " +
             "LIMIT :take", nativeQuery = true)
     List<Search> search(String src, int take);
 }

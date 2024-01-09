@@ -10,7 +10,7 @@ export class UtilsService {
 
   constructor() { }
 
-  siteSearch(search: string, take: number = 10) {
+  siteSearch(search: string, take: number = 25) {
     return axios.get<SearchDto[]>(environment.apiUrl + '/siteSearch', { params: { src: search, take: take } }).then(res => {
       return res.data;
     });

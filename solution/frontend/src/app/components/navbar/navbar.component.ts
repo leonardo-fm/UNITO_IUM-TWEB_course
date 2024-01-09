@@ -24,9 +24,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.search.patchValue('');
       if (params['search'])
         this.search.patchValue(params['search']);
+      else
+        this.search.patchValue('');
+    });
+
+    this.search.valueChanges.subscribe(val => {
+      if (val.length >= 3)
+        this.onSearch();
+      else if (val.length == 0)
+        this.router.navigate(['']);
     })
   }
 
