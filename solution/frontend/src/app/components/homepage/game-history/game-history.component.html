@@ -11,7 +11,8 @@
                 <span class="competition-country-label">{{
                     languageService.selectedLanguage['country_name_'+competition.games[0].countryId] }} {{
                     moment(dayCompetitions.date).format(languageService.selectedLanguage['date_format']) }}</span>
-                <span class="cursor-pointer" [routerLink]="['/competition', competition.games[0].competitionId]">{{ competition.games[0].competitionName }}</span>
+                <span class="cursor-pointer" [routerLink]="['/competition', competition.games[0].competitionId]">{{
+                    competition.games[0].competitionName }}</span>
             </div>
             <button class="btn ms-auto" (click)="groupExpand.classList.toggle('expand-close')">
                 @if (groupExpand.classList.contains('expand-close')){
@@ -41,4 +42,8 @@
     </div>
     }
 </div>
+}
+@if (games && games.length > 0){
+<button class="btn btn-load-more mx-auto mt-3" (click)="loadMore()">{{
+    languageService.selectedLanguage['homepage_game_history_load_more'] }}</button>
 }

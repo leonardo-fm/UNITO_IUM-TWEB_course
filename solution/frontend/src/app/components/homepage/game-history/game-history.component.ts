@@ -13,6 +13,7 @@ import { DateInputComponent } from '../../shared/date-input/date-input.component
   selector: 'app-game-history',
   standalone: true,
   imports: [RouterLink, DateInputComponent],
+  host: { class: 'd-flex flex-column' },
   templateUrl: './game-history.component.html',
   styleUrl: './game-history.component.css'
 })
@@ -40,18 +41,22 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
     })
 
     this.scrollSubscription = this.gameService.gameHistoryScroll.subscribe(() => {
-      this.loaderService.show();
-      this.gameService.getGameHistory(this.dateInput.value, this.games?.length)
-        .then(games => {
-          this.games = this.games.concat(games);
-          this.gameHistory = this.groupGameData(this.games);
-        })
-        .finally(() => this.loaderService.hide());
-      console.log('Load more');
+      this.loadMore();
     });
   }
 
-  searchGames(date: Date, offset?: number, take?: number){
+  loadMore(){
+    this.loaderService.show();
+    this.gameService.getGameHistory(this.dateInput.value, this.games?.length)
+      .then(games => {
+        this.games = this.games.concat(games);
+        this.gameHistory = this.groupGameData(this.games);
+      })
+      .finally(() => this.loaderService.hide());
+    console.log('Load more');
+  }
+
+  searchGames(date: Date, offset?: number, take?: number) {
     this.loaderService.show();
     this.gameService.getGameHistory(date, offset, take)
       .then(games => {

@@ -19,3 +19,8 @@
 .expand-close {
     max-height: 0;
 }
+
+.btn-load-more {
+    background-color: var(--primary);
+    color: var(--white);
+}
