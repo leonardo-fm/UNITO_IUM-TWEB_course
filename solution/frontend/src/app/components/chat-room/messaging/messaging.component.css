@@ -20,3 +20,8 @@
     font-size: small;
     color: var(--text-secondary);
 }
+
+:host ::ng-deep .users-icon {
+    width: 32px;
+    height: 32px;
+}

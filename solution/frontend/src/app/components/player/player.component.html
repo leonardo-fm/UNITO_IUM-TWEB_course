@@ -2,7 +2,7 @@
 <div class="d-flex player-container align-items-center p-3 gap-3">
     <img width="72" height="72" [src]="player.imageUrl" alt="">
     <span>{{player.fullName}}</span>
-    <img class="ms-auto mt-auto cursor-pointer" width="48" height="48" src="assets/icons/chat_white.svg" [routerLink]="['/chat', ChatRoomType.Player, player.id]">
+    <img class="ms-auto mt-auto cursor-pointer" width="48" height="48" src="assets/icons/chat.svg" [routerLink]="['/chat', ChatRoomType.Player, player.id]">
 </div>
 
 <div class="d-flex flex-column player-detail-container p-3">

@@ -15,6 +15,8 @@
     </div>
 </div>
 
-{{roomSize}}
-
-<input type="text" class="form-control" [(ngModel)]="message" (keydown.enter)="onMessageSend()">
+<div class="d-flex align-items-center">
+    <input type="text" class="form-control me-3" [(ngModel)]="message" (keydown.enter)="onMessageSend()">
+    <div class="users-icon" svg="user_amount_chat"></div>
+    <span>{{roomSize}}</span>
+</div>
