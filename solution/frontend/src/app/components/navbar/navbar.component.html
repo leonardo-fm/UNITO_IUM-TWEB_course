@@ -16,9 +16,13 @@
             <span>{{ languageService.selectedLanguage['navbar_hello'] }} {{ loggedUser.username }}</span>
             }
             <button class="d-flex btn" [routerLink]="['/login']">
-                <img width="64" height="64" src="assets/icons/account_circle.svg" alt="Profile button">
+                <div class="icon-account" svg="account_circle"></div>
+                <!-- <img width="64" height="64" src="assets/icons/account_circle.svg" alt="Profile button"> -->
             </button>
 
+            <button class="d-flex justify-content-center btn" (click)="onThemeChange()">
+                <div class="icon-theme" [svg]="themeSvg"></div>
+            </button>
 
             <span class="cursor-pointer" (click)="onLanguageChange('it')"
                 [class.lang-selected]="languageService.activeLanguage == 'it'">IT</span> /

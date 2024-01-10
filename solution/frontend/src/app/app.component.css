@@ -1,0 +1,36 @@
+.main-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--background);
+}
+
+.light-theme {
+    --background: #ebebeb;
+    --primary: #682d63;
+    --secondary: #616a93;
+    --white: #ffffff;
+    --white-shade: #f5f6fa;
+    --text-primary: #000000;
+    --text-secondary: #b9b9b9;
+    --win: green;
+    --draw: lightgrey;
+    --lose: red;
+    --error: red;
+}
+
+.dark-theme {
+    --background: #1a1a1a;
+    --primary: #682d63;
+    --secondary: #616a93;
+    --white: #2c2c2c;
+    --white-shade: #383838;
+    --text-primary: #ffffff;
+    --text-secondary: #b9b9b9;
+    --win: green;
+    --draw: lightgrey;
+    --lose: red;
+    --error: red;
+}

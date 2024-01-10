@@ -3,15 +3,16 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LanguageService } from '../../services/language.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { UtilsService } from '../../services/utils.service';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserDto } from '../../models/user.dto.model';
+import { SvgDirective } from '../../directives/svg.directive';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, NgbDropdownModule],
+  imports: [ReactiveFormsModule, RouterLink, NgbDropdownModule, SvgDirective],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,11 +21,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
   search = new FormControl('', { nonNullable: true, validators: [Validators.required] });
   loggedUser: UserDto;
   loggedUserSubscription: Subscription;
+  themeMode: string = 'light';
+  themeSvg: string = 'dark_mode';
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService,
+    private utilsService: UtilsService,
     public languageService: LanguageService
   ) { }
 
@@ -46,7 +50,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.onSearch();
       else if (val.length == 0 && this.router.url.indexOf('/search') > -1)
         this.router.navigate(['']);
-    })
+    });
+
+    let theme = localStorage.getItem('theme');
+    if (theme && theme == 'dark') {
+      this.themeMode = 'dark';
+      this.themeSvg = 'light_mode';
+    }
   }
 
   onSearch() {
@@ -58,7 +68,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.languageService.selectLanguage(language);
   }
 
+  onThemeChange() {
+    switch (this.themeMode) {
+      case 'light':
+        this.themeMode = 'dark';
+        this.themeSvg = 'light_mode';
+        break;
+      case 'dark':
+        this.themeMode = 'light';
+        this.themeSvg = 'dark_mode';
+        break;
+    }
+    this.utilsService.themeSubject.next(this.themeMode);
+  }
+
   ngOnDestroy(): void {
-      if (this.loggedUserSubscription) this.loggedUserSubscription.unsubscribe();
+    if (this.loggedUserSubscription) this.loggedUserSubscription.unsubscribe();
   }
 }

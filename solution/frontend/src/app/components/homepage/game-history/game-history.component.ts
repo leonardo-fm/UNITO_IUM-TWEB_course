@@ -39,7 +39,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
 
     this.scrollSubscription = this.gameService.gameHistoryScroll.subscribe(() => {
       this.loaderService.show();
-      this.gameService.getGameHistory(this.games.length)
+      this.gameService.getGameHistory(this.games?.length)
         .then(games =>  {
           this.games = this.games.concat(games);
           this.gameHistory = this.groupGameData(this.games);

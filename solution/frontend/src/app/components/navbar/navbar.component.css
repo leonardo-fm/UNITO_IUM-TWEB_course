@@ -21,3 +21,21 @@
 .lang-selected {
     font-weight: bold;
 }
+
+:host ::ng-deep .icon-account {
+    width: 64px;
+    height: 64px;
+}
+
+:host ::ng-deep .icon-account > circle, :host ::ng-deep .icon-account > path {
+    stroke: var(--white);
+}
+
+:host ::ng-deep .icon-theme {
+    width: 24px;
+    height: 24px;
+}
+
+:host ::ng-deep .icon-theme > path {
+    fill: var(--white);
+}

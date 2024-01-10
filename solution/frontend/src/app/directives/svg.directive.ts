@@ -1,8 +1,9 @@
-import { Directive, ElementRef, Input } from "@angular/core";
+import { Directive, ElementRef, Input, SimpleChanges } from "@angular/core";
 import axios from "axios";
 
 @Directive({
-    selector: '[svg]'
+    selector: '[svg]',
+    standalone: true
 })
 export class SvgDirective {
 
@@ -13,14 +14,17 @@ export class SvgDirective {
         private el: ElementRef<HTMLElement>
     ) { }
 
-    ngAfterViewInit() {
-        axios.get<string>(`assets/${this.svgFolder}/${this.svgName}.svg`).then(x => {
-            let svg = document.createElement("svg");
-            svg.innerHTML = x.data;
-            let classes: any = this.el.nativeElement.classList;
-            let classList = [...classes];
-            svg.firstElementChild?.classList.add(...classList);
-            this.el.nativeElement.replaceWith(svg.childNodes[0])
-        });
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['svgName']) {
+            axios.get<string>(`assets/${this.svgFolder}/${this.svgName}.svg`).then(x => {
+                let parent = this.el.nativeElement;
+                parent.innerHTML = x.data;
+                let svg = parent.getElementsByTagName('svg')[0];
+                let classes: any = parent.classList;
+                let classList = [...classes];
+                svg.classList.add(...classList);
+                console.log('SVG');
+            });
+        }
     }
 }
