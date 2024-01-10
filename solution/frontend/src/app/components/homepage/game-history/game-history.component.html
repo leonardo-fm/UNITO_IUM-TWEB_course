@@ -1,3 +1,4 @@
+<app-date-input [dateInput]="dateInput.value" (dateChange)="onDateFromChange($event)"></app-date-input>
 @for (dayCompetitions of gameHistory; track dayCompetitions.date){
 <div class="d-flex flex-column date-group-container">
     @for(competition of dayCompetitions.competitions; track competition.competitionId){

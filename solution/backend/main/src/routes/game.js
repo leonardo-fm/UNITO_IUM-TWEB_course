@@ -83,9 +83,13 @@ router.get('/getGameDetail', (req, res) => {
  *        in: query
  *        description: The ammount of games id to take
  *        required: true
- *      - name: skip
+ *      - name: offset
  *        in: query
  *        description: The ammount of games id to skip
+ *        required: true
+ *      - name: date
+ *        in: query
+ *        description: The date from when get data
  *        required: true
  *     description: Return the games list
  *     responses:
@@ -93,7 +97,7 @@ router.get('/getGameDetail', (req, res) => {
  *         description: OK
  */
 router.get('/getGameHistory', (req, res) => {
-    if (!req.query.take || !req.query.offset) {
+    if (!req.query.take || !req.query.offset || !req.query.date) {
         res.sendStatus(403);
         return;
     }

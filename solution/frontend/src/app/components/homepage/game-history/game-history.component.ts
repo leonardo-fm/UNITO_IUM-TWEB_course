@@ -6,21 +6,25 @@ import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { GameDto } from '../../../models/game.dto.model';
 import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { DateInputComponent } from '../../shared/date-input/date-input.component';
 
 @Component({
   selector: 'app-game-history',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DateInputComponent],
   templateUrl: './game-history.component.html',
   styleUrl: './game-history.component.css'
 })
 export class GameHistoryComponent implements OnInit, OnDestroy {
 
-  public scrollSubscription: Subscription;
+  scrollSubscription: Subscription;
 
-  public gameHistory: GroupGameByDate[];
-  public games: GameDto[];
-  public moment = moment;
+  gameHistory: GroupGameByDate[];
+  games: GameDto[];
+  moment = moment;
+
+  dateInput = new FormControl(new Date(), { nonNullable: true });
 
   constructor(
     private gameService: GameService,
@@ -29,18 +33,16 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.loaderService.show();
-    this.gameService.getGameHistory()
-      .then(games => {
-        this.games = games;
-        this.gameHistory = this.groupGameData(this.games);
-      })
-      .finally(() => this.loaderService.hide());
+    this.searchGames(this.dateInput.value);
+
+    this.dateInput.valueChanges.subscribe(date => {
+      this.searchGames(date);
+    })
 
     this.scrollSubscription = this.gameService.gameHistoryScroll.subscribe(() => {
       this.loaderService.show();
-      this.gameService.getGameHistory(this.games?.length)
-        .then(games =>  {
+      this.gameService.getGameHistory(this.dateInput.value, this.games?.length)
+        .then(games => {
           this.games = this.games.concat(games);
           this.gameHistory = this.groupGameData(this.games);
         })
@@ -49,30 +51,44 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  searchGames(date: Date, offset?: number, take?: number){
+    this.loaderService.show();
+    this.gameService.getGameHistory(date, offset, take)
+      .then(games => {
+        this.games = games;
+        this.gameHistory = this.groupGameData(this.games);
+      })
+      .finally(() => this.loaderService.hide());
+  }
+
+  onDateFromChange(date: Date) {
+    this.dateInput.patchValue(date);
+  }
+
   ngOnDestroy(): void {
-      if (this.scrollSubscription) this.scrollSubscription.unsubscribe();
+    if (this.scrollSubscription) this.scrollSubscription.unsubscribe();
   }
 
   groupGameData(games: GameDto[]) {
-      let groupByDate: any = {};
-      games.forEach(game => (groupByDate[game.date] = groupByDate[game.date] || []).push(game));
+    let groupByDate: any = {};
+    games.forEach(game => (groupByDate[game.date] = groupByDate[game.date] || []).push(game));
 
-      let historyGame: GroupGameByDate[] = [];
-      for (let [key, historyGames] of Object.entries(groupByDate)) {
-        let groupByLeagues: any = {};
-        (<GameDto[]>historyGames).forEach(game => (groupByLeagues[game.competitionId] = groupByLeagues[game.competitionId] || []).push(game));
+    let historyGame: GroupGameByDate[] = [];
+    for (let [key, historyGames] of Object.entries(groupByDate)) {
+      let groupByLeagues: any = {};
+      (<GameDto[]>historyGames).forEach(game => (groupByLeagues[game.competitionId] = groupByLeagues[game.competitionId] || []).push(game));
 
-        let competitionGames: GroupGameByCompetition[] = [];
-        for (let [competitionId, games] of Object.entries(groupByLeagues))
-          competitionGames.push({
-            competitionId: competitionId,
-            games: <GameDto[]>games
-          });
-        historyGame.push({ date: key, competitions: competitionGames });
-      }
+      let competitionGames: GroupGameByCompetition[] = [];
+      for (let [competitionId, games] of Object.entries(groupByLeagues))
+        competitionGames.push({
+          competitionId: competitionId,
+          games: <GameDto[]>games
+        });
+      historyGame.push({ date: key, competitions: competitionGames });
+    }
 
-      historyGame.sort((x, y) => x.date >= y.date ? -1 : 1);
-      return historyGame;
+    historyGame.sort((x, y) => x.date >= y.date ? -1 : 1);
+    return historyGame;
   }
 }
 

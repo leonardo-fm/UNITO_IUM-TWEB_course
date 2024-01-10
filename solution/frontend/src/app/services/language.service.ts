@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/min/locales';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import 'moment/min/locales';
 export class LanguageService {
   public selectedLanguage: any = {};
   public activeLanguage: string;
+  public languageSubject = new Subject<string>();
 
   constructor() { }
 
@@ -18,6 +20,7 @@ export class LanguageService {
       this.activeLanguage = language;
       localStorage.setItem('language', language);
       moment.locale(this.selectedLanguage['date_lan']);
+      this.languageSubject.next(language);
       console.info(`Loaded language: ${this.activeLanguage}`);
     })
   }

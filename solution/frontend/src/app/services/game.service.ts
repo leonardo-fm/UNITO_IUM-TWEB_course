@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ReplaySubject, Subject } from 'rxjs';
 import { GameDto, GameEventModel, GameLineupModel } from '../models/game.dto.model';
 import { environment } from '../../environments/environment';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +20,18 @@ export class GameService {
     });
   }
 
-  getGameDetails(gameId: number){
-    return axios.get<{events: GameEventModel[], lineups: GameLineupModel[]}>(environment.apiUrl + '/getGameDetail', { params: { gameId: gameId } }).then(res => {
+  getGameDetails(gameId: number) {
+    return axios.get<{ events: GameEventModel[], lineups: GameLineupModel[] }>(environment.apiUrl + '/getGameDetail', { params: { gameId: gameId } }).then(res => {
       return res.data;
     })
   }
 
-  getGameHistory(offset: number = 0, take: number = 25) {
+  getGameHistory(date: Date, offset: number = 0, take: number = 25) {
     return axios.get<GameDto[]>(environment.apiUrl + '/getGameHistory', {
       params: {
         take: take,
-        offset: offset
+        offset: offset,
+        date: moment(date).format('DD-MM-yyyy')
       }
     }).then(res => res.data);
   }
@@ -57,12 +59,12 @@ export class GameService {
   }
 
   getPlayerGameHistory(playerId: number, offset: number = 0, take: number = 25) {
-    return axios.get<GameDto[]>(environment.apiUrl + '/getPlayerGameHistory', { 
-      params: { 
+    return axios.get<GameDto[]>(environment.apiUrl + '/getPlayerGameHistory', {
+      params: {
         playerId: playerId,
         take: take,
         offset: offset
-      } 
+      }
     }).then(res => {
       res.data.sort((x, y) => x.date >= y.date ? -1 : 1);
       return res.data;

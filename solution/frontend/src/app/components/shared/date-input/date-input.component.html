@@ -1,0 +1,5 @@
+<span class="d-flex align-items-center datepicker-toggle">
+    <input class="form-control datepicker-text" type="text" [value]="dateText" readonly>
+    <div class="datepicker-toggle-button" svg="fi-rr-calendar"></div>
+    <input type="date" class="datepicker-input" (change)="onDateChange($event.target)">
+</span>
