@@ -22,6 +22,7 @@
     "register_error_duplicate": "Username already registered",
     "navbar_search_placeholder": "Search",
     "navbar_hello": "Hello",
+    "navbar_logout": "Logout",
     "homepage_all_leagues": "All leagues",
     "homepage_leagues_search_placeholder": "Filter",
     "competition_season_detail_position": "#",

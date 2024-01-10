@@ -14,6 +14,9 @@
         <div class="d-flex align-items-center gap-2">
             @if (loggedUser){
             <span>{{ languageService.selectedLanguage['navbar_hello'] }} {{ loggedUser.username }}</span>
+            <button class="btn" (click)="onLogout()">
+                <a>{{ languageService.selectedLanguage['navbar_logout'] }}</a>
+            </button>
             }
             <button class="d-flex btn" [routerLink]="['/login']">
                 <div class="icon-account" svg="account_circle"></div>

@@ -19,7 +19,7 @@ import { UtilsService } from '../../services/utils.service';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   search = new FormControl('', { nonNullable: true, validators: [Validators.required] });
-  loggedUser: UserDto;
+  loggedUser: UserDto | null;
   loggedUserSubscription: Subscription;
   themeMode: string = 'light';
   themeSvg: string = 'dark_mode';
@@ -34,8 +34,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loggedUserSubscription = this.authenticationService.loggedUserSubject.subscribe(user => {
-      if (user)
-        this.loggedUser = user;
+      this.loggedUser = user;
     });
 
     this.activatedRoute.queryParams.subscribe(params => {
@@ -80,6 +79,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
         break;
     }
     this.utilsService.themeSubject.next(this.themeMode);
+  }
+
+  onLogout(){
+    this.authenticationService.logout();
   }
 
   ngOnDestroy(): void {
