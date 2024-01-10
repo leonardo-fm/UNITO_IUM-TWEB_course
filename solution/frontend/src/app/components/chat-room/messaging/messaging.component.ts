@@ -7,11 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { SvgDirective } from '../../../directives/svg.directive';
+import { ScrollDirective } from '../../../directives/scroll.directive';
+import { LoaderService } from '../../../services/loader.service';
 
 @Component({
   selector: 'app-messaging',
   standalone: true,
-  imports: [FormsModule, SvgDirective],
+  imports: [FormsModule, SvgDirective, ScrollDirective],
   host: { class: 'd-flex flex-column h-100 w-100 gap-3' },
   templateUrl: './messaging.component.html',
   styleUrl: './messaging.component.css'
@@ -37,6 +39,7 @@ export class MessagingComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
     private authenticationService: AuthenticationService,
+    private loaderService: LoaderService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -48,10 +51,11 @@ export class MessagingComponent implements OnInit, OnDestroy {
 
         this.accountId = user?.id ?? moment().unix().toString();
         this.accontName = user?.username ?? 'Guest_' + this.accountId;
+        this.loaderService.show();
         this.chatService.getMessages(this.roomType, this.roomId).then(messages => {
           this.chat = messages.reverse();
           this.scrollBottom();
-        })
+        }).finally(() => this.loaderService.hide())
         this.chatService.connectChat(this.roomType, this.roomId);
       });
     });

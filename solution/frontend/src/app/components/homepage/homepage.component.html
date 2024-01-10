@@ -2,6 +2,6 @@
     <app-country-leagues></app-country-leagues>
 </div>
 
-<div class="matches-container p-3 w-75" (scrollBottom)="onScrollBottom()">
+<div class="matches-container p-3 w-75" scrollDirective (scrollBottomParent)="onScrollBottom()">
     <app-game-history></app-game-history>
 </div>
