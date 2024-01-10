@@ -28,7 +28,7 @@ export class ChatService {
     });
   }
 
-  getMessages(roomType: ChatRoomType, roomId: string, offset: number = 0, take: number = 25) {
+  getMessages(roomType: ChatRoomType, roomId: string, offset: number = 0, take: number = 100) {
     return axios.get<MessageDto[]>(environment.apiUrl + '/getChatMessages', {
       params: { 
         chatId: roomType + roomId,
