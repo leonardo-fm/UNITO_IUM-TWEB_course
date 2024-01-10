@@ -7,12 +7,13 @@ import com.example.springboot.service.CompetitionService;
 import com.example.springboot.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @RestController
 @RequestMapping("/game")
@@ -39,9 +40,11 @@ public class GameController {
     }
 
     @GetMapping()
-    @Operation(summary = "Return a list of the last games", description = "Given a take x and an offset y, return the list of games by date")
-    public List<GameDto> GetGames(@RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
-        List<Game> games = gameService.getGames(take, offset);
+    @Operation(summary = "Return a list of the last games", description = "Given a date gg-MM-yyyy and a take x and an offset y, return the list of games by date")
+    public List<GameDto> GetGames(@RequestParam(name = "date") String date, @RequestParam(name = "take") int take, @RequestParam(name = "offset") int offset) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        List<Game> games = gameService.getGames(localDate, take, offset);
         List<GameDto> response = new ArrayList<>();
         for (Game game : games) response.add(new GameDto(game, Competitions.get(game.getCompetitionId())));
         return response;
