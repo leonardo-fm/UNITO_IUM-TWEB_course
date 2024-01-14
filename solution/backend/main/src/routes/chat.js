@@ -42,6 +42,7 @@ router.get('/getChatMessages', (req, res) => {
         }
     }).then(response => {
         let messages = response.data.messages || [];
+        messages.reverse();
         if (config.chats[req.query.chatId])
             messages.push(...config.chats[req.query.chatId]);
         res.json(messages);
