@@ -8,11 +8,12 @@ import { GameDto } from '../../../models/game.dto.model';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { DateInputComponent } from '../../shared/date-input/date-input.component';
+import { SvgDirective } from '../../../directives/svg.directive';
 
 @Component({
   selector: 'app-game-history',
   standalone: true,
-  imports: [RouterLink, DateInputComponent],
+  imports: [RouterLink, DateInputComponent, SvgDirective],
   host: { class: 'd-flex flex-column' },
   templateUrl: './game-history.component.html',
   styleUrl: './game-history.component.css'

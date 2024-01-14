@@ -8,11 +8,12 @@ import { ClubGamesComponent } from './club-games/club-games.component';
 import { ClubDto } from '../../models/club.dto.model';
 import { ChatRoomType } from '../../models/chat.dto.model';
 import { ScrollDirective } from '../../directives/scroll.directive';
+import { SvgDirective } from '../../directives/svg.directive';
 
 @Component({
   selector: 'app-club',
   standalone: true,
-  imports: [ClubPlayersComponent, ClubGamesComponent, RouterLink, ScrollDirective],
+  imports: [ClubPlayersComponent, ClubGamesComponent, RouterLink, ScrollDirective, SvgDirective],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './club.component.html',
   styleUrl: './club.component.css'

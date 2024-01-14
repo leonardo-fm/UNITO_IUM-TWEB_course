@@ -3,13 +3,25 @@
 }
 
 .game-container {
-    margin-left: 48px;
-    border-left: 1px solid var(--text-secondary);
     cursor: pointer;
+    color: var(--text-secondary);
+    border-radius: 8px;
+}
+
+.separator {
+    margin-left: 48px;
 }
 
 .game-container:hover {
     background-color: var(--white-shade);
+}
+
+.game-single-container {
+    border-left: 1px solid var(--text-secondary);
+}
+
+.winner-label {
+    color: var(--text-primary);
 }
 
 .game-group-container {
@@ -23,4 +35,8 @@
 .btn-load-more {
     background-color: var(--primary);
     color: var(--white);
+}
+
+:host ::ng-deep .expand-icon>path {
+    fill: var(--text-primary);
 }

@@ -1,6 +1,6 @@
 .navbar {
     background-color: var(--primary);
-    color: var(--white);
+    color: var(--text-white);
 }
 
 .search-form {
@@ -16,6 +16,17 @@
 
 .search-form>input {
     padding-left: 48px;
+    background-color: var(--white-shade);
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--text-secondary);
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder, /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--text-secondary);
 }
 
 .lang-selected {
@@ -28,7 +39,7 @@
 }
 
 :host ::ng-deep .icon-account > circle, :host ::ng-deep .icon-account > path {
-    stroke: var(--white);
+    stroke: var(--text-white);
 }
 
 :host ::ng-deep .icon-theme {
@@ -37,5 +48,9 @@
 }
 
 :host ::ng-deep .icon-theme > path {
-    fill: var(--white);
+    fill: var(--text-white);
+}
+
+:host ::ng-deep .search-icon > path {
+    fill: var(--text-primary);
 }

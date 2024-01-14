@@ -3,7 +3,7 @@
     <input class="form-control" type="search"
         [placeholder]="languageService.selectedLanguage['homepage_leagues_search_placeholder']" aria-label="Search leagues" [(ngModel)]="filter" (ngModelChange)="onFilterLeagues()">
     <button class="d-flex btn">
-        <img src="assets/icons/search.svg" alt="Search button">
+        <div class="d-flex search-icon" svg="search"></div>
     </button>
 </div>
 @for (competitionCountry of competitionsByCountry; track competitionCountry) {
@@ -11,10 +11,10 @@
         <img class="mx-2" width="24" height="24" [src]="'assets/icons/flags/'+competitionCountry[0].countryId+'.webp'" [alt]="'Flag ' + competitionCountry[0].countryName">
         <span>{{ languageService.selectedLanguage['country_name_'+competitionCountry[0].countryId] }}</span>
         @if (leagueExpand.classList.contains('expand-open')){
-            <img class="ms-auto" width="24" height="24" src="assets/icons/expand_less.svg" alt="">
+            <div class="d-flex ms-auto expand-icon" svg="expand_less"></div>
         }
         @else {
-            <img class="ms-auto" width="24" height="24" src="assets/icons/expand_more.svg" alt="">
+            <div class="d-flex ms-auto expand-icon" svg="expand_more"></div>
         }
     </div>
     <div #leagueExpand class="d-flex flex-column expand-container ps-3">

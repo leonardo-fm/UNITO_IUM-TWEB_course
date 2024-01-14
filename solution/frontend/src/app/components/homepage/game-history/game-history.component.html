@@ -16,25 +16,34 @@
             </div>
             <button class="btn ms-auto" (click)="groupExpand.classList.toggle('expand-close')">
                 @if (groupExpand.classList.contains('expand-close')){
-                <img width="24" height="24" src="assets/icons/expand_more.svg">
+                <div class="d-flex ms-auto expand-icon" svg="expand_more"></div>
                 }
                 @else {
-                <img width="24" height="24" src="assets/icons/expand_less.svg">
+                <div class="d-flex ms-auto expand-icon" svg="expand_less"></div>
                 }
             </button>
         </div>
         <div #groupExpand class="d-flex flex-column game-group-container">
             @for(game of competition.games; track game.gameId){
-            <div class="d-flex flex-column game-container gap-1 my-2 px-2" [routerLink]="['/game', game.gameId]">
-                <div class="d-flex gap-2">
-                    <img width="24" height="24"
-                        [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
-                    <span>{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+            <div class="d-flex game-container align-items-center gap-1" [routerLink]="['/game', game.gameId]">
+                <div class="separator"></div>
+                <div class="d-flex flex-column game-single-container gap-1 m-2 px-2">
+                    <div class="d-flex gap-2">
+                        <img width="24" height="24"
+                            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
+                        <span
+                            [class.winner-label]="game.homeClubScore > game.awayClubScore">{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <img width="24" height="24"
+                            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
+                        <span
+                            [class.winner-label]="game.awayClubScore > game.homeClubScore">{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+                    </div>
                 </div>
-                <div class="d-flex gap-2">
-                    <img width="24" height="24"
-                        [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
-                    <span>{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+                <div class="d-flex flex-column gap-1 ms-auto my-2 px-2">
+                    <span [class.winner-label]="game.homeClubScore > game.awayClubScore">{{ game.homeClubScore }}</span>
+                    <span [class.winner-label]="game.awayClubScore > game.homeClubScore">{{ game.awayClubScore }}</span>
                 </div>
             </div>
             }

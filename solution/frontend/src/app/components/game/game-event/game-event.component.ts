@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GameService } from '../../../services/game.service';
 import { RouterLink } from '@angular/router';
-import { GameDto, GameEventType } from '../../../models/game.dto.model';
+import { GameDto, GameEventType, GameLineupModel } from '../../../models/game.dto.model';
+import { SvgDirective } from '../../../directives/svg.directive';
 
 @Component({
   selector: 'app-game-event',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SvgDirective],
   host: { class: 'w-100' },
   templateUrl: './game-event.component.html',
   styleUrl: './game-event.component.css'
@@ -15,6 +16,7 @@ import { GameDto, GameEventType } from '../../../models/game.dto.model';
 export class GameEventComponent implements OnInit, OnDestroy {
   gameSubscription: Subscription;
   game: GameDto;
+  playerLineups: GameLineupModel[];
   GameEventType = GameEventType;
 
   constructor(
@@ -22,7 +24,18 @@ export class GameEventComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.gameSubscription = this.gameService.gameSubject.subscribe(game => this.game = game);
+    this.gameSubscription = this.gameService.gameSubject.subscribe(game => {
+      this.game = game;
+      this.mapLineup(this.game.lineups);
+    });
+  }
+
+  // Map lineup for getting player information from player_id
+  mapLineup(lineups: GameLineupModel[]) {
+    this.playerLineups = [];
+    lineups.forEach(x => {
+      this.playerLineups[x.player_id] = x;
+    });
   }
 
   ngOnDestroy(): void {

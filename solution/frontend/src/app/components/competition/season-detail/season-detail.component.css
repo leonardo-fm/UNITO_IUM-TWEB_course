@@ -1,3 +1,9 @@
+table td {
+    color: var(--text-primary);
+    background-color: var(--white);
+    vertical-align: middle;
+}
+
 tr > td:not(:nth-child(2)) {
     text-align: center;
 }
@@ -8,4 +14,12 @@ tbody td {
 
 tbody tr:hover td {
     background-color: var(--white-shade);
+}
+
+tbody tr:hover :last-child {
+    border-radius: 0px 8px 8px 0px;
+}
+
+tbody tr:hover :first-child {
+    border-radius: 8px 0px 0px 8px;
 }

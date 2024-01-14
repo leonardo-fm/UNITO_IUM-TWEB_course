@@ -1,6 +1,7 @@
 .game-container {
     cursor: pointer;
     color: var(--text-secondary);
+    border-radius: 8px;
 }
 
 .game-container:hover {

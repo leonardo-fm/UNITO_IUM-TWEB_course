@@ -8,6 +8,11 @@
     right: 8px;
 }
 
+.datepicker-text {
+    background-color: var(--white-shade);
+    color: var(--text-primary);
+}
+
 .datepicker-input {
     position: absolute;
     left: 0;

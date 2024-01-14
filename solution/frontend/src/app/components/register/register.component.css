@@ -6,3 +6,13 @@
 form .ng-invalid.ng-touched {
     border-color: var(--error);
 }
+
+.form-control {
+    background-color: var(--white-shade);
+}
+
+.btn-primary {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    background-color: var(--secondary);
+}

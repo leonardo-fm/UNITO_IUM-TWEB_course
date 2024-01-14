@@ -8,11 +8,12 @@ import { PlayerGamesComponent } from './player-games/player-games.component';
 import { PlayerDetailDto } from '../../models/player.dto.model';
 import { ChatRoomType } from '../../models/chat.dto.model';
 import { ScrollDirective } from '../../directives/scroll.directive';
+import { SvgDirective } from '../../directives/svg.directive';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [PlayerGamesComponent, RouterLink, ScrollDirective],
+  imports: [PlayerGamesComponent, RouterLink, ScrollDirective, SvgDirective],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './player.component.html',
   styleUrl: './player.component.css'

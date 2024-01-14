@@ -100,7 +100,11 @@
 }
 
 <ng-template #lineupTemplate let-lineup>
-    <div class="cursor-pointer" [routerLink]="['/player', lineup.player_id]">
-        {{ lineup.number }}
+    <div class="d-flex flex-column cursor-pointer justify-content-center align-items-center" [routerLink]="['/player', lineup.player_id]">
+        <div class="d-flex position-relative shirt-container">
+            <div class="shirt-icon" svg="shirt"></div>
+            <span class="m-auto">{{ lineup.number }}</span>
+        </div>
+        <span class="text-center">{{ lineup.player_name }}</span>
     </div>
 </ng-template>
