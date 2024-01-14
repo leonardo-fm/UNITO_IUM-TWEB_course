@@ -53,7 +53,7 @@ export class MessagingComponent implements OnInit, OnDestroy {
         this.accontName = user?.username ?? 'Guest_' + this.accountId;
         this.loaderService.show();
         this.chatService.getMessages(this.roomType, this.roomId).then(messages => {
-          this.chat = messages.reverse();
+          this.chat = messages;
           this.scrollBottom();
         }).finally(() => this.loaderService.hide())
         this.chatService.connectChat(this.roomType, this.roomId);
