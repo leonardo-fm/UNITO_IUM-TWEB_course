@@ -9,7 +9,7 @@ if "%arg1%"=="-b" (
     start cmd /k "echo Starting express server... & npm run dev --prefix .\backend\express"
     start cmd /k "echo Building springboot server... & backend\spring\gradlew build -p backend\spring & echo Starting springboot server... & backend\spring\gradlew run -p backend\spring"
     start cmd /k "echo Starting main server... & npm run dev --prefix .\backend\main"
-    start cmd /k "echo Building frontend... & cd frontend & ng build --base-href /browser/ --output-path ../backend/main/static & exit"
+    start cmd /k "echo Building frontend... & cd frontend & ng build --base-href /browser/ --output-path ../backend/main/static"
 ) else (
     :not_define
     start cmd /k "echo Starting express server... & npm run dev --prefix .\backend\express"
