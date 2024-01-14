@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LanguageService } from '../../../services/language.service';
 import { GameService } from '../../../services/game.service';
 import moment from 'moment';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { GameDto } from '../../../models/game.dto.model';
 import { Subscription } from 'rxjs';
@@ -30,6 +30,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private loaderService: LoaderService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -52,6 +53,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
         this.games = this.games.concat(games);
         this.gameHistory = this.groupGameData(this.games);
       })
+      .catch(() => this.router.navigate(['/error']))
       .finally(() => this.loaderService.hide());
     console.log('Load more');
   }
@@ -63,6 +65,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
         this.games = games;
         this.gameHistory = this.groupGameData(this.games);
       })
+      .catch(() => this.router.navigate(['/error']))
       .finally(() => this.loaderService.hide());
   }
 

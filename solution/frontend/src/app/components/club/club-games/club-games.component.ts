@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from '../../../services/game.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
@@ -29,6 +29,7 @@ export class ClubGamesComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private gameService: GameService,
     private clubService: ClubService,
+    private router: Router,
     private loaderService: LoaderService
   ) { }
 
@@ -36,19 +37,23 @@ export class ClubGamesComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.clubId = params['id'];
       this.loaderService.show();
-      this.gameService.getClubGameHistory(this.clubId, 2023).then(games => {
-        this.games = games;
-        this.groupedGames = this.gameService.groupConsequentCompetitionGame(games);
-      }).finally(() => this.loaderService.hide());
+      this.gameService.getClubGameHistory(this.clubId)
+        .then(games => {
+          this.games = games;
+          this.groupedGames = this.gameService.groupConsequentCompetitionGame(games);
+        })
+        .catch(() => this.router.navigate(['/error']))
+        .finally(() => this.loaderService.hide());
     });
 
     this.scrollSubscription = this.clubService.gameHistoryScroll.subscribe(() => {
       this.loaderService.show();
-      this.gameService.getClubGameHistory(this.clubId, 2023, this.games.length)
+      this.gameService.getClubGameHistory(this.clubId, this.games.length)
         .then(games =>  {
           this.games = this.games.concat(games);
           this.groupedGames = this.gameService.groupConsequentCompetitionGame(this.games);
         })
+        .catch(() => this.router.navigate(['/error']))
         .finally(() => this.loaderService.hide());
       console.log('Load more');
     });

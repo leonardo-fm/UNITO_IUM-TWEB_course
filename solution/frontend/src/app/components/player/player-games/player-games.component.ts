@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { GameService } from '../../../services/game.service';
 import moment from 'moment';
@@ -30,6 +30,7 @@ export class PlayerGamesComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private gameService: GameService,
     private playerService: PlayerService,
+    private router: Router,
     private loaderService: LoaderService
   ) { }
 
@@ -37,10 +38,13 @@ export class PlayerGamesComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.playerId = params['id'];
       this.loaderService.show();
-      this.gameService.getPlayerGameHistory(this.playerId).then(games => {
-        this.games = games;
-        this.groupedGames = this.gameService.groupConsequentCompetitionGame(games);
-      }).finally(() => this.loaderService.hide());
+      this.gameService.getPlayerGameHistory(this.playerId)
+        .then(games => {
+          this.games = games;
+          this.groupedGames = this.gameService.groupConsequentCompetitionGame(games);
+        })
+        .catch(() => this.router.navigate(['/error']))
+        .finally(() => this.loaderService.hide());
     });
 
     this.scrollSubscription = this.playerService.gameHistoryScroll.subscribe(() => {
@@ -50,6 +54,7 @@ export class PlayerGamesComponent implements OnInit, OnDestroy {
           this.games = this.games.concat(games);
           this.groupedGames = this.gameService.groupConsequentCompetitionGame(this.games);
         })
+        .catch(() => this.router.navigate(['/error']))
         .finally(() => this.loaderService.hide());
       console.log('Load more');
     });

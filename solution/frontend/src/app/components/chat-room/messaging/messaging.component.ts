@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ChatRoomType, MessageDto } from '../../../models/chat.dto.model';
 import moment from 'moment';
 import { ChatService } from '../../../services/chat.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { SvgDirective } from '../../../directives/svg.directive';
@@ -40,6 +40,7 @@ export class MessagingComponent implements OnInit, OnDestroy {
     private chatService: ChatService,
     private authenticationService: AuthenticationService,
     private loaderService: LoaderService,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -52,10 +53,13 @@ export class MessagingComponent implements OnInit, OnDestroy {
         this.accountId = user?.id ?? moment().unix().toString();
         this.accontName = user?.username ?? 'Guest_' + this.accountId;
         this.loaderService.show();
-        this.chatService.getMessages(this.roomType, this.roomId).then(messages => {
-          this.chat = messages;
-          this.scrollBottom();
-        }).finally(() => this.loaderService.hide())
+        this.chatService.getMessages(this.roomType, this.roomId)
+          .then(messages => {
+            this.chat = messages;
+            this.scrollBottom();
+          })
+          .catch(() => this.router.navigate(['/error']))
+          .finally(() => this.loaderService.hide())
         this.chatService.connectChat(this.roomType, this.roomId);
       });
     });

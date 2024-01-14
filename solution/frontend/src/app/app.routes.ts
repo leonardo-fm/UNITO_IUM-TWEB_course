@@ -9,6 +9,7 @@ import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
+import { ErrorComponent } from './components/error/error.component';
 
 export const routes: Routes = [
     {path: '', component: MainpageComponent, children: [
@@ -21,5 +22,6 @@ export const routes: Routes = [
         {path: 'login', component: LoginComponent},
         {path: 'register', component: RegisterComponent},
         {path: 'search', component: SearchComponent},
+        {path: 'error', component: ErrorComponent},
     ]}
 ];

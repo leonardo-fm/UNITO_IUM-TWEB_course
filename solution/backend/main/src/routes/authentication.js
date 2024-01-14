@@ -4,6 +4,26 @@ const config = require('../config');
 
 var router = express.Router();
 
+/**
+ * @openapi
+ * /login:
+ *  post:
+ *     tags:
+ *     - Authentication
+ *     summary: Authenticate the user
+ *     parameters:
+ *      - name: username
+ *        in: body
+ *        description: The username of the user
+ *        required: true
+ *      - name: password
+ *        in: body
+ *        description: The password of the user
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Return a boolean indicate if the login has been successful
+ */
 router.post('/login', (req, res) => {
     console.log(req.body)
     if (!req.body?.username || !req.body?.password) {
@@ -19,6 +39,26 @@ router.post('/login', (req, res) => {
     });
 });
 
+/**
+ * @openapi
+ * /register:
+ *  post:
+ *     tags:
+ *     - Authentication
+ *     summary: Register a new user
+ *     parameters:
+ *      - name: username
+ *        in: body
+ *        description: The username of the user
+ *        required: true
+ *      - name: password
+ *        in: body
+ *        description: The password of the user
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Return a boolean indicate if the register has been successful
+ */
 router.post('/register', (req, res) => {
     if (!req.body.username || !req.body.password) {
         res.sendStatus(400);

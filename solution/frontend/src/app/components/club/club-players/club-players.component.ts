@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { ClubService } from '../../../services/club.service';
 import { PlayerDto } from '../../../models/player.dto.model';
@@ -23,6 +23,7 @@ export class ClubPlayersComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private playerService: PlayerService,
     private loaderService: LoaderService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -30,11 +31,14 @@ export class ClubPlayersComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let clubId = params['id'];
       this.loaderService.show();
-      this.playerService.getPlayersByClubId(clubId).then(players => {
-        this.data = players;
-        console.log(this.data)
-        this.players = players;
-      }).finally(() => this.loaderService.hide());
+      this.playerService.getPlayersByClubId(clubId)
+        .then(players => {
+          this.data = players;
+          console.log(this.data)
+          this.players = players;
+        })
+        .catch(() => this.router.navigate(['/error']))
+        .finally(() => this.loaderService.hide());
     })
   }
 
