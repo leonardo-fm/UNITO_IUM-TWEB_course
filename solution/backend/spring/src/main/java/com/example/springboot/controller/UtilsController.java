@@ -1,12 +1,12 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.dto.PlayerDto;
 import com.example.springboot.dto.SearchDto;
-import com.example.springboot.entity.Player;
 import com.example.springboot.entity.Search;
 import com.example.springboot.service.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,16 +29,24 @@ public class UtilsController {
 
     @GetMapping("/healthCheck")
     @Operation(summary = "Return a health check")
-    public Date HealthCheck() {
-        return new Date();
+    public ResponseEntity<Date> HealthCheck() {
+        try {
+            return new ResponseEntity(new Date(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/search")
     @Operation(summary = "Return a global search", description = "A search that look fro Players, Competitions and Clubs name")
-    public List<SearchDto> Search(@RequestParam(name = "src") String src, @RequestParam(name = "take") int take) {
-        List<Search> results = searchService.search(src, take);
-        List<SearchDto> response = new ArrayList<>();
-        for (Search result : results) response.add(new SearchDto(result));
-        return response;
+    public ResponseEntity<List<SearchDto>> Search(@RequestParam(name = "src") String src, @RequestParam(name = "take") int take) {
+        try {
+            List<Search> results = searchService.search(src, take);
+            List<SearchDto> response = new ArrayList<>();
+            for (Search result : results) response.add(new SearchDto(result));
+            return new ResponseEntity(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

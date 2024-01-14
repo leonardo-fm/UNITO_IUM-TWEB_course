@@ -10,11 +10,11 @@
 }
 
 .light-theme {
-    --background: #fffef9;
+    --background: #ebebeb;
     --primary: #59344F;
-    --secondary: #726E60;
-    --white: #efeee4;
-    --white-shade: #d3d2c6;
+    --secondary: #fffef9;
+    --white: #fffef9;
+    --white-shade: #87528f21;
     --text-primary: #2d2b25;
     --text-secondary: #555247;
     --win: #98B06F;
