@@ -35,14 +35,17 @@ export class LoginComponent {
 
     let user: any = this.loginForm.getRawValue();
     this.loaderService.show();
-    this.authenticationService.login(user).then(res => {
-      if (!res) {
-        alert(this.languageService.selectedLanguage['login_error_not_valid']);
-        return;
-      }
-      this.router.navigate(['']);
-    }).catch(err => {
-      alert(this.languageService.selectedLanguage['login_error'])
-    }).finally(() => this.loaderService.hide());
+    this.authenticationService.login(user)
+      .then(res => {
+        if (!res) {
+          alert(this.languageService.selectedLanguage['login_error_not_valid']);
+          return;
+        }
+        this.router.navigate(['']);
+      })
+      .catch(err => {
+        alert(this.languageService.selectedLanguage['login_error'])
+      })
+      .finally(() => this.loaderService.hide());
   }
 }

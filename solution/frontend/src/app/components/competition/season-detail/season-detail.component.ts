@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Subscription } from 'rxjs';
 import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompetitionStatsDto } from '../../../models/competition.dto.model';
 import { LoaderService } from '../../../services/loader.service';
 
@@ -26,6 +26,7 @@ export class SeasonDetailComponent implements OnInit, OnDestroy {
     public languageService: LanguageService,
     private activatedRoute: ActivatedRoute,
     private loaderService: LoaderService,
+    private router: Router,
     private competitionService: CompetitionService
   ) { }
 
@@ -37,6 +38,7 @@ export class SeasonDetailComponent implements OnInit, OnDestroy {
         this.loaderService.show();
         this.competitionService.getCompetitionStats(this.competitionId, season)
           .then(stats => this.clubsStatistics = stats)
+          .catch(() => this.router.navigate(['/error']))
           .finally(() => this.loaderService.hide());
       })
     })

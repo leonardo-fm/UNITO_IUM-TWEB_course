@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
@@ -26,6 +26,7 @@ export class PlayerComponent implements OnInit {
     public languageService: LanguageService,
     private playerService: PlayerService,
     private loaderService: LoaderService,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -33,13 +34,17 @@ export class PlayerComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let playerId = params['id'];
       this.loaderService.show();
-      this.playerService.getPlayerById(playerId).then(player => {
-        this.player = player;
-        console.log(player);
-      }).finally(() => this.loaderService.hide());
+      this.playerService.getPlayerById(playerId)
+        .then(player => {
+          this.player = player;
+          console.log(player);
+        })
+        .catch(() => this.router.navigate(['/error']))
+        .finally(() => this.loaderService.hide());
     });
   }
 
+  // Format number to have a fixed digits and suffix
   // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
   nFormatter(num: number, digits: number = 2) {
     const lookup = [

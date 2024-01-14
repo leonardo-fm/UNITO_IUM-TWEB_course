@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { GameLineupComponent } from './game-lineup/game-lineup.component';
 import { GameEventComponent } from './game-event/game-event.component';
@@ -22,6 +22,7 @@ export class GameComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private gameService: GameService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -34,12 +35,16 @@ export class GameComponent implements OnInit{
           console.log('Game', game);
           this.game = game;
           this.loaderService.show();
-          this.gameService.getGameDetails(gameId).then(res => {
-            this.game.events = res.events;
-            this.game.lineups = res.lineups;
-            this.gameService.gameSubject.next(this.game);
-          }).finally(() => this.loaderService.hide());
+          this.gameService.getGameDetails(gameId)
+            .then(res => {
+              this.game.events = res.events;
+              this.game.lineups = res.lineups;
+              this.gameService.gameSubject.next(this.game);
+            })
+            .catch(() => this.router.navigate(['/error']))
+            .finally(() => this.loaderService.hide());
         })
+        .catch(() => this.router.navigate(['/error']))
         .finally(() => this.loaderService.hide());
     })    
   }

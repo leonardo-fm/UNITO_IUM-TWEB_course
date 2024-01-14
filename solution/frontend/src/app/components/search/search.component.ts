@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from '../../services/utils.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SearchDto } from '../../models/search.dto.model';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
     private loaderService: LoaderService,
     private activatedRoute: ActivatedRoute,
     private utilsService: UtilsService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -32,17 +33,20 @@ export class SearchComponent implements OnInit {
         return;
       }
       this.loaderService.show();
-      this.utilsService.siteSearch(params['search']).then(res => {
-        this.searchResults = res;
-        let groupedSearch: any = {};
-        for (let search of res) {
-          (groupedSearch[search.entity] = groupedSearch[search.entity] || []).push(search);
-        }
-        this.groupedSearch = [];
-        for (let [key, value] of Object.entries(groupedSearch)) {
-          this.groupedSearch.push(<SearchDto[]>value);
-        }
-      }).finally(() => this.loaderService.hide());
+      this.utilsService.siteSearch(params['search'])
+        .then(res => {
+          this.searchResults = res;
+          let groupedSearch: any = {};
+          for (let search of res) {
+            (groupedSearch[search.entity] = groupedSearch[search.entity] || []).push(search);
+          }
+          this.groupedSearch = [];
+          for (let [key, value] of Object.entries(groupedSearch)) {
+            this.groupedSearch.push(<SearchDto[]>value);
+          }
+        })
+        .catch(() => this.router.navigate(['/error']))
+        .finally(() => this.loaderService.hide());
     })
   }
 }

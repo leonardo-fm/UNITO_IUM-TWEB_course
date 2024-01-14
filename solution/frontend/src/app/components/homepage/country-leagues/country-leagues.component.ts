@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompetitionService } from '../../../services/competition.service';
 import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { CompetitionDto } from '../../../models/competition.dto.model';
 
@@ -22,6 +22,7 @@ export class CountryLeaguesComponent implements OnInit {
   constructor(
     private competitionService: CompetitionService,
     private loaderService: LoaderService,
+    private router: Router,
     public languageService: LanguageService
   ) { }
 
@@ -30,7 +31,9 @@ export class CountryLeaguesComponent implements OnInit {
     this.competitionService.getAllCompetitions().then(competitions => {
       this.data = competitions;
       this.groupByCountry(this.data);
-    }).finally(() => this.loaderService.hide());
+    })
+    .catch(() => this.router.navigate(['/error']))
+    .finally(() => this.loaderService.hide());
   }
 
   groupByCountry(competitions: CompetitionDto[]) {

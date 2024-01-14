@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClubService } from '../../services/club.service';
 import { LoaderService } from '../../services/loader.service';
 import { LanguageService } from '../../services/language.service';
@@ -26,6 +26,7 @@ export class ClubComponent implements OnInit {
     public languageService: LanguageService,
     private activatedRoute: ActivatedRoute,
     private loaderService: LoaderService,
+    private router: Router,
     private clubService: ClubService
   ) { }
 
@@ -33,7 +34,10 @@ export class ClubComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       let clubId = params['id'];
       this.loaderService.show();
-      this.clubService.getClubById(clubId).then(club => {this.club = club; console.log(this.club)}).finally(() => this.loaderService.hide());
+      this.clubService.getClubById(clubId)
+        .then(club => {this.club = club; console.log(this.club)})
+        .catch(() => this.router.navigate(['/error']))
+        .finally(() => this.loaderService.hide());
     });
   }
 

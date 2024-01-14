@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CompetitionService } from '../../../services/competition.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import moment from 'moment';
 import { LanguageService } from '../../../services/language.service';
 import { Subscription } from 'rxjs';
@@ -31,6 +31,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private gameService: GameService,
+    private router: Router,
     private competitionService: CompetitionService  
   ) { }
 
@@ -43,6 +44,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
         this.loaderService.show();
         this.gameService.getCompetitionGameHistory(this.competitionId, season)
           .then(games => this.games = games)
+          .catch(() => this.router.navigate(['/error']))
           .finally(() => this.loaderService.hide());
       })
     });
@@ -51,6 +53,7 @@ export class GameHistoryComponent implements OnInit, OnDestroy {
       this.loaderService.show();
         this.gameService.getCompetitionGameHistory(this.competitionId, this.season, this.games.length)
           .then(games => this.games = this.games.concat(games))
+          .catch(() => this.router.navigate(['/error']))
           .finally(() => this.loaderService.hide());
       console.log('Load more');
     });

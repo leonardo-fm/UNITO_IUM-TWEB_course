@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompetitionService } from '../../services/competition.service';
 import { GameHistoryComponent } from './game-history/game-history.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +29,7 @@ export class CompetitionComponent implements OnInit {
     public languageService: LanguageService,
     private competitionService: CompetitionService,
     private loaderService: LoaderService,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -41,6 +42,7 @@ export class CompetitionComponent implements OnInit {
           this.competition = competition;
           this.choosedSeason.patchValue(this.competition.seasons[0]);
         })
+        .catch(() => this.router.navigate(['/error']))
         .finally(() => this.loaderService.hide());
     });
 

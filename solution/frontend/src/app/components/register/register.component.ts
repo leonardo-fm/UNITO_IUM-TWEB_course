@@ -40,15 +40,18 @@ export class RegisterComponent {
 
     let user: any = this.loginForm.getRawValue();
     this.loaderService.show();
-    this.authenticationService.register(user).then(res => {
-      if (!res) {
-        alert(this.languageService.selectedLanguage['register_error_duplicate']);
-        return;
-      }
-      this.router.navigate(['/login']);
-    }).catch(err => {
-      alert(this.languageService.selectedLanguage['register_error']);
-    }).finally(() => this.loaderService.hide());
+    this.authenticationService.register(user)
+      .then(res => {
+        if (!res) {
+          alert(this.languageService.selectedLanguage['register_error_duplicate']);
+          return;
+        }
+        this.router.navigate(['/login']);
+      })
+      .catch(err => {
+        alert(this.languageService.selectedLanguage['register_error']);
+      })
+      .finally(() => this.loaderService.hide());
   }
 
   get password() { return this.loginForm.get('password') }

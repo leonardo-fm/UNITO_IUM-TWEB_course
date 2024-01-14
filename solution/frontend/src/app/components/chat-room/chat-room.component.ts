@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatRoomType } from '../../models/chat.dto.model';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClubDto } from '../../models/club.dto.model';
 import { CompetitionDto } from '../../models/competition.dto.model';
 import { PlayerDto } from '../../models/player.dto.model';
@@ -35,6 +35,7 @@ export class ChatRoomComponent implements OnInit {
     private clubService: ClubService,
     private playerService: PlayerService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private loaderService: LoaderService
   ) { }
 
@@ -50,16 +51,19 @@ export class ChatRoomComponent implements OnInit {
         case ChatRoomType.Competition:
           this.competitionService.getCompetitionById(this.roomId)
             .then(res => this.competition = res)
+            .catch(() => this.router.navigate(['/error']))
             .finally(() => this.loaderService.hide());
           break;
         case ChatRoomType.Club:
           this.clubService.getClubById(Number(this.roomId))
             .then(res => this.club = res)
+            .catch(() => this.router.navigate(['/error']))
             .finally(() => this.loaderService.hide());
           break;
         case ChatRoomType.Player:
           this.playerService.getPlayerById(Number(this.roomId))
             .then(res => this.player = res)
+            .catch(() => this.router.navigate(['/error']))
             .finally(() => this.loaderService.hide());
           break;
         default:
