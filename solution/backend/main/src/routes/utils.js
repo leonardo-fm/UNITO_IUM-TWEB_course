@@ -4,6 +4,27 @@ const config = require('../config');
 
 var router = express.Router();
 
+/**
+ * @openapi
+ * /siteSearch?src&take:
+ *  get:
+ *     tags:
+ *     - Utils
+ *     summary: Return a global search
+ *     parameters:
+ *      - name: src
+ *        in: query
+ *        description: The string to be searched
+ *        required: true
+ *      - name: take
+ *        in: query
+ *        description: The ammount of results to take
+ *        required: true
+ *     description: A search that look for Players, Competitions and Clubs name
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 router.get('/siteSearch', (req, res) => {
     if (!req.query.src || !req.query.take) {
         res.sendStatus(400);
