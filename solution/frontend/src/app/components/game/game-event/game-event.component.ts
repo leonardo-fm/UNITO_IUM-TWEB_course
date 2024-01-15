@@ -4,6 +4,7 @@ import { GameService } from '../../../services/game.service';
 import { RouterLink } from '@angular/router';
 import { GameDto, GameEventType, GameLineupModel } from '../../../models/game.dto.model';
 import { SvgDirective } from '../../../directives/svg.directive';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'app-game-event',
@@ -16,11 +17,12 @@ import { SvgDirective } from '../../../directives/svg.directive';
 export class GameEventComponent implements OnInit, OnDestroy {
   gameSubscription: Subscription;
   game: GameDto;
-  playerLineups: GameLineupModel[];
+  playerLineups: GameLineupModel[] | null[];
   GameEventType = GameEventType;
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    public languageService: LanguageService
   ) { }
 
   ngOnInit(): void {

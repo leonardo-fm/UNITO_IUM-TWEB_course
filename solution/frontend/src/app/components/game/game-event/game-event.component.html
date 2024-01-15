@@ -8,14 +8,14 @@
         @else{
         <div class="d-flex event-icon" [svg]="event.type.toLowerCase()"></div>
         }
-        <span>{{event.type}}</span>
+        <span>{{ languageService.selectedLanguage['player_event_type_' + event.type.toLowerCase()] }}</span>
         <span>{{event.minute}}°</span>
         <div>
             <span class="cursor-pointer"
-                [routerLink]="['/player', event.player_id]">{{ playerLineups[event.player_id].player_name }}</span>
+                [routerLink]="['/player', event.player_id]">{{ playerLineups[event.player_id]?.player_name ?? languageService.selectedLanguage['player_unknown'] }}</span>
             @if(event.player_in_id){
             <span class="cursor-pointer" [routerLink]="['/player', event.player_in_id]"> ->
-                {{ playerLineups[event.player_in_id].player_name }}</span>
+                {{ playerLineups[event.player_in_id]?.player_name ?? languageService.selectedLanguage['player_unknown'] }}</span>
             }
         </div>
         <!-- <span>{{event.description}}</span> -->
