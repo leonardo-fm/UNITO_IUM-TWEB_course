@@ -4,6 +4,7 @@
 
     "error_title": "Ops.. There was an error",
     "error_label": "There was an error with the server. Please retry later",
+    "error_home_button": "Back to home",
     "search_no_found": "Nothing found",
     "search_club": "CLUB",
     "search_competition": "COMPETITION",
