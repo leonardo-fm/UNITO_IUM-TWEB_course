@@ -7,6 +7,10 @@
     font-weight: bold;
 }
 
+.search-value-container {
+    border-radius: 8px;
+}
+
 .search-value-container:hover {
     background-color: var(--white-shade);
 }

@@ -3,9 +3,11 @@
 @if(competition){
 <div class="d-flex competition-container p-3">
     <img class="object-fit cursor-pointer" width="128" height="128"
-        [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competitionId.toLowerCase()+'.png'" [routerLink]="['/competition', competition.competitionId]">
+        [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competitionId.toLowerCase()+'.png'"
+        [routerLink]="['/competition', competition.competitionId]">
     <div class="d-flex flex-column justify-content-around">
-        <span class="cursor-pointer" [routerLink]="['/competition', competition.competitionId]">{{ competition.name }}</span>
+        <span class="cursor-pointer"
+            [routerLink]="['/competition', competition.competitionId]">{{ competition.name }}</span>
         <span class="d-flex gap-2">
             <img width="24" height="24" [src]="'assets/icons/flags/'+competition.countryId +'.webp'"
                 [alt]="'Flag ' + languageService.selectedLanguage['country_name_'+competition.countryId]">
@@ -18,9 +20,12 @@
 @case (ChatRoomType.Club) {
 @if(club){
 <div class="d-flex club-container p-3 gap-3">
-    <img class="cursor-pointer" width="72" height="72" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+club.clubId+'.png'" [routerLink]="['/club', club.clubId]">
+    <img class="cursor-pointer" width="72" height="72"
+        [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+club.clubId+'.png'"
+        [routerLink]="['/club', club.clubId]">
     <div class="d-flex flex-column justify-content-center gap-1">
-        <span class="cursor-pointer" [routerLink]="['/club', club.clubId]">{{club.clubName ?? this.languageService.selectedLanguage['club_unknown']}}</span>
+        <span class="cursor-pointer"
+            [routerLink]="['/club', club.clubId]">{{club.clubName ?? this.languageService.selectedLanguage['club_unknown']}}</span>
         <div class="d-flex gap-2">
             <img width="24" height="24" [src]="'assets/icons/flags/'+club.countryId+'.webp'"
                 [alt]="'Flag ' + club.countryId">
@@ -33,8 +38,32 @@
 @case (ChatRoomType.Player) {
 @if(player){
 <div class="d-flex player-container align-items-center p-3 gap-3">
-    <img class="cursor-pointer" width="72" height="72" [src]="player.imageUrl" alt="" [routerLink]="['/player', player.id]">
+    <img class="cursor-pointer" width="72" height="72" [src]="player.imageUrl" alt=""
+        [routerLink]="['/player', player.id]">
     <span class="cursor-pointer" [routerLink]="['/player', player.id]">{{player.fullName}}</span>
+</div>
+}
+}
+@case (ChatRoomType.Game) {
+@if(game){
+<div class="d-flex score-container justify-content-evenly p-3">
+    <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25"
+        [routerLink]="['/club', game.homeClubId]">
+        <img width="72" height="72"
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
+        <span
+            class="text-center">{{ game.homeClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+    </div>
+    <div class="d-flex flex-column justify-content-center">
+        <span class="score-label">{{game.homeClubScore}} - {{game.awayClubScore}}</span>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25"
+        [routerLink]="['/club', game.awayClubId]">
+        <img width="72" height="72"
+            [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
+        <span
+            class="text-center">{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
+    </div>
 </div>
 }
 }

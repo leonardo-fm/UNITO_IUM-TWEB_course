@@ -6,16 +6,20 @@ import { GameEventComponent } from './game-event/game-event.component';
 import { LoaderService } from '../../services/loader.service';
 import { GameDto } from '../../models/game.dto.model';
 import { LanguageService } from '../../services/language.service';
+import { ChatRoomType } from '../../models/chat.dto.model';
+import { SvgDirective } from '../../directives/svg.directive';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [GameLineupComponent, GameEventComponent, RouterLink],
+  imports: [GameLineupComponent, GameEventComponent, RouterLink, SvgDirective],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto gap-3 py-4' },
   templateUrl: './game.component.html',
   styleUrl: './game.component.css'
 })
 export class GameComponent implements OnInit{
+
+  ChatRoomType=ChatRoomType;
   game: GameDto;
 
   constructor(

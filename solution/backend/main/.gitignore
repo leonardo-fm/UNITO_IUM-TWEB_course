@@ -128,6 +128,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-static/browser
-static/3rdpartylicenses.txt

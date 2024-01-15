@@ -3,19 +3,19 @@
     <span class="m-auto">{{ languageService.selectedLanguage['search_no_found'] }}</span>
     }
     @for (searchRes of groupedSearch; track searchRes){
-    <div class="d-flex flex-column mb-1">
+    <div class="d-flex flex-column mb-1 gap-2">
         <h4 class="title-label">{{ languageService.selectedLanguage['search_' + searchRes[0].entity] }}</h4>
         @for (search of searchRes; track search.id) {
         <div class="d-flex search-value-container cursor-pointer gap-2" [routerLink]="['/', search.entity, search.id]">
             @switch (search.entity) {
             @case ('player') {
-            <img width="32" height="32" [src]="search.imageUrl" alt="">
+            <img class="ms-2" width="32" height="32" [src]="search.imageUrl" alt="">
             }
             @case ('club') {
-            <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+search.id+'.png'">
+            <img class="ms-2" width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+search.id+'.png'">
             }
             @case ('competition') {
-            <img class="object-fit" width="32" height="32" [src]="'https://tmssl.akamaized.net/images/logo/header/'+search.id.toLowerCase()+'.png'">
+            <img class="object-fit ms-2" width="32" height="32" [src]="'https://tmssl.akamaized.net/images/logo/header/'+search.id.toLowerCase()+'.png'">
             }
             }
             <h5 class="my-auto">{{ search.name }}</h5>

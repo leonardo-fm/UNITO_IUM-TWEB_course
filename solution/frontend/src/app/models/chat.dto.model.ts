@@ -15,4 +15,5 @@ export enum ChatRoomType {
     Competition = 'competition',
     Player = 'player',
     Club = 'club',
+    Game = 'game',
 }

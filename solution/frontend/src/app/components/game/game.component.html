@@ -1,5 +1,5 @@
 @if(game){
-<div class="d-flex score-container justify-content-evenly p-3">
+<div class="d-flex score-container justify-content-evenly position-relative p-3">
     <div class="d-flex flex-column justify-content-center align-items-center cursor-pointer w-25" [routerLink]="['/club', game.homeClubId]">
         <img width="72" height="72"
             [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.homeClubId+'.png'">
@@ -13,6 +13,7 @@
             [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+game.awayClubId+'.png'">
         <span class="text-center">{{ game.awayClubName ?? this.languageService.selectedLanguage['club_unknown'] }}</span>
     </div>
+    <div class="d-flex ms-auto mt-auto cursor-pointer chat-icon" svg="chat" [routerLink]="['/chat', ChatRoomType.Game, game.gameId]"></div>
 </div>
 
 <app-game-lineup></app-game-lineup>

@@ -5,10 +5,11 @@
 }
 
 .player-container,
+.score-container,
 .club-container {
     border-radius: 8px;
-    background-color: var(--secondary);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--text-primary);
 }
 
 .player-container>img {
@@ -17,4 +18,8 @@
 
 .player-container>span {
     font-size: x-large;
+}
+
+.score-label{
+    font-size: xx-large;
 }

@@ -10,6 +10,8 @@ import { ClubService } from '../../services/club.service';
 import { PlayerService } from '../../services/player.service';
 import { LanguageService } from '../../services/language.service';
 import { MessagingComponent } from './messaging/messaging.component';
+import { GameService } from '../../services/game.service';
+import { GameDto } from '../../models/game.dto.model';
 
 @Component({
   selector: 'app-chat-room',
@@ -28,12 +30,14 @@ export class ChatRoomComponent implements OnInit {
   competition: CompetitionDto;
   club: ClubDto;
   player: PlayerDto;
+  game: GameDto;
 
   constructor(
     public languageService: LanguageService,
     private competitionService: CompetitionService,
     private clubService: ClubService,
     private playerService: PlayerService,
+    private gameService: GameService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private loaderService: LoaderService
@@ -45,9 +49,9 @@ export class ChatRoomComponent implements OnInit {
       this.roomId = params['id'];
       console.log(this.roomType, this.roomId);
       console.log(this.roomType === ChatRoomType.Competition);
-      
+
       this.loaderService.show();
-      switch (this.roomType){
+      switch (this.roomType) {
         case ChatRoomType.Competition:
           this.competitionService.getCompetitionById(this.roomId)
             .then(res => this.competition = res)
@@ -63,6 +67,12 @@ export class ChatRoomComponent implements OnInit {
         case ChatRoomType.Player:
           this.playerService.getPlayerById(Number(this.roomId))
             .then(res => this.player = res)
+            .catch(() => this.router.navigate(['/error']))
+            .finally(() => this.loaderService.hide());
+          break;
+        case ChatRoomType.Game:
+          this.gameService.getGameById(Number(this.roomId))
+            .then(res => this.game = res)
             .catch(() => this.router.navigate(['/error']))
             .finally(() => this.loaderService.hide());
           break;

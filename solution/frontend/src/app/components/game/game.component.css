@@ -7,3 +7,20 @@
 .score-label{
     font-size: xx-large;
 }
+
+.chat-icon {
+    margin: 1rem;
+}
+
+:host ::ng-deep .chat-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 48px;
+    height: 48px;
+}
+
+:host ::ng-deep .chat-icon>path {
+    stroke: var(--text-primary);
+}
