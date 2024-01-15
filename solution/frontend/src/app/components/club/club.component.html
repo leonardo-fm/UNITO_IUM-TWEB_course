@@ -10,7 +10,7 @@
             <span>{{ languageService.selectedLanguage['country_name_'+club.countryId] }}</span>
         </div>
     </div>
-    <img class="ms-auto mt-auto cursor-pointer" width="48" height="48" src="assets/icons/chat.svg" alt="" [routerLink]="['/chat', ChatRoomType.Club, club.clubId]">
+    <div class="d-flex ms-auto mt-auto cursor-pointer chat-icon" svg="chat" [routerLink]="['/chat', ChatRoomType.Club, club.clubId]"></div>
 </div>
 
 <div class="d-flex w-100" scrollDirective (scrollBottomParent)="onScrollBottom()">

@@ -1,5 +1,24 @@
+:host {
+    font-size: small;
+}
+
 .home-starting-lineup, .away-starting-lineup{
     background-color: var(--white);
     border-radius: 8px;
-    height: 200px;
+    height: 100%;
+}
+
+:host ::ng-deep .shirt-icon>path {
+    stroke: var(--text-primary);
+}
+
+:host ::ng-deep .shirt-icon {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+}
+
+.shirt-container {
+    width: 36px;
+    height: 36px;
 }

@@ -1,3 +1,7 @@
+:host ::ng-deep .search-icon > path {
+    fill: var(--text-primary);
+}
+
 .search-container {
     position: relative;
 }
@@ -12,6 +16,21 @@
 .search-container>input {
     padding-left: 48px;
     background-color: var(--white-shade);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--text-secondary);
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder, /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--text-secondary);
+}
+
+.player-container {
+    border-radius: 8px;
 }
 
 .player-container:hover{

@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { CompetitionDto } from '../../../models/competition.dto.model';
+import { SvgDirective } from '../../../directives/svg.directive';
 
 @Component({
   selector: 'app-country-leagues',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, SvgDirective],
   templateUrl: './country-leagues.component.html',
   styleUrl: './country-leagues.component.css'
 })

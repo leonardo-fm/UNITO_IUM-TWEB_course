@@ -3,3 +3,17 @@
     border-radius: 8px;
     background-color: var(--white);
 }
+
+.season-select {
+    color: var(--text-primary);
+    background-color: var(--white-shade);
+}
+
+:host ::ng-deep .chat-icon {
+    width: 48px;
+    height: 48px;
+}
+
+:host ::ng-deep .chat-icon>path {
+    stroke: var(--text-primary);
+}

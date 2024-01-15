@@ -13,3 +13,16 @@
 .red {
     background-color: red;
 }
+
+:host ::ng-deep .event-icon {
+    width: 24px;
+    height: 24px;
+}
+
+:host ::ng-deep .event-icon>path {
+    fill: var(--text-primary);
+}
+
+:host ::ng-deep .event-icon>polyline {
+    stroke: var(--text-primary) !important;
+}

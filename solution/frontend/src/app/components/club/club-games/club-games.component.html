@@ -6,7 +6,7 @@
     <span class="cursor-pointer" [routerLink]="['/competition', gameGroup[0].competitionId]">{{ gameGroup[0].competitionName }}</span>
 </div>
 @for (game of gameGroup; track game.gameId){
-<div class="d-flex game-container align-items-center" [routerLink]="['/game', game.gameId]">
+<div class="d-flex game-container align-items-center px-2" [routerLink]="['/game', game.gameId]">
     <span>{{ moment(game.date).format(languageService.selectedLanguage['date_format']) }}</span>
     <div class="d-flex flex-column game-club-container gap-1 m-2 px-2">
         <div class="d-flex gap-2">

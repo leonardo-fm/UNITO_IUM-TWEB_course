@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { GameLineupModel, LineupPositionType } from '../../../models/game.dto.model';
+import { SvgDirective } from '../../../directives/svg.directive';
 
 @Component({
   selector: 'app-game-lineup',
   standalone: true,
-  imports: [NgTemplateOutlet, RouterLink],
+  imports: [NgTemplateOutlet, RouterLink, SvgDirective],
   host: { class: 'd-flex justify-content-between' },
   templateUrl: './game-lineup.component.html',
   styleUrl: './game-lineup.component.css'

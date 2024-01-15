@@ -10,13 +10,13 @@
                     [alt]="'Flag ' + languageService.selectedLanguage['country_name_'+competition.countryId]">
                 {{ languageService.selectedLanguage['country_name_'+competition.countryId] }}
             </span>
-            <select class="form-select" name="season" id="season" [formControl]="choosedSeason">
+            <select class="form-select season-select cursor-pointer" name="season" id="season" [formControl]="choosedSeason">
                 @for(season of competition.seasons; track season; let first = $first){
                 <option [value]="season">{{season}}</option>
                 }
             </select>
         </div>
-        <img class="ms-auto mt-auto cursor-pointer" width="48" height="48" src="assets/icons/chat.svg" alt="" [routerLink]="['/chat', ChatRoomType.Competition, competitionId]">
+        <div class="d-flex ms-auto mt-auto cursor-pointer chat-icon" svg="chat" [routerLink]="['/chat', ChatRoomType.Competition, competitionId]"></div>
     </div>
 }
 

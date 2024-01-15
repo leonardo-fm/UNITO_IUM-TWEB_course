@@ -1,7 +1,7 @@
 .player-container {
     border-radius: 8px;
-    background-color: var(--secondary);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--text-primary);
 }
 
 .games-container {
@@ -35,4 +35,13 @@
     color: var(--text);
     font-size: medium;
     font-weight: bold;
+}
+
+:host ::ng-deep .chat-icon {
+    width: 48px;
+    height: 48px;
+}
+
+:host ::ng-deep .chat-icon>path {
+    stroke: var(--text-primary);
 }

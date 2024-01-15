@@ -8,7 +8,7 @@
                 [placeholder]="languageService.selectedLanguage['navbar_search_placeholder']" aria-label="Search"
                 [formControl]="search" (keydown.enter)="onSearch()">
             <button class="d-flex btn" type="submit" (click)="onSearch()">
-                <img src="assets/icons/search.svg" alt="Search button">
+                <div class="d-flex search-icon" svg="search"></div>
             </button>
         </div>
         <div class="d-flex align-items-center gap-2">

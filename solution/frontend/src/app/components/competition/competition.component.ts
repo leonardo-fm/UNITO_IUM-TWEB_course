@@ -9,11 +9,12 @@ import { CompetitionDto } from '../../models/competition.dto.model';
 import { LanguageService } from '../../services/language.service';
 import { ChatRoomType } from '../../models/chat.dto.model';
 import { ScrollDirective } from '../../directives/scroll.directive';
+import { SvgDirective } from '../../directives/svg.directive';
 
 @Component({
   selector: 'app-competition',
   standalone: true,
-  imports: [GameHistoryComponent, SeasonDetailComponent, ReactiveFormsModule, RouterLink, ScrollDirective],
+  imports: [GameHistoryComponent, SeasonDetailComponent, ReactiveFormsModule, RouterLink, ScrollDirective, SvgDirective],
   host: { class: 'container d-flex flex-column h-100 w-100 overflow-auto py-4' },
   templateUrl: './competition.component.html',
   styleUrl: './competition.component.css'

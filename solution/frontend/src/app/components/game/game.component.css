@@ -1,7 +1,7 @@
 .score-container{
     border-radius: 8px;
-    background-color: var(--secondary);
-    color: white;
+    background-color: var(--white);
+    color: var(--text-primary);
 }
 
 .score-label{

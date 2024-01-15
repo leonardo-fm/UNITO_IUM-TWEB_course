@@ -6,12 +6,19 @@
         <div class="card-icon" [class.red]="event.description.toLowerCase().includes('red')"></div>
         }
         @else{
-        <img width="24" height="24" [src]="'assets/icons/'+event.type.toLowerCase()+'.svg'" alt="">
+        <div class="d-flex event-icon" [svg]="event.type.toLowerCase()"></div>
         }
         <span>{{event.type}}</span>
-        <span>{{event.minute}}</span>
-        <span class="cursor-pointer" [routerLink]="['/player', event.player_id]">{{event.player_id}}</span>
-        <span>{{event.description}}</span>
+        <span>{{event.minute}}°</span>
+        <div>
+            <span class="cursor-pointer"
+                [routerLink]="['/player', event.player_id]">{{ playerLineups[event.player_id].player_name }}</span>
+            @if(event.player_in_id){
+            <span class="cursor-pointer" [routerLink]="['/player', event.player_in_id]"> ->
+                {{ playerLineups[event.player_in_id].player_name }}</span>
+            }
+        </div>
+        <!-- <span>{{event.description}}</span> -->
     </div>
     }
 </div>

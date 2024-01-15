@@ -3,14 +3,14 @@ import { LanguageService } from '../../../services/language.service';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
-import { ClubService } from '../../../services/club.service';
 import { PlayerDto } from '../../../models/player.dto.model';
 import { PlayerService } from '../../../services/player.service';
+import { SvgDirective } from '../../../directives/svg.directive';
 
 @Component({
   selector: 'app-club-players',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, SvgDirective],
   templateUrl: './club-players.component.html',
   styleUrl: './club-players.component.css'
 })
