@@ -1,8 +1,6 @@
 package com.example.springboot.service;
 
-import com.example.springboot.dto.PlayerDto;
 import com.example.springboot.entity.Competition;
-import com.example.springboot.entity.Player;
 import com.example.springboot.repository.CompetitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
