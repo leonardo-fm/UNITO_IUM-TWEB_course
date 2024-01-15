@@ -1,9 +1,9 @@
 <nav class="navbar">
-    <div class="container justify-content-between">
+    <div class="container flex-row">
         <a class="navbar-brand" routerLink="">
             <img class="m-auto" width="96" height="96" src="assets/icons/monitoring.svg" alt="Logo">
         </a>
-        <div class="d-flex search-form" role="search">
+        <div class="d-flex search-form ms-5" role="search">
             <input class="form-control" type="search"
                 [placeholder]="languageService.selectedLanguage['navbar_search_placeholder']" aria-label="Search"
                 [formControl]="search" (keydown.enter)="onSearch()">
@@ -11,7 +11,7 @@
                 <div class="d-flex search-icon" svg="search"></div>
             </button>
         </div>
-        <div class="d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center ms-auto gap-2">
             @if (loggedUser){
             <span>{{ languageService.selectedLanguage['navbar_hello'] }} {{ loggedUser.username }}</span>
             <button class="btn" (click)="onLogout()">

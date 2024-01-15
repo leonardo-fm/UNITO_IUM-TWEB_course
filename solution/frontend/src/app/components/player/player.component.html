@@ -34,7 +34,7 @@
         </div>
         <div class="d-flex flex-column align-items-center">
             <span class="player_detail_label">{{ languageService.selectedLanguage['player_foot'] }}</span>
-            <span class="player_detail_value">{{ languageService.selectedLanguage['player_foot_' + player.foot] }}</span>
+            <span class="player_detail_value">{{ player.foot ? languageService.selectedLanguage['player_foot_' + player.foot] : '/' }}</span>
         </div>
         <div class="d-flex flex-column align-items-center">
             <span class="player_detail_label">{{ languageService.selectedLanguage['player_position'] }}</span>

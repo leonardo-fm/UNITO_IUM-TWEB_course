@@ -3,8 +3,13 @@
     color: var(--text-white);
 }
 
+.container {
+    justify-content: initial;
+}
+
 .search-form {
     position: relative;
+    width: 400px;
 }
 
 .search-form>button {

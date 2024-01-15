@@ -1,31 +1,36 @@
-<table class="table">
-    <thead>
-        <tr>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_position'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_team'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_games'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_wins'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_draws'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_loses'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_goals'] }}</td>
-            <td>{{ languageService.selectedLanguage['competition_season_detail_points'] }}</td>
-        </tr>
-    </thead>
-    <tbody>
-        @for (clubStatistic of clubsStatistics; track clubStatistic; let index = $index){
-        <tr>
-            <td>{{ index + 1 }}</td>
-            <td class="cursor-pointer" [routerLink]="['/club', clubStatistic.clubId]">
-                <img width="32" height="32" [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.clubId+'.png'">
-                {{ clubStatistic.clubName ?? this.languageService.selectedLanguage['club_unknown'] }}
-            </td>
-            <td>{{ clubStatistic.wins + clubStatistic.draws + clubStatistic.loses }}</td>
-            <td>{{ clubStatistic.wins }}</td>
-            <td>{{ clubStatistic.draws }}</td>
-            <td>{{ clubStatistic.loses }}</td>
-            <td>{{ clubStatistic.scoreGoals }}:{{ clubStatistic.takenGoals }}</td>
-            <td>{{ clubStatistic.points }}</td>
-        </tr>
-        }
-    </tbody>
-</table>
+@if (clubsStatistics && clubsStatistics.length > 0) {
+<div class="d-flex game-history-container p-3 mt-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_position'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_team'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_games'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_wins'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_draws'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_loses'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_goals'] }}</td>
+                <td>{{ languageService.selectedLanguage['competition_season_detail_points'] }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            @for (clubStatistic of clubsStatistics; track clubStatistic; let index = $index){
+            <tr>
+                <td>{{ index + 1 }}</td>
+                <td class="cursor-pointer" [routerLink]="['/club', clubStatistic.clubId]">
+                    <img width="32" height="32"
+                        [src]="'https://tmssl.akamaized.net/images/wappen/normquad/'+clubStatistic.clubId+'.png'">
+                    {{ clubStatistic.clubName ?? this.languageService.selectedLanguage['club_unknown'] }}
+                </td>
+                <td>{{ clubStatistic.wins + clubStatistic.draws + clubStatistic.loses }}</td>
+                <td>{{ clubStatistic.wins }}</td>
+                <td>{{ clubStatistic.draws }}</td>
+                <td>{{ clubStatistic.loses }}</td>
+                <td>{{ clubStatistic.scoreGoals }}:{{ clubStatistic.takenGoals }}</td>
+                <td>{{ clubStatistic.points }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

@@ -1,3 +1,8 @@
+.game-history-container {
+    border-radius: 8px;
+    background-color: var(--white);
+}
+
 table td {
     color: var(--text-primary);
     background-color: var(--white);
