@@ -47,7 +47,7 @@ export class GameService {
     }).then(res => res.data);
   }
 
-  getClubGameHistory(clubId: number, season: number = 2023, offset: number = 0, take: number = 25) {
+  getClubGameHistory(clubId: number, offset: number = 0, season: number = 2023, take: number = 25) {
     return axios.get<GameDto[]>(environment.apiUrl + '/getClubGameHistory', {
       params: {
         clubId: clubId,
