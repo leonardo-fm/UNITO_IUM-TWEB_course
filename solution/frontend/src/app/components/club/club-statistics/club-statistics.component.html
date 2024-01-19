@@ -1,0 +1,19 @@
+<div class="d-flex charts-container gap-2 justify-content-between">
+    <div class="w-100">
+        <canvas baseChart #BarChart
+            [data]="barChartData" 
+            [options]="barChartOptions" 
+            [legend]="true" 
+            type="bar">
+        </canvas>
+    </div>
+    
+    <div class="w-100">
+        <canvas baseChart #LineChart
+            [data]="lineChartData" 
+            [options]="lineChartOptions" 
+            [legend]="true" 
+            type="line">
+        </canvas>
+    </div>
+</div>
