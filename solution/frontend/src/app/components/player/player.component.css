@@ -1,4 +1,5 @@
-.player-container {
+.player-container,
+.statistics-container {
     border-radius: 8px;
     background-color: var(--white);
     color: var(--text-primary);
