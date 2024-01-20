@@ -25,7 +25,7 @@ router.get('/player/:playerId/marketValue', function (req, res) {
         return res.status(400).json({ error: "Wrong arguments" });
     }
 
-    getDb().collection('player_valutations')
+    getDb().collection('player_valuations')
         .find({ player_id: BigInt(req.params.playerId) })
         .project({ date: 1, market_value_in_eur: 1, _id: 0 })
         .sort({ date: 1 })

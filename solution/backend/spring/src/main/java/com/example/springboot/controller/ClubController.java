@@ -41,7 +41,7 @@ public class ClubController {
 
     @GetMapping("/{clubId}")
     @Operation(summary = "Return a club by Id", description = "Given an Id of a club, return all the data of a club")
-    public ResponseEntity<ClubDto> GetClub(@PathVariable int clubId) {
+    public ResponseEntity<ClubDto> GetClub(@PathVariable long clubId) {
         try {
             Club club = clubService.getClub(clubId);
             Competition competition = competitionService.getCompetition(club.getDomesticCompetitionId());
