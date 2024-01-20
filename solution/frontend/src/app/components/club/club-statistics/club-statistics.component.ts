@@ -1,18 +1,9 @@
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
 import { AvgGoalsStatisticsDto, WinDrawLoseStatisticsDto } from '../../../models/club.dto.model';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '../../../services/language.service';
-import moment from 'moment';
-import { UtilsService } from '../../../services/utils.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
@@ -25,7 +16,8 @@ import { ClubService } from '../../../services/club.service';
   templateUrl: './club-statistics.component.html',
   styleUrl: './club-statistics.component.css',
 })
-export class ClubStatisticsComponent implements OnInit, OnDestroy, AfterViewInit {
+
+export class ClubStatisticsComponent implements OnInit, OnDestroy {
   @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
 
   performancePerYear = new FormControl <number | null>(null);
@@ -70,7 +62,7 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy, AfterViewInit
           
           this.data2 = datas[1];
           this.avgGoalsYears = [...new Set(this.data2.map(x => x.year))];
-          this.avgGoalsYear.patchValue(this.avgGoalsYears[Math.max(this.avgGoalsYears.length - 10, 0)]);
+          this.avgGoalsYear.patchValue(this.avgGoalsYears[Math.max(this.avgGoalsYears.length - 4, 0)]);
         })
         .catch(() => this.router.navigate(['/error']))
         .finally(() => this.loaderService.hide());
@@ -155,17 +147,6 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy, AfterViewInit
     this.charts?.forEach((chart) => {
       chart.render();
     });
-  }
-
-  ngAfterViewInit(): void {
-
-
-    // this.renderCharts();
-    // this.lineChartData.datasets[0].backgroundColor = style.getPropertyValue('--lose');
-    // console.log(this.charts)
-    // this.charts.forEach((chart) => {
-    //   chart.render();
-    // });
   }
 
   ngOnDestroy(): void {

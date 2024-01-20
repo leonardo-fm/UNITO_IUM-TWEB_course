@@ -22,6 +22,10 @@
     --draw: #ababab;
     --lose: #b06f6f;
     --error: #b06f6f;
+    --goals: #b06f6f;
+    --assists: #b06f6f;
+    --yellow-card: #b06f6f;
+    --red-card: #b06f6f;
 }
 
 .dark-theme {
@@ -37,4 +41,8 @@
     --draw: #ababab;
     --lose: #b06f6f;
     --error: #b06f6f;
+    --goals: #b06f6f;
+    --assists: #b06f6f;
+    --yellow-card: #b06f6f;
+    --red-card: #b06f6f;
 }
