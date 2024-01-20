@@ -9,7 +9,7 @@ const swaggerOptions = {
             version: '1.0.0'
         }
     },
-    apis: ["src/routes/player.js", "src/routes/game.js", "src/routes/chat.js"]
+    apis: ["src/routes/player.js", "src/routes/game.js", "src/routes/chat.js", "src/routes/statistic.js"]
 };
 
 const swaggerSpec = swaggerJsDoc(swaggerOptions);
