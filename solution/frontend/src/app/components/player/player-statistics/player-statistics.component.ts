@@ -17,7 +17,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './player-statistics.component.html',
   styleUrl: './player-statistics.component.css'
 })
-export class PlayerStatisticsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PlayerStatisticsComponent implements OnInit, OnDestroy {
   @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
   moment = moment;
 
@@ -115,23 +115,22 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   renderCharts() {
+    let style = getComputedStyle(document.querySelector('[class$="-theme"]')!);
+    this.barChartData.datasets[0].backgroundColor = style.getPropertyValue('--goals');
+    this.barChartData.datasets[0].borderColor = style.getPropertyValue('--goals');
+
+    this.barChartData.datasets[1].backgroundColor = style.getPropertyValue('--assists');
+    this.barChartData.datasets[1].borderColor = style.getPropertyValue('--assists');
+
+    this.barChartData.datasets[2].backgroundColor = style.getPropertyValue('--yellow-card');
+    this.barChartData.datasets[2].borderColor = style.getPropertyValue('--yellow-card');
+
+    this.barChartData.datasets[3].backgroundColor = style.getPropertyValue('--red-card');
+    this.barChartData.datasets[3].borderColor = style.getPropertyValue('--red-card');
+
     this.charts?.forEach((chart) => {
       chart.render();
     });
-  }
-
-  ngAfterViewInit(): void {
-    // let style = getComputedStyle(document.querySelector('[class$="-theme"]')!);
-    // this.barChartData.datasets[0].backgroundColor = 'green';
-    // this.barChartData.datasets[1].backgroundColor = 'yellow';
-    // this.barChartData.datasets[2].backgroundColor = 'red';
-
-    // this.lineChartData.datasets[0].backgroundColor = style.getPropertyValue('--lose');
-
-    // console.log(this.charts)
-    // this.charts.forEach((chart) => {
-    //   chart.render();
-    // });
   }
 
   ngOnDestroy(): void {
