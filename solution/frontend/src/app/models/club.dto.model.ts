@@ -13,6 +13,6 @@ export class WinDrawLoseStatisticsDto {
 
 export class AvgGoalsStatisticsDto {
     year: number;
-    competition: string;
+    competitionName: string;
     avgGoals: number;
 }

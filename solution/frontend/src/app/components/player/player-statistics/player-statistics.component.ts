@@ -63,7 +63,7 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy, AfterViewIn
           
           this.data2 = datas[1];
           this.marketValueDates = [...new Set(this.data2.map(x => x.date))];
-          this.marketValueDate.patchValue(this.marketValueDates[Math.max(this.marketValueDates.length - 6, 0)]);
+          this.marketValueDate.patchValue(this.marketValueDates[Math.max(this.marketValueDates.length - 10, 0)]);
         })
         .catch(() => this.router.navigate(['/error']))
         .finally(() => this.loaderService.hide());

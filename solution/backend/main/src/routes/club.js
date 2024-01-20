@@ -86,4 +86,64 @@ router.get('/getClubGameHistory', (req, res) => {
     });
 })
 
+/**
+ * @openapi
+ * /getClubWinStatistics?clubId:
+ *  get:
+ *     tags:
+ *     - Club
+ *     summary: Get win statistics of the club
+ *     parameters:
+ *      - name: clubId
+ *        in: query
+ *        description: The id of the club
+ *        required: true
+ *     description: Return the wins, draws and loses per year of the club
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+router.get('/getClubWinStatistics', (req, res) => {
+    if (!req.query.clubId) {
+        res.sendStatus(403);
+        return;
+    }
+    axios.get(config.hostSpring + '/statistic/club/' + req.query.clubId + '/winDrawLose').then(response => {
+        res.json(response.data);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+})
+
+/**
+ * @openapi
+ * /getClubGoalStatistics?clubId:
+ *  get:
+ *     tags:
+ *     - Club
+ *     summary: Get goal statistics of the club
+ *     parameters:
+ *      - name: clubId
+ *        in: query
+ *        description: The id of the club
+ *        required: true
+ *     description: Return the average goals per year of the club
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+router.get('/getClubGoalStatistics', (req, res) => {
+    if (!req.query.clubId) {
+        res.sendStatus(403);
+        return;
+    }
+    axios.get(config.hostSpring + '/statistic/club/' + req.query.clubId + '/avgGoals').then(response => {
+        res.json(response.data);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+})
+
 module.exports = router;
