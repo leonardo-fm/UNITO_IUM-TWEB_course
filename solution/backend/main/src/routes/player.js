@@ -114,4 +114,64 @@ router.get('/getPlayerGameHistory', (req, res) => {
     });
 })
 
+/**
+ * @openapi
+ * /getPlayerMarketValue?playerId:
+ *  get:
+ *     tags:
+ *     - Player
+ *     summary: Get player market value
+ *     parameters:
+ *      - name: playerId
+ *        in: query
+ *        description: The id of the player
+ *        required: true
+ *     description: Return the list of market value
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+router.get('/getPlayerMarketValue', (req, res) => {
+    if (!req.query.playerId) {
+        res.sendStatus(403);
+        return;
+    }
+    axios.get(config.hostExpress + '/statistic/player/' + req.query.playerId + '/marketValue').then(response => {
+        res.json(response.data);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+})
+
+/**
+ * @openapi
+ * /getPlayerHighlights?playerId:
+ *  get:
+ *     tags:
+ *     - Player
+ *     summary: Get player highlights
+ *     parameters:
+ *      - name: playerId
+ *        in: query
+ *        description: The id of the player
+ *        required: true
+ *     description: Return the list of highlights
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+router.get('/getPlayerHighlights', (req, res) => {
+    if (!req.query.playerId) {
+        res.sendStatus(403);
+        return;
+    }
+    axios.get(config.hostExpress + '/statistic/player/' + req.query.playerId + '/highlights').then(response => {
+        res.json(response.data);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+})
+
 module.exports = router;

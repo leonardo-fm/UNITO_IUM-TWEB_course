@@ -24,10 +24,10 @@ export class PlayerDetailDto {
 
 export class GoalCardsStatisticsDto {
     year: number;
-    goals: number;
-    assists: number;
-    yellowCards: number;
-    redCards: number;
+    totalGoals: number;
+    totalAssists: number;
+    totalYellowCards: number;
+    totalRedCards: number;
 }
 
 export class MarketValueStatisticsDto {

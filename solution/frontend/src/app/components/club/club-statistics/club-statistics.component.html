@@ -1,19 +1,35 @@
 <div class="d-flex gap-2 justify-content-between">
-    <div class="w-50">
+    <div class="d-flex flex-column align-items-center w-50">
+        <div class="d-flex align-items-center justify-content-center gap-2 w-100">
+            <span>{{ languageService.selectedLanguage['club_statistics_performance'] }}</span>
+            <select class="form-select season-select cursor-pointer" name="performancePerYear" id="performancePerYear" [formControl]="performancePerYear">
+                @for(year of performancePerYears; track year){
+                <option [value]="year">{{year}}</option>
+                }
+            </select>
+        </div>
         <canvas baseChart
             [data]="barChartData" 
             [options]="barChartOptions" 
             [legend]="true" 
-            type="bar">
+            type="line">
         </canvas>
     </div>
     
-    <div class="w-50">
+    <div class="d-flex flex-column align-items-center w-50">
+        <div class="d-flex align-items-center justify-content-center gap-2 w-100">
+            <span>{{ languageService.selectedLanguage['club_statistics_goals'] }}</span>
+            <select class="form-select season-select cursor-pointer" name="avgGoalsYear" id="avgGoalsYear" [formControl]="avgGoalsYear">
+                @for(year of avgGoalsYears; track year){
+                <option [value]="year">{{year}}</option>
+                }
+            </select>
+        </div>
         <canvas baseChart
             [data]="lineChartData" 
             [options]="lineChartOptions" 
             [legend]="true" 
-            type="line">
+            type="bar">
         </canvas>
     </div>
 </div>
