@@ -21,3 +21,16 @@ export class PlayerDetailDto {
     marketValue: number;
     imageUrl: string;
 }
+
+export class GoalCardsStatisticsDto {
+    year: number;
+    goals: number;
+    assists: number;
+    yellowCards: number;
+    redCards: number;
+}
+
+export class MarketValueStatisticsDto {
+    date: Date;
+    market_value_in_eur: number;
+}

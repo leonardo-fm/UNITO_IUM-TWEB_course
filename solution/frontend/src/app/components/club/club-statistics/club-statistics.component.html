@@ -1,0 +1,19 @@
+<div class="d-flex gap-2 justify-content-between">
+    <div class="w-50">
+        <canvas baseChart
+            [data]="barChartData" 
+            [options]="barChartOptions" 
+            [legend]="true" 
+            type="bar">
+        </canvas>
+    </div>
+    
+    <div class="w-50">
+        <canvas baseChart
+            [data]="lineChartData" 
+            [options]="lineChartOptions" 
+            [legend]="true" 
+            type="line">
+        </canvas>
+    </div>
+</div>

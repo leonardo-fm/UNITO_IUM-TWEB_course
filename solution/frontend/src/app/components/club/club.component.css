@@ -1,10 +1,11 @@
-.club-container{
+.club-container {
     border-radius: 8px;
     background-color: var(--white);
 }
 
 .players-container,
-.games-container {
+.games-container,
+.statistics-container {
     height: fit-content;
     background-color: var(--white);
     border-radius: 8px;

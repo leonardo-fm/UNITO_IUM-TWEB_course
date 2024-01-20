@@ -25,7 +25,7 @@ export class ScrollDirective {
 
     setScroll(element: HTMLElement, eventBottom: EventEmitter<boolean>, eventUp?: EventEmitter<boolean>){
         element.onscroll = () => {
-            if (element.offsetHeight + element.scrollTop >= element.scrollHeight) {
+            if (Math.ceil(element.offsetHeight + element.scrollTop) >= element.scrollHeight) {
                 eventBottom.emit(true);
             }
             if (element.scrollTop <= 0){

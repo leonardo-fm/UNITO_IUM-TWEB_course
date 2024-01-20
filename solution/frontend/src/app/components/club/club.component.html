@@ -14,11 +14,16 @@
 </div>
 
 <div class="d-flex w-100" scrollDirective (scrollBottomParent)="onScrollBottom()">
-    <div class="d-flex flex-column players-container p-3 me-3 w-25">
+    <div class="d-flex flex-column players-container p-3 me-3">
         <app-club-players></app-club-players>
     </div>
-    <div class="games-container p-3 w-75">
-        <app-club-games></app-club-games>
+    <div class="d-flex flex-column gap-3 w-75">
+        <div class="statistics-container p-3">
+            <app-club-statistics></app-club-statistics>
+        </div>
+        <div class="games-container p-3">
+            <app-club-games></app-club-games>
+        </div>
     </div>
 </div>
 
