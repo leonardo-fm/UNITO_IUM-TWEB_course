@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
 import { GoalCardsStatisticsDto, MarketValueStatisticsDto } from '../../../models/player.dto.model';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './player-statistics.component.html',
   styleUrl: './player-statistics.component.css'
 })
-export class PlayerStatisticsComponent implements OnInit, OnDestroy {
+export class PlayerStatisticsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren(BaseChartDirective) charts: QueryList<BaseChartDirective>;
 
   data1: GoalCardsStatisticsDto[] = [
