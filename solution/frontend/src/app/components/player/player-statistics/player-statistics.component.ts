@@ -9,6 +9,7 @@ import { PlayerService } from '../../../services/player.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-player-statistics',
@@ -32,15 +33,16 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy {
 
   private eventOnResize = this.onWindowResize.bind(this);
   private languageSubscription: Subscription;
+  private themeSubscription: Subscription;
 
   public barChartData: ChartConfiguration<'bar'>['data'] = { labels: [], datasets: [] };
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = { responsive: true, plugins: {legend: {position: 'bottom'}} };
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = { responsive: true, plugins: {legend: {position: 'bottom'}}, scales : { x : {}, y: {} } };
 
   public lineChartData: ChartConfiguration<'line'>['data'] = { labels: [], datasets: [] };
   public lineChartOptions: ChartOptions<'line'> = { 
     responsive: true, 
     plugins: { legend: { position: 'bottom'} }, 
-    scales: { y: {beginAtZero: true} }
+    scales: { x: {}, y: {beginAtZero: true} }
   };
 
   constructor(
@@ -48,6 +50,7 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private playerService: PlayerService,
+    private utilsService: UtilsService,
     public languageService: LanguageService
   ) { }
 
@@ -74,6 +77,7 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy {
 
     addEventListener("resize", this.eventOnResize);
     this.languageSubscription = this.languageService.languageSubject.subscribe(() => this.updateData());
+    this.themeSubscription = this.utilsService.themeSubject.subscribe(() => setTimeout(() => this.renderCharts(), 10));
   }
 
   onWindowResize() {
@@ -128,6 +132,16 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy {
     this.barChartData.datasets[3].backgroundColor = style.getPropertyValue('--red-card');
     this.barChartData.datasets[3].borderColor = style.getPropertyValue('--red-card');
 
+    if (this.barChartOptions?.scales && this.barChartOptions.scales['x'])
+      this.barChartOptions.scales['x'].grid = { color: style.getPropertyValue('--white-shade') };
+    if (this.barChartOptions?.scales && this.barChartOptions.scales['y'])
+      this.barChartOptions.scales['y'].grid = { color: style.getPropertyValue('--white-shade') };
+
+    if (this.lineChartOptions?.scales && this.lineChartOptions.scales['x'])
+      this.lineChartOptions.scales['x'].grid = { color: style.getPropertyValue('--white-shade') };
+    if (this.lineChartOptions?.scales && this.lineChartOptions.scales['y'])
+      this.lineChartOptions.scales['y'].grid = { color: style.getPropertyValue('--white-shade') };
+
     this.charts?.forEach((chart) => {
       chart.render();
     });
@@ -135,6 +149,7 @@ export class PlayerStatisticsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.languageSubscription) this.languageSubscription.unsubscribe();
+    if (this.themeSubscription) this.themeSubscription.unsubscribe();
     removeEventListener("resize", this.eventOnResize);
   }
 }

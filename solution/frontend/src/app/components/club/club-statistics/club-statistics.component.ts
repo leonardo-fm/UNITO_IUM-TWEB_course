@@ -8,6 +8,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
 import { ClubService } from '../../../services/club.service';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-club-statistics',
@@ -33,20 +34,22 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy {
   public performanceChartOptions: ChartConfiguration<'line'>['options'] = { 
     responsive: true, 
     plugins: {legend: {position: 'bottom'}},
-    scales: { y: {beginAtZero: true}}
+    scales: { x: {}, y: {beginAtZero: true}}
   };
 
-  public lineChartData: ChartConfiguration<'bar'>['data'] = { labels: [], datasets: [] };
-  public lineChartOptions: ChartOptions<'bar'> = { responsive: true, plugins: {legend: {position: 'bottom'}} };
+  public avgGoalsChartData: ChartConfiguration<'bar'>['data'] = { labels: [], datasets: [] };
+  public avgGoalsChartOptions: ChartOptions<'bar'> = { responsive: true, plugins: {legend: {position: 'bottom'}}, scales: { x: {}, y: {} } };
 
   private eventOnResize = this.onWindowResize.bind(this);
   private languageSubscription: Subscription;
+  private themeSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private loaderService: LoaderService,
     private clubService: ClubService,
     private router: Router,
+    private utilsService: UtilsService,
     public languageService: LanguageService
   ) { }
 
@@ -69,6 +72,7 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy {
         
       this.performancePerYear.valueChanges.subscribe(() => this.updateData());
       this.avgGoalsYear.valueChanges.subscribe(() => this.updateData());
+      this.themeSubscription = this.utilsService.themeSubject.subscribe(() => setTimeout(() => this.renderCharts(), 10));
     });
 
     addEventListener("resize", this.eventOnResize);
@@ -115,10 +119,10 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy {
         groupedData[key].push(value[year]);
     }
 
-    this.lineChartData.labels = [...labels];
-    this.lineChartData.datasets = [];
+    this.avgGoalsChartData.labels = [...labels];
+    this.avgGoalsChartData.datasets = [];
     for (let [key, value] of Object.entries(groupedData))
-      this.lineChartData.datasets.push({ data: value, label: key });
+      this.avgGoalsChartData.datasets.push({ data: value, label: key });
 
     this.renderCharts();
   }
@@ -144,6 +148,16 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy {
     this.performanceChartData.datasets[2].pointBackgroundColor = style.getPropertyValue('--lose');
     this.performanceChartData.datasets[2].backgroundColor = style.getPropertyValue('--lose');
 
+    if (this.performanceChartOptions?.scales && this.performanceChartOptions.scales['x'])
+      this.performanceChartOptions.scales['x'].grid = { color: style.getPropertyValue('--white-shade') };
+    if (this.performanceChartOptions?.scales && this.performanceChartOptions.scales['y'])
+      this.performanceChartOptions.scales['y'].grid = { color: style.getPropertyValue('--white-shade') };
+
+    if (this.avgGoalsChartOptions?.scales && this.avgGoalsChartOptions.scales['x'])
+      this.avgGoalsChartOptions.scales['x'].grid = { color: style.getPropertyValue('--white-shade') };
+    if (this.avgGoalsChartOptions?.scales && this.avgGoalsChartOptions.scales['y'])
+      this.avgGoalsChartOptions.scales['y'].grid = { color: style.getPropertyValue('--white-shade') };
+
     this.charts?.forEach((chart) => {
       chart.render();
     });
@@ -151,6 +165,7 @@ export class ClubStatisticsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.languageSubscription) this.languageSubscription.unsubscribe();
+    if (this.themeSubscription) this.themeSubscription.unsubscribe();
     removeEventListener("resize", this.eventOnResize);
   }
 }
