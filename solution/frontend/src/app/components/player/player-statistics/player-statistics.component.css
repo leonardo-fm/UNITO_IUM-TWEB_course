@@ -1,0 +1,5 @@
+.season-select {
+    width: fit-content;
+    color: var(--text-primary);
+    background-color: var(--white-shade);
+}

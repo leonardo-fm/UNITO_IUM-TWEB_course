@@ -136,7 +136,7 @@ router.get('/getPlayerMarketValue', (req, res) => {
         res.sendStatus(403);
         return;
     }
-    axios.get(config.hostSpring + '/player/' + req.query.playerId + '/marketValue').then(response => {
+    axios.get(config.hostExpress + '/statistic/player/' + req.query.playerId + '/marketValue').then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);
@@ -166,7 +166,7 @@ router.get('/getPlayerHighlights', (req, res) => {
         res.sendStatus(403);
         return;
     }
-    axios.get(config.hostSpring + '/player/' + req.query.playerId + '/highlights').then(response => {
+    axios.get(config.hostExpress + '/statistic/player/' + req.query.playerId + '/highlights').then(response => {
         res.json(response.data);
     }).catch(err => {
         console.log(err);

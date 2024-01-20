@@ -1,5 +1,13 @@
 <div class="d-flex gap-2 justify-content-between">
-    <div class="w-50">
+    <div class="d-flex flex-column align-items-center w-50">
+        <div class="d-flex align-items-center justify-content-center gap-2 w-100">
+            <span>{{ languageService.selectedLanguage['player_statistics_highlights'] }}</span>
+            <select class="form-select season-select cursor-pointer" name="highlightsYear" id="highlightsYear" [formControl]="highlightsYear">
+                @for(year of highlightsYears; track year){
+                <option [value]="year">{{year}}</option>
+                }
+            </select>
+        </div>
         <canvas baseChart
             [data]="barChartData" 
             [options]="barChartOptions" 
@@ -8,11 +16,19 @@
         </canvas>
     </div>
     
-    <div class="w-50">
+    <div class="d-flex flex-column align-items-center w-50">
+        <div class="d-flex align-items-center justify-content-center gap-2 w-100">
+            <span>{{ languageService.selectedLanguage['player_statistics_market_value'] }}</span>
+            <select class="form-select season-select cursor-pointer" name="marketValueDate" id="marketValueDate" [formControl]="marketValueDate">
+                @for(date of marketValueDates; track date){
+                <option [value]="date">{{ moment(date).format('MMMM YYYY') }}</option>
+                }
+            </select>
+        </div>
         <canvas baseChart
             [data]="lineChartData" 
             [options]="lineChartOptions" 
-            [legend]="true" 
+            [legend]="false" 
             type="line">
         </canvas>
     </div>
