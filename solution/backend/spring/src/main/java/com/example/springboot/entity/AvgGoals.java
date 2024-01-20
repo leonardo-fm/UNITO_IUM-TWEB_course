@@ -3,7 +3,9 @@ package com.example.springboot.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 
+@IdClass(AvgGoalsId.class)
 @Entity
 public class AvgGoals {
 
@@ -11,6 +13,7 @@ public class AvgGoals {
     @Column(name = "year")
     private Integer year;
 
+    @Id
     @Column(name = "competition_id")
     private String competitionId;
 
