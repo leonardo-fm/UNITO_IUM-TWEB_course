@@ -1,6 +1,7 @@
 .club-container {
     border-radius: 8px;
     background-color: var(--white);
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 .players-container,
@@ -9,6 +10,7 @@
     height: fit-content;
     background-color: var(--white);
     border-radius: 8px;
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 :host ::ng-deep .chat-icon {

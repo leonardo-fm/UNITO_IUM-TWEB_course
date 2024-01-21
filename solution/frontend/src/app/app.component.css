@@ -10,11 +10,12 @@
 }
 
 .light-theme {
-    --background: #ebebeb;
-    --primary: #59344F;
+    --background: #fff9f3;
+    --primary: #5c4b99;
     --secondary: #fffef9;
-    --white: #fffef9;
-    --white-shade: #ece6ed;
+    --white: #fffdfa;
+    --shadow: #d7d7d769;
+    --white-shade: #efece9;
     --text-primary: #2d2b25;
     --text-secondary: #8e8b79;
     --text-white: #ffffff;
@@ -22,27 +23,28 @@
     --draw: #ababab;
     --lose: #b06f6f;
     --error: #b06f6f;
-    --goals: #b06f6f;
-    --assists: #b06f6f;
-    --yellow-card: #b06f6f;
-    --red-card: #b06f6f;
+    --goals: #98B06F;
+    --assists: #6f99b0;
+    --yellow-card: #e5e160;
+    --red-card: #c54949;
 }
 
 .dark-theme {
-    --background: #2b2b2b;
+    --background: #161616;
     --primary: #393939;
     --secondary: #454545;
-    --white: #1a1a1a;
+    --white: #292929;
+    --shadow: #31313159;
     --white-shade: #3f3f3f;
-    --text-primary: #b5b5b5;
-    --text-secondary: #d9d9d9;
+    --text-primary: #dddddd;
+    --text-secondary: #737373;
     --text-white: #ffffff;
     --win: #98B06F;
     --draw: #ababab;
     --lose: #b06f6f;
     --error: #b06f6f;
-    --goals: #ebec99;
-    --assists: #ebec99;
-    --yellow-card: #ebec99;
-    --red-card: #ebec99;
+    --goals: #98B06F;
+    --assists: #6f99b0;
+    --yellow-card: #e5e160;
+    --red-card: #c54949;
 }

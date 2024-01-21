@@ -3,11 +3,13 @@
     border-radius: 8px;
     background-color: var(--white);
     color: var(--text-primary);
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 .games-container {
     background-color: var(--white);
     border-radius: 8px;
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 .player-container>img {
@@ -21,6 +23,7 @@
 .player-detail-container {
     border-radius: 8px;
     background-color: var(--white);
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 .separator {

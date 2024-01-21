@@ -1,6 +1,7 @@
 .navbar {
     background-color: var(--primary);
     color: var(--text-white);
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 .container {
