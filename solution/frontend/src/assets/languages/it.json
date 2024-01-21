@@ -1,6 +1,6 @@
 {
     "date_format": "L",
-    "date_lan": "en",
+    "date_lan": "it",
 
     "error_title": "Ops.. Si è verificato un errore",
     "error_label": "Si è verificato un errore con il server. Si prega di riprovare più tardi",
@@ -86,6 +86,7 @@
     "player_statistics_red_cards": "Cartellini rossi",
     "player_statistics_market_value": "Valore di mercato da",
     "player_statistics_highlights": "Momenti salienti da",
+    "chat_room_message_placeholder": "Scrivi un messaggio",
     "country_name_19": "Belgio",
     "country_name_39": "Danimarca",
     "country_name_40": "Germania",

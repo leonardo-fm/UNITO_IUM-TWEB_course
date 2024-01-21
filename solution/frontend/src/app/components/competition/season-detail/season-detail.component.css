@@ -1,6 +1,7 @@
 .game-history-container {
     border-radius: 8px;
     background-color: var(--white);
+    box-shadow: 0px 0px 5px 5px var(--shadow);
 }
 
 table td {

@@ -21,7 +21,28 @@
     color: var(--text-secondary);
 }
 
-:host ::ng-deep .users-icon {
+.form-control {
+    background-color: var(--white-shade);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--text-secondary);
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder, /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--text-secondary);
+}
+
+:host ::ng-deep .users-icon, 
+:host ::ng-deep .profile-icon {
     width: 32px;
     height: 32px;
+}
+
+:host ::ng-deep .profile-icon > circle, :host ::ng-deep .profile-icon > path,
+:host ::ng-deep .users-icon > circle, :host ::ng-deep .users-icon > path {
+    stroke: var(--text-primary);
 }

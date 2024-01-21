@@ -1,7 +1,7 @@
 .leagues-container,
 .matches-container {
     height: fit-content;
-    min-height: 100%;
+    /* min-height: 100%; */
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0px 0px 5px 5px var(--shadow);

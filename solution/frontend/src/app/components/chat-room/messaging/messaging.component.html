@@ -2,7 +2,8 @@
     <div #scrollElement class="d-flex flex-column scroll-container gap-3">
         @for (message of chat; track message){
         <div class="d-flex gap-2" [class.flex-row-reverse]="message.accountId == accountId">
-            <img class="profile-icon" height="32" width="32" src="assets/icons/account_circle.svg" alt="">
+            <!-- <img class="profile-icon" height="32" width="32" src="assets/icons/account_circle.svg" alt=""> -->
+            <div class="profile-icon" svg="account_circle"></div>
             <div class="d-flex flex-column">
                 <div class="d-flex align-items-end gap-2" [class.flex-row-reverse]="message.accountId == accountId">
                     <span class="account-label">{{ message.accountName ?? accountId }}</span>
@@ -16,7 +17,7 @@
 </div>
 
 <div class="d-flex align-items-center">
-    <input type="text" class="form-control me-3" [(ngModel)]="message" (keydown.enter)="onMessageSend()">
+    <input type="text" class="form-control me-3" [placeholder]="languageService.selectedLanguage['chat_room_message_placeholder']" [(ngModel)]="message" (keydown.enter)="onMessageSend()">
     <div class="users-icon" svg="user_amount_chat"></div>
     <span>{{roomSize}}</span>
 </div>

@@ -9,6 +9,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { SvgDirective } from '../../../directives/svg.directive';
 import { ScrollDirective } from '../../../directives/scroll.directive';
 import { LoaderService } from '../../../services/loader.service';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'app-messaging',
@@ -41,7 +42,8 @@ export class MessagingComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private loaderService: LoaderService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public languageService: LanguageService
   ) { }
 
   ngOnInit(): void {

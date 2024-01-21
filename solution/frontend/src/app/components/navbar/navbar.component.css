@@ -23,6 +23,7 @@
 .search-form>input {
     padding-left: 48px;
     background-color: var(--white-shade);
+    color: var(--text-primary);
 }
 
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

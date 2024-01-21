@@ -47,3 +47,13 @@
 .expand-open {
     max-height: fit-content;
 }
+
+.link-competition:hover {
+    background-color: var(--white-shade);
+}
+
+.link-competition {
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+}

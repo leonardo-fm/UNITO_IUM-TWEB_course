@@ -19,7 +19,7 @@
     </div>
     <div #leagueExpand class="d-flex flex-column expand-container ps-3">
         @for (competition of competitionCountry; track competition) {
-            <a [routerLink]="['competition', competition.competitionId]">
+            <a class="link-competition px-2" [routerLink]="['competition', competition.competitionId]">
                 <img width="24" height="24" [src]="'https://tmssl.akamaized.net/images/logo/header/'+competition.competitionId.toLowerCase()+'.png'" alt="">
                 {{ competition.name }}
             </a>
