@@ -21,7 +21,7 @@ public interface WinDrawLoseRepository extends JpaRepository<WinDrawLose, Intege
             "WHEN home_club_id = :clubId AND home_club_goals < away_club_goals THEN 1 " +
             "WHEN away_club_id = :clubId AND away_club_goals < home_club_goals THEN 1 " +
             "ELSE 0 END) AS loses " +
-            "FROM game WHERE home_club_id = :clubId OR away_club_id = :clubId GROUP BY EXTRACT(YEAR FROM date)", nativeQuery = true)
+            "FROM game WHERE home_club_id = :clubId OR away_club_id = :clubId GROUP BY EXTRACT(YEAR FROM date) ORDER BY year", nativeQuery = true)
     List<WinDrawLose> getWinDrawLose(long clubId);
 }
 

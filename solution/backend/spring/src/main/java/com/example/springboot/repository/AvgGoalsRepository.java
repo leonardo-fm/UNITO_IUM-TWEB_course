@@ -15,6 +15,6 @@ public interface AvgGoalsRepository extends JpaRepository<AvgGoals, AvgGoalsId> 
             "WHEN home_club_id = :clubId THEN home_club_goals " +
             "WHEN away_club_id = :clubId THEN away_club_goals " +
             "ELSE 0 END) AS avg_goals " +
-            "FROM game WHERE home_club_id = :clubId OR away_club_id = :clubId GROUP BY season, competition_id", nativeQuery = true)
+            "FROM game WHERE home_club_id = :clubId OR away_club_id = :clubId GROUP BY season, competition_id ORDER BY year", nativeQuery = true)
     List<AvgGoals> getAvgGoals(long clubId);
 }
