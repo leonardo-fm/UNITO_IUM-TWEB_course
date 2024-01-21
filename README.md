@@ -68,5 +68,12 @@ Spring Boot | http://localhost:8082/swagger-ui/index.html#/
 Main | http://localhost:3000/api-docs
 Second express server | http://localhost:3001/api-docs
 
+# Jupyter Notebook
+The Jupyter Notebook file can be found at: 
+```
+..IUM-TWEB/solution/notebook/soccerPlots.ipynb
+```
+All the instructions to run it are inside. It is mandatory to have the MongoDB database and PostgreSQL running with data.
+
 # Autors
 [Antonio Buscema](https://github.com/Yotsumi) (Yotsumi), [Leonardo Ferrero Merlino](https://github.com/leonardo-fm) (leonardo-fm)
