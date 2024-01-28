@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="it">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Player</title>
+        <base href="./">
+
+        <link rel="stylesheet" href="bootstrap-italia/dist/css/bootstrap-italia.min.css">
+        <script src="bootstrap-italia/dist/js/bootstrap-italia.bundle.min.js"></script>
+
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <!-- Barra di navigazione -->
+        <nav role="navigation" class="nav-bar">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <a href="#" role="link" aria-label="Return to homepage">
+                            <img width="82" height="82" class="brand-icon" src="icons/monitoring.svg" alt="Homepage"
+                                aria-hidden="true">
+                        </a>
+                    </div>
+                    <div class="search-container input-group mb-0 w-md-75">
+                        <span class="input-group-text">
+                            <svg class="icon icon-sm">
+                                <use href="bootstrap-italia/dist/svg/sprites.svg#it-search"></use>
+                            </svg>
+                        </span>
+                        <label for="search-input" class="visually-hidden active">Cerca competitioni, club o giocatori</label>
+                        <input type="search" class="form-control ds-input search-input" id="search-input"
+                            name="search-input" placeholder="Cerca competitioni, club o giocatori"
+                            aria-label="Cerca competitioni, club o giocatori">
+                    </div>
+                    <div class="user-icon-container">
+                        <a href="#" role="link" aria-label="Signin/signup">
+                            <svg class="icon icon-white" aria-hidden="true">
+                                <use href="bootstrap-italia/dist/svg/sprites.svg#it-user"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-4 d-flex flex-column gap-4">
+            <!-- Informazioni giocatore -->
+            <div class="d-flex position-relative player-container align-items-center p-4 gap-2">
+                <img class="player-icon" src="icons/player_40433.webp" alt="">
+                <span class="player-name">Alexis Sánchez</span>
+                <a role="link" class="chat-icon-container mb-2 me-2" href="#" aria-label="Enter Alexis Sánchez chat room">
+                    <svg class="icon icon-white" aria-hidden="true">
+                        <use href="bootstrap-italia/dist/svg/sprites.svg#it-comment"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Dettagli aggiuntivi giocatore -->
+            <div class="d-flex player-detail-container align-items-center gap-4 p-4">
+                <div class="d-flex flex-column w-100 gap-3">
+                    <a href="#" role="link" class="d-flex gap-3 club-container align-items-center" aria-label="Go to Football Club Internazionale Milano S.p.A.">
+                        <img width="64" height="64" src="icons/club_46.png" alt="">
+                        <div class="d-flex flex-column">
+                            <span class="club-name">Football Club Internazionale Milano S.p.A.</span>
+                            <span class="contract-expiration">Contract until 30 Jun 2024</span>
+                        </div>
+                    </a>
+                    <div class="separator"></div>
+                    <div class="d-flex flex-wrap justify-content-evenly gap-4">
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">NATIONALITY</span>
+                            <div class="d-flex gap-1">
+                                <img width="24" height="24" src="icons/flag_chi.png" alt="">
+                                <span class="detail-value">CHI</span>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">18 Dec 1998</span>
+                            <span class="detail-value">35 yrs</span>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">HEIGHT</span>
+                            <span class="detail-value">169 cm</span>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">FOOT</span>
+                            <span class="detail-value">Right</span>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">POSITION</span>
+                            <span class="detail-value">Attack</span>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">SHIRT NUMBER</span>
+                            <span class="detail-value">70</span>
+                        </div>
+                    </div>
+                    <div class="d-flex player-value-container align-items-center gap-3 p-4">
+                        <div class="d-flex flex-column align-items-center">
+                            <span class="detail-label">PLAYER NUMBER</span>
+                            <span class="detail-value-market">4.3M €</span>
+                        </div>
+                        <div class="market-value-separator"></div>
+                        <span class="detail-value-more-less">Is the player value higher or lower?</span>
+                        <button role="button" class="d-flex flex-column btn align-items-center button-up-value">
+                            <svg class="icon icon-success" aria-hidden="true">
+                                <use href="bootstrap-italia/dist/svg/sprites.svg#it-arrow-up-triangle"></use>
+                            </svg>
+                            <span>€</span>
+                        </button>
+                        <button role="button" class="d-flex flex-column btn align-items-center button-down-value">
+                            <span>€</span>
+                            <svg class="icon icon-danger" aria-hidden="true">
+                                <use href="bootstrap-italia/dist/svg/sprites.svg#it-arrow-down-triangle"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <img height="260" class="ms-auto field-posistion" src="icons/formazione.png" alt="Posizione in campo">
+            </div>
+
+            <!-- Storico partite -->
+            <div class="d-flex flex-column game-history-container gap-4 p-4">
+                <div class="d-flex flex-column gap-2">
+                    <a href="#" role="link" aria-label="Go to Uefa champions league">
+                        <div class="d-flex align-items-center gap-1">
+                            <img width="48" height="48" src="icons/competition_cl.png" alt="">
+                            <span class="competition-label">Uefa champions league</span>
+                        </div>
+                    </a>
+                    <a href="#" role="link" class="d-flex game-container align-items-center gap-3 px-2 py-1" aria-label="Go to game">
+                        <span class="game-date">11/29/2023</span>
+                        <div class="game-separator"></div>
+                        <div class="d-flex flex-column gap-1 w-100">
+                            <div class="d-flex align-items-center game-club-lose gap-1">
+                                <img width="32" height="32" src="icons/club_294.png" alt="">
+                                <span>Sport Lisboa e Benfica</span>
+                                <span class="ms-auto">3</span>
+                            </div>
+                            <div class="d-flex align-items-center game-club-lose gap-1">
+                                <img width="32" height="32" src="icons/club_46.png" alt="">
+                                <span>Football Club Internazionale Milano S.p.A.</span>
+                                <span class="ms-auto">3</span>
+                            </div>
+                        </div>
+                        <div class="game-separator"></div>
+                        <span class="game-valutation px-2 py-1">6.8</span>
+                    </a>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <a href="#" role="link" aria-label="Go to Serie A">
+                        <div class="d-flex align-items-center gap-1">
+                            <img width="48" height="48" src="icons/competition_it1.png" alt="">
+                            <span class="competition-label">Serie A</span>
+                        </div>
+                    </a>
+                    <a href="#" role="link" class="d-flex game-container align-items-center gap-3 px-2 py-1" aria-label="Go to game">
+                        <span class="game-date">11/12/2023</span>
+                        <div class="game-separator"></div>
+                        <div class="d-flex flex-column gap-1 w-100">
+                            <div class="d-flex align-items-center gap-1">
+                                <img width="32" height="32" src="icons/club_46.png" alt="">
+                                <span>Football Club Internazionale Milano S.p.A.</span>
+                                <span class="ms-auto">2</span>
+                            </div>
+                            <div class="d-flex align-items-center game-club-lose gap-1">
+                                <img width="32" height="32" src="icons/club_8970.png" alt="">
+                                <span>Frosinone Calcio S.r.l.</span>
+                                <span class="ms-auto">0</span>
+                            </div>
+                        </div>
+                        <div class="game-separator"></div>
+                        <span class="game-valutation game-valutation-7 px-2 py-1">7.2</span>
+                    </a>
+                    <a href="#" role="link" class="d-flex game-container align-items-center gap-3 px-2 py-1" aria-label="Go to game">
+                        <span class="game-date">10/29/2023</span>
+                        <div class="game-separator"></div>
+                        <div class="d-flex flex-column gap-1 w-100">
+                            <div class="d-flex align-items-center gap-1">
+                                <img width="32" height="32" src="icons/club_46.png" alt="">
+                                <span>Football Club Internazionale Milano S.p.A.</span>
+                                <span class="ms-auto">1</span>
+                            </div>
+                            <div class="d-flex align-items-center game-club-lose gap-1">
+                                <img width="32" height="32" src="icons/club_12.png" alt="">
+                                <span>Associazione Sportiva Roma</span>
+                                <span class="ms-auto">0</span>
+                            </div>
+                        </div>
+                        <div class="game-separator"></div>
+                        <span class="game-valutation game-valutation-7 px-2 py-1">7.2</span>
+                    </a>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <a href="#" role="link" aria-label="Go to Serie A">
+                        <div class="d-flex align-items-center gap-1">
+                            <img width="48" height="48" src="icons/competition_it1.png" alt="">
+                            <span class="competition-label">Serie A</span>
+                        </div>
+                    </a>
+                    <a href="#" role="link" class="d-flex game-container align-items-center gap-3 px-2 py-1" aria-label="Go to game">
+                        <span class="game-date">11/12/2023</span>
+                        <div class="game-separator"></div>
+                        <div class="d-flex flex-column gap-1 w-100">
+                            <div class="d-flex align-items-center gap-1">
+                                <img width="32" height="32" src="icons/club_46.png" alt="">
+                                <span>Football Club Internazionale Milano S.p.A.</span>
+                                <span class="ms-auto">2</span>
+                            </div>
+                            <div class="d-flex align-items-center game-club-lose gap-1">
+                                <img width="32" height="32" src="icons/club_8970.png" alt="">
+                                <span>Frosinone Calcio S.r.l.</span>
+                                <span class="ms-auto">0</span>
+                            </div>
+                        </div>
+                        <div class="game-separator"></div>
+                        <span class="game-valutation game-valutation-7 px-2 py-1">7.2</span>
+                    </a>
+                    <a href="#" role="link" class="d-flex game-container align-items-center gap-3 px-2 py-1" aria-label="Go to game">
+                        <span class="game-date">10/29/2023</span>
+                        <div class="game-separator"></div>
+                        <div class="d-flex flex-column gap-1 w-100">
+                            <div class="d-flex align-items-center gap-1">
+                                <img width="32" height="32" src="icons/club_46.png" alt="">
+                                <span>Football Club Internazionale Milano S.p.A.</span>
+                                <span class="ms-auto">1</span>
+                            </div>
+                            <div class="d-flex align-items-center game-club-lose gap-1">
+                                <img width="32" height="32" src="icons/club_12.png" alt="">
+                                <span>Associazione Sportiva Roma</span>
+                                <span class="ms-auto">0</span>
+                            </div>
+                        </div>
+                        <div class="game-separator"></div>
+                        <span class="game-valutation game-valutation-7 px-2 py-1">7.2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

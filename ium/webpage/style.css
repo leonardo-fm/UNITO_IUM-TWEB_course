@@ -1,0 +1,188 @@
+body {
+  background-color: #ebebeb;
+}
+
+img {
+  object-fit: contain;
+}
+
+/* Barra di navigazione */
+.nav-bar {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  background-color: #682d63;
+}
+
+.search-container {
+  width: 175px;
+}
+
+.search-input {
+  border-radius: 4px;
+}
+
+.user-icon-container {
+  border-radius: 100%;
+  border: 2px solid white;
+}
+
+.user-icon-container .icon {
+  width: 45px;
+  height: 45px;
+}
+
+/* Informazioni giocatore */
+.player-container {
+  height: 150px;
+  background-color: #646d92;
+  border-radius: 8px;
+  color: white;
+}
+
+.player-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 100%;
+}
+
+.player-name {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.chat-icon-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.chat-icon-container .icon {
+  width: 45px;
+  height: 45px;
+}
+
+/* Dettagli aggiuntivi giocatore */
+.player-detail-container {
+  background-color: white;
+  border-radius: 8px;
+}
+
+
+.club-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.contract-expiration {
+  font-weight: 500;
+  color: #777777;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #777777;
+}
+
+.detail-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.detail-value-market {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ed9613;
+}
+
+.detail-value-more-less {
+  font-weight: 600;
+}
+
+.separator {
+  width: 100%;
+  border-bottom: 1px solid #8e8b79;
+}
+
+.player-value-container {
+  border-radius: 8px;
+  background-color: #f5f6f9;
+}
+
+.field-posistion {
+  display: none;
+}
+
+.market-value-separator {
+  height: 54px;
+  border-right: 1px solid #8e8b79;
+}
+
+.button-up-value,
+.button-down-value {
+  min-width: 64px;
+  min-height: 64px;
+  padding: 0;
+  background-color: white;
+  border-radius: 100%;
+  box-shadow: 5px 5px 9px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Storico partite */
+.game-history-container {
+  background-color: white;
+  border-radius: 8px;
+}
+
+.competition-label {
+  font-size: 1.5rem;
+  color: #777777;
+}
+
+.game-date {
+  color: #777777;
+}
+
+.game-separator {
+  height: 54px;
+  border-right: 1px solid #8e8b79;
+}
+
+/* .game-club-lose {
+  color: #777777;
+} */
+
+.game-valutation {
+  background-color: rgb(211, 173, 2);
+  border-radius: 8px;
+  color: white;
+}
+
+.game-valutation-7 {
+  background-color: rgb(190, 211, 2);
+}
+
+.game-container {
+  border-radius: 8px;
+}
+
+.game-container:hover {
+  background-color: #f5f6f9;
+  color: black;
+}
+
+@media (min-width: 576px) {
+  .search-container {
+    width: 250px;
+  }
+}
+
+@media (min-width: 768px) {
+  .search-container {
+    width: 500px;
+  }
+
+  .field-posistion {
+    display: block;
+  }
+}
